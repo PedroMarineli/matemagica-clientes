@@ -29,7 +29,7 @@ export default function LoginPage() {
       </div>
       
       {/* Coluna do Formulário */}
-      <div className="flex items-center justify-center bg-white p-6 sm:p-12">
+      <div className="flex items-center justify-center bg-gray-350 p-6 sm:p-12">
         <div className="w-full max-w-sm space-y-8">
           
           {/* Cabeçalho com Logo */}
@@ -52,7 +52,7 @@ export default function LoginPage() {
                 value={emailOrUsername}
                 onChange={(e) => setEmailOrUsername(e.target.value)}
                 placeholder="Email ou Usuário"
-                className="w-full appearance-none rounded-lg border-0 bg-cor-5 px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
+                className="w-full appearance-none rounded-lg border-0 bg-white px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
               />
               <input
                 id="password"
@@ -63,7 +63,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Senha"
-                className="w-full appearance-none rounded-lg border-0 bg-cor-5 px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
+                className="w-full appearance-none rounded-lg border-0 bg-white px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
               />
             </div>
             
