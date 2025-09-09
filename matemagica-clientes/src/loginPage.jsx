@@ -72,7 +72,7 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-lg bg-[#4A5568] px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#2D3748] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
+                className="flex w-full justify-center rounded-lg bg-regal-blue px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#2D3748]  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
               >
                 Entrar
               </button>
