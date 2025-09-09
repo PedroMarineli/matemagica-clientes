@@ -17,7 +17,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full lg:grid lg:grid-cols-2 font-sans">
+    <div className="min-h-screen w-full lg:grid lg:grid-cols-2 font-family-title">
       
       {/* Coluna da Imagem (visível em telas grandes) */}
       <div className="hidden lg:block relative">
@@ -29,13 +29,13 @@ export default function LoginPage() {
       </div>
       
       {/* Coluna do Formulário */}
-      <div className="flex items-center justify-center bg-[#EFEBE6] p-6 sm:p-12">
+      <div className="flex items-center justify-center bg-white p-6 sm:p-12">
         <div className="w-full max-w-sm space-y-8">
           
           {/* Cabeçalho com Logo */}
           <div className="flex flex-col items-center text-center">
             <img src="/logo.svg" alt="logo"className='absolute top-0 right-0 w-3xs'/>
-            <h1 className="text-4xl font-bold text-gray-800 mt-6">
+            <h1 className="text-4xl font-bold text-gray-800 mt-6 ">
               Bem vindo(a)!
             </h1>
           </div>
@@ -52,7 +52,7 @@ export default function LoginPage() {
                 value={emailOrUsername}
                 onChange={(e) => setEmailOrUsername(e.target.value)}
                 placeholder="Email ou Usuário"
-                className="w-full appearance-none rounded-lg border-0 bg-[#E1D9D0] px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
+                className="w-full appearance-none rounded-lg border-0 bg-cor-5 px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
               />
               <input
                 id="password"
@@ -63,7 +63,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Senha"
-                className="w-full appearance-none rounded-lg border-0 bg-[#E1D9D0] px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
+                className="w-full appearance-none rounded-lg border-0 bg-cor-5 px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
               />
             </div>
             
@@ -72,7 +72,7 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-lg bg-cor-1 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#2D3748]  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
+                className="flex w-full justify-center rounded-lg bg-cor-1 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cor-2  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
               >
                 Entrar
               </button>
@@ -82,7 +82,7 @@ export default function LoginPage() {
           {/* Link para Registro */}
           <p className="text-center text-sm text-gray-600">
             ou{' '}
-            <a href="#" className="font-semibold text-purple-700 hover:text-purple-500">
+            <a href="#" className="font-semibold text-cor-2 hover:text-cor-3">
               Registre-se
             </a>
           </p>
