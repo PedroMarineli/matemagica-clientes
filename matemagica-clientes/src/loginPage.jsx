@@ -52,7 +52,7 @@ export default function LoginPage() {
                 value={emailOrUsername}
                 onChange={(e) => setEmailOrUsername(e.target.value)}
                 placeholder="Email ou Usuário"
-                className="w-full appearance-none rounded-lg border-0 bg-[#E1D9D0] px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-transparent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
+                className="w-full appearance-none rounded-lg border-0 bg-[#E1D9D0] px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
               />
               <input
                 id="password"
@@ -63,7 +63,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Senha"
-                className="w-full appearance-none rounded-lg border-0 bg-[#E1D9D0] px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-transparent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
+                className="w-full appearance-none rounded-lg border-0 bg-[#E1D9D0] px-4 py-3 text-gray-900 placeholder-gray-500 ring-1 ring-inset ring-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm"
               />
             </div>
             
@@ -72,7 +72,7 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-lg bg-regal-blue px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#2D3748]  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
+                className="flex w-full justify-center rounded-lg bg-cor-1 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#2D3748]  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
               >
                 Entrar
               </button>
@@ -91,4 +91,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
