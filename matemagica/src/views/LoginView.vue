@@ -46,13 +46,13 @@
       </div>
       
       <!-- Coluna do Formulário -->
-      <div class="flex items-center justify-center bg-gray-300 p-6 sm:p-12">
+      <div class="flex items-center justify-center bg-light-brown p-6 sm:p-12">
         <div class="w-full max-w-sm space-y-8">
           
           <!-- Cabeçalho com Logo -->
           <div class="flex flex-col items-center text-center">
             <img src="../../public/logo.svg" alt="logo"class='absolute lg:top-0 lg:right-0 w-3xs bottom-0'/>
-            <h1 class="text-4xl font-bold text-gray-800 mt-6 ">
+            <h1 class="text-4xl font-bold text-gray-800 mt-6">
               Bem vindo(a)!
             </h1>
           </div>
@@ -87,7 +87,7 @@
             <div>
               <button
                 type="submit"
-                class="flex w-full justify-center rounded-lg bg-cor-1 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cor-2  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
+                class="flex w-full justify-center rounded-lg bg-gray-700 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cor-2  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
               >
                 Entrar
               </button>
@@ -96,7 +96,7 @@
 
           <!-- Link para Registro -->
           <p class="text-center text-sm text-gray-600">
-            <!-- ou{' '} -->
+            ou
             <a href="#" class="font-semibold text-cor-2 hover:text-cor-3">
               Registre-se
             </a>

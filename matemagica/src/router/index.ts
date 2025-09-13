@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/LoginView.vue';
 import StudentView from '../views/Student/StudentView.vue';
+import TeacherLayout from '../views/Teacher/TeacherLayout.vue';
 import TeacherView from '../views/Teacher/TeacherView.vue';
 
 const router = createRouter({
@@ -26,14 +27,14 @@ const router = createRouter({
         {
             path: '/professores',
             name: 'professores',
-            component: TeacherView,
-            // children: [
-            //     {
-            //     path: '', // Rota padrão, acessada em /professores
-            //     name: 'TeacherDashboard',
-            //     component: TeacherDashboard,
-            //     }
-            // ],
+            component: TeacherLayout,
+            children: [
+                {
+                path: '',
+                name: 'professoresDashboard',
+                component: TeacherView,
+                }
+            ],
         },
     ]
 })

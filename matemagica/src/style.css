@@ -1,3 +1,21 @@
+:root {
+  /* Variáveis de cores da sua marca */
+  --light-brown: #CFC5B0;
+  --light-blue: #CFFEFF;
+  --light-green: #6A9D7D;
+
+  /* Outras variáveis que você pode precisar */
+  /* --fonte-principal: 'Arial', sans-serif; */
+}
+
 @import "tailwindcss";
 
-/* CFC5B0 COR DE FUNDO */
+.bg-light-brown {
+  background-color: var(--light-brown);
+}
+.bg-light-blue {
+  background-color: var(--light-blue);
+}
+.bg-light-green {
+  background-color: var(--light-green);
+}
