@@ -1,36 +1,31 @@
 <script setup lang="ts">
-    import { reactive } from 'vue';
+import { reactive } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 
-    const form = reactive({
-        emailOrUsername: '',
-        password: '',
-        error: ''
-    })
+const router = useRouter();
 
-    const handleLogin = async() => {
-        const login = {
-            emailOrUsername: form.emailOrUsername,
-            password: form.password
-        }
+const form = reactive({
+  emailOrUsername: '',
+  password: '',
+  error: ''
+})
 
-        // try { EXEMPLO DO VUE FEITO
-        //     const response = await axios.post('/api/jobs', newJob)
-        //     toast.success('Job Added Successfully')
-        //     router.push(`/jobs/${response.data.id}`)
-        // } catch(error) {
-        //     console.error('Error fetching job', error)
-        //     toast.error('Job Was Not Added')
-        // }
+const handleLogin = async() => {
+  const login = {
+    username: form.emailOrUsername,
+    password: form.password
+  }
 
-        // PEDRAO
-        // e.preventDefault();
-        // if (!emailOrUsername || !password) {
-        // setError('Por favor, preencha todos os campos.');
-        // return;
-        // }
-        // setError('');
-        // console.log('Tentativa de login com:', { login: emailOrUsername, password });
-    };
+  try {
+    const response = await axios.post('http://localhost:3000/users/login', login)
+    if(response) {
+      router.push({ name: 'professores' })
+    }
+  } catch(error) {
+    console.log('Tentativa de login com falha')
+  }
+};
 </script>
 
 <template>
