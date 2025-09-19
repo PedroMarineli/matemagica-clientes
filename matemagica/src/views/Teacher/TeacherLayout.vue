@@ -13,6 +13,6 @@ import Header from '../../components/Header.vue';
                 <RouterView />
             </main>
         </div>
-        <footer class="absolute bottom-0">Rodapé do Aluno</footer>
+        <footer class="absolute bottom-0">Rodapé do Professor</footer>
     </div>
 </template>
