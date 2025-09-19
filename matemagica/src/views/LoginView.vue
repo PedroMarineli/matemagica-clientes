@@ -20,7 +20,7 @@ const handleLogin = async() => {
   try {
     const response = await axios.post('http://localhost:3000/users/login', login)
     if(response) {
-      router.push({ name: 'professores' })
+      router.push({ name: 'teacher' })
     }
   } catch(error) {
     console.log('Tentativa de login com falha')

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AsideTeacher from '../../components/AsideTeacher.vue';
+import AsideTeacher from '../../components/teacher/AsideTeacher.vue';
 import Header from '../../components/Header.vue';
 
 </script>
@@ -9,7 +9,7 @@ import Header from '../../components/Header.vue';
         <Header />
         <div class="flex flex-1">
             <AsideTeacher />
-            <main>
+            <main class="w-full flex flex-col items-center">
                 <RouterView />
             </main>
         </div>

@@ -19,3 +19,22 @@
 .bg-light-green {
   background-color: var(--light-green);
 }
+.table {
+  @apply bg-white border-separate border-spacing-0 rounded-lg border-2 border-gray-200 overflow-hidden;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+thead tr {
+  @apply bg-gray-700 text-white;
+}
+tbody tr {
+  @apply border-b-2 border-solid border-gray-200;
+}
+th, td {
+  @apply px-5 py-2;
+  border-left: none;
+  border-right: none;
+}
+tbody tr:last-child {
+  border-bottom: none;
+}

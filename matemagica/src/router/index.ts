@@ -3,6 +3,8 @@ import LoginView from '../views/LoginView.vue';
 import StudentView from '../views/Student/StudentView.vue';
 import TeacherLayout from '../views/Teacher/TeacherLayout.vue';
 import TeacherView from '../views/Teacher/TeacherView.vue';
+import TeacherStudents from '../components/teacher/TeacherStudents.vue';
+import TeacherClasses from '../components/teacher/TeacherClasses.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,13 +28,23 @@ const router = createRouter({
         },
         {
             path: '/professores',
-            name: 'professores',
+            name: 'teacher',
             component: TeacherLayout,
             children: [
                 {
-                path: '',
-                name: 'professoresDashboard',
-                component: TeacherView,
+                    path: '',
+                    name: 'teacherDashboard',
+                    component: TeacherView,
+                },
+                {
+                    path: '/alunos',
+                    name: 'teacherStudents',
+                    component: TeacherStudents,
+                },
+                                {
+                    path: '/salas',
+                    name: 'teacherClasses',
+                    component: TeacherClasses,
                 }
             ],
         },
