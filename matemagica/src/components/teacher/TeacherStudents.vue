@@ -34,4 +34,5 @@ const mocks = [
             </tr>
         </tbody>
     </table>
+    <button>Adicionar Aluno</button>
 </template>
