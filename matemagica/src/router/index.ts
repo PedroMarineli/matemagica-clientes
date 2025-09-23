@@ -6,6 +6,7 @@ import TeacherView from '../views/Teacher/TeacherView.vue';
 import TeacherStudents from '../components/teacher/TeacherStudents.vue';
 import TeacherClasses from '../components/teacher/TeacherClasses.vue';
 import RegisterView from '../views/RegisterView.vue';
+import StudentLayout from '../views/Student/StudentLayout.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,14 +24,14 @@ const router = createRouter({
         {
             path: '/alunos',
             name: 'alunos',
-            component: StudentView,
-            // children: [
-            //     {
-            //         path: '',
-            //         name: 'StudentDashboard',
-            //         component: StudentDashboard,
-            //     }
-            // ],
+            component: StudentLayout,
+            children: [
+                {
+                    path: '',
+                    name: 'studentDashboard',
+                    component: StudentView,
+                }
+            ],
         },
         {
             path: '/professores',
