@@ -15,12 +15,12 @@ const top = [
 </script>
 
 <template>
-    <aside class="w-1/6 py-10 bg-light-brown flex flex-col items-center gap-5 border-r-1 border-r-black">
-        <span class="font-bold">Menu</span>
-        <ul class="flex flex-col gap-3">
+    <aside class="w-screen md:w-1/4 py-4 md:py-10 lg:w-1/6 bg-light-brown flex flex-col items-center gap-5 border-r-1 border-r-black">
+        <span class="hidden md:block font-bold">Menu</span>
+        <ul class="flex md:flex-col gap-3">
             <li class="flex items-center gap-5 cursor-pointer" v-for="item in top" :key="item.nome" @click="() => router.push({ name: item.route })">
                 <img v-if="item.icon" :src="item.icon" :alt="item.nome" class="w-7 h-7"/>
-                <span class="font-bold">{{ item.nome }}</span>
+                <span class="hidden min-[425px]:block font-bold">{{ item.nome }}</span>
             </li>
         </ul>
     </aside>
