@@ -92,7 +92,7 @@ const handleLogin = async() => {
           <!-- Link para Registro -->
           <p class="text-center text-sm text-gray-600">
             ou
-            <a href="#" class="font-semibold text-cor-2 hover:text-cor-3">
+            <a href="#" @click="() => router.push({ name: 'register' })" class="font-semibold text-cor-2 hover:text-cor-3">
               Registre-se
             </a>
           </p>
