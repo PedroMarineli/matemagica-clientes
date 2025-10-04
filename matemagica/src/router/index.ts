@@ -7,12 +7,18 @@ import TeacherStudents from '../components/teacher/TeacherStudents.vue';
 import TeacherClasses from '../components/teacher/TeacherClasses.vue';
 import RegisterView from '../views/RegisterView.vue';
 import StudentLayout from '../views/Student/StudentLayout.vue';
+import InicialView from '../views/InicialView.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',
+            name: 'inicial',
+            component: InicialView
+        },
+        {
+            path: '/login',
             name: 'login',
             component: LoginView
         },
