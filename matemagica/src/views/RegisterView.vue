@@ -41,12 +41,128 @@ const handleRegister = async() => {
           class="absolute inset-0 h-full w-full object-cover"
         />
       </div>
-      
+
       <!-- Coluna do Formulário -->
       <div class="flex items-center justify-center bg-light-brown p-6 sm:p-12">
         <div class="w-full max-w-sm space-y-8">
+        
+      <section className="p-8 shadow-glow border-2 bg-white">
+          <div className="space-y-6">
+            <!-- Logo -->
+            <div className="flex justify-center">
+              <div @click="() => router.push('/')" className="flex items-center gap-2 transition-smooth hover:scale-105">
+                <div className="bg-gradient-primary rounded-2xl p-3 shadow-medium">
+                  <Sparkles className="w-8 h-8 text-white" />
+                </div>
+                <span className="text-3xl font-bold text-gradient-primary">Matemágica</span>
+              </div>
+            </div>
+
+            <div className="text-center space-y-2">
+              <h1 className="text-2xl font-bold">Criar Conta de Professor</h1>
+              <p className="text-muted-foreground">Preencha os dados para começar</p>
+            </div>
+
+            <!-- Form -->
+            <form className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-base">Nome Completo</Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Seu nome completo"
+                    className="pl-12 h-12 text-base rounded-xl"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-base">E-mail</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="seu@email.com"
+                    className="pl-12 h-12 text-base rounded-xl"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-base">Senha</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Mínimo 8 caracteres"
+                    className="pl-12 h-12 text-base rounded-xl"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="confirm-password" className="text-base">Confirmar Senha</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    id="confirm-password"
+                    type="password"
+                    placeholder="Digite a senha novamente"
+                    className="pl-12 h-12 text-base rounded-xl"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2">
+                <input type="checkbox" id="terms" className="mt-1 rounded" />
+                <label htmlFor="terms" className="text-sm text-muted-foreground">
+                  Eu concordo com os
+                  <span to="/termos" className="text-primary hover:underline">
+                    Termos de Uso
+                  </span>
+                  e
+                  <span to="/privacidade" className="text-primary hover:underline">
+                    Política de Privacidade
+                  </span>
+                </label>
+              </div>
+
+              <Button type="submit" variant="playful" size="lg" className="w-full">
+                Criar Conta
+              </Button>
+            </form>
+
+            <!-- Divider -->
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-border"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-card px-4 text-muted-foreground">ou</span>
+              </div>
+            </div>
+
+            <!-- Login link -->
+            <div className="text-center">
+              <span className="text-muted-foreground">Já tem uma conta? </span>
+              <span @click="() => router.push('/login')" className="text-primary hover:underline font-bold">
+                Faça login
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+      </div>
+      
+      <!-- Coluna do Formulário
+      <div class="flex items-center justify-center bg-light-brown p-6 sm:p-12">
+        <div class="w-full max-w-sm space-y-8">
           
-          <!-- Cabeçalho com Logo -->
+          Cabeçalho com Logo
           <div class="flex flex-col items-center text-center">
             <img src="../../public/logo.svg" alt="logo"class='absolute lg:top-0 lg:right-0 w-3xs bottom-0'/>
             <h1 class="text-4xl font-bold text-gray-800 mt-6">
@@ -55,7 +171,7 @@ const handleRegister = async() => {
             <span>Professor(a), insira seus dados para cadastrar-se</span>
           </div>
           
-          <!-- Formulário de Login -->
+          Formulário de Login
           <form @submit.prevent="handleRegister" class="space-y-6">
             <div class="space-y-4">
                 <input
@@ -90,7 +206,7 @@ const handleRegister = async() => {
                 />
             </div>
             
-            <!-- <p v-if="error" class="text-red-500 text-sm text-center">{{ error }}</p> -->
+            <p v-if="error" class="text-red-500 text-sm text-center">{{ error }}</p>
 
             <div>
               <button
@@ -102,7 +218,7 @@ const handleRegister = async() => {
             </div>
           </form>
 
-          <!-- Link para Registro -->
+          Link para Registro
           <p class="text-center text-sm text-gray-600">
             ou
             <a href="#" @click="() => router.push({ name: 'login' })" class="font-semibold text-cor-2 hover:text-cor-3">
@@ -110,6 +226,16 @@ const handleRegister = async() => {
             </a>
           </p>
         </div>
-      </div>
+      </div> -->
     </div>
 </template>
+
+<style>
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+</style>
