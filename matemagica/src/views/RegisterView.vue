@@ -64,7 +64,7 @@ const handleRegister = async() => {
             </div>
 
             <!-- Form -->
-            <form className="space-y-4">
+            <form @submit.prevent="handleRegister" className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-base">Nome Completo</Label>
                 <div className="relative">
