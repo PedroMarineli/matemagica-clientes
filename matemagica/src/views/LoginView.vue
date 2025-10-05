@@ -86,12 +86,12 @@ const handleLogin = async() => {
             <!-- Form -->
             <form @submit.prevent="handleLogin" class="space-y-4">
               <div class="space-y-2">
-                <Label htmlFor="email" class="text-base">
+                <label htmlFor="email" class="text-base">
                   {{ userType.userType === "professor" ? "E-mail" : "Usuário" }}
-                </Label>
+                </label>
                 <div class="relative">
                   <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <Input
+                  <input
                     id="email"
                     name="email"
                     :type="userType.userType === 'professor' ? 'email' : 'text'"
@@ -105,10 +105,10 @@ const handleLogin = async() => {
               </div>
 
               <div class="space-y-2">
-                <Label htmlFor="password" class="text-base">Senha</Label>
+                <label htmlFor="password" class="text-base">Senha</label>
                 <div class="relative">
                   <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <Input
+                  <input
                     id="password"
                     name="password"
                     type="password"

@@ -67,10 +67,10 @@ const handleRegister = async() => {
             <!-- Form -->
             <form @submit.prevent="handleRegister" class="space-y-4">
               <div class="space-y-2">
-                <Label htmlFor="name" class="text-base">Nome Completo</Label>
+                <label htmlFor="name" class="text-base">Nome Completo</label>
                 <div class="relative">
                   <User class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <Input
+                  <input
                     id="username"
                     type="text"
                     required
@@ -83,10 +83,10 @@ const handleRegister = async() => {
               </div>
 
               <div class="space-y-2">
-                <Label htmlFor="email" class="text-base">E-mail</Label>
+                <label htmlFor="email" class="text-base">E-mail</label>
                 <div class="relative">
                   <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <Input
+                  <input
                     id="email"
                     type="text"
                     required
@@ -97,10 +97,10 @@ const handleRegister = async() => {
               </div>
 
               <div class="space-y-2">
-                <Label htmlFor="password" class="text-base">Senha</Label>
+                <label htmlFor="password" class="text-base">Senha</label>
                 <div class="relative">
                   <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <Input
+                  <input
                     id="password"
                     type="password"
                     required
@@ -112,10 +112,10 @@ const handleRegister = async() => {
               </div>
 
               <div class="space-y-2">
-                <Label htmlFor="confirm-password" class="text-base">Confirmar Senha</Label>
+                <label htmlFor="confirm-password" class="text-base">Confirmar Senha</label>
                 <div class="relative">
                   <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <Input
+                  <input
                     id="confirm-password"
                     type="password"
                     placeholder="Digite a senha novamente"
