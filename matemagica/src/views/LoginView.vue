@@ -2,8 +2,10 @@
 import { reactive } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '../userStore';
 
 const router = useRouter();
+const userStore = useUserStore();
 
 const form = reactive({
   email: '',
@@ -24,6 +26,8 @@ const handleLogin = async() => {
   try {
     const response = await axios.post('http://localhost:3000/users/login', login)
     if(response) {
+      const userData = response.data.user
+      userStore.setUserData(userData)
       router.push({ name: 'teacher' })
     }
   } catch(error) {
