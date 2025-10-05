@@ -46,110 +46,110 @@ const handleRegister = async() => {
       <div class="flex items-center justify-center bg-light-brown p-6 sm:p-12">
         <div class="w-full max-w-sm space-y-8">
         
-      <section className="p-8 shadow-glow border-2 bg-white">
-          <div className="space-y-6">
+      <section class="p-8 shadow-glow border-2 bg-white">
+          <div class="space-y-6">
             <!-- Logo -->
-            <div className="flex justify-center">
-              <div @click="() => router.push('/')" className="flex items-center gap-2 transition-smooth hover:scale-105">
-                <div className="bg-gradient-primary rounded-2xl p-3 shadow-medium">
-                  <Sparkles className="w-8 h-8 text-white" />
+            <div class="flex justify-center">
+              <div @click="() => router.push('/')" class="flex items-center gap-2 transition-smooth hover:scale-105">
+                <div class="bg-gradient-primary rounded-2xl p-3 shadow-medium">
+                  <Sparkles class="w-8 h-8 text-white" />
                 </div>
-                <span className="text-3xl font-bold text-gradient-primary">Matemágica</span>
+                <span class="text-3xl font-bold text-gradient-primary">Matemágica</span>
               </div>
             </div>
 
-            <div className="text-center space-y-2">
-              <h1 className="text-2xl font-bold">Criar Conta de Professor</h1>
-              <p className="text-muted-foreground">Preencha os dados para começar</p>
+            <div class="text-center space-y-2">
+              <h1 class="text-2xl font-bold">Criar Conta de Professor</h1>
+              <p class="text-muted-foreground">Preencha os dados para começar</p>
             </div>
 
             <!-- Form -->
-            <form @submit.prevent="handleRegister" className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-base">Nome Completo</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+            <form @submit.prevent="handleRegister" class="space-y-4">
+              <div class="space-y-2">
+                <Label htmlFor="name" class="text-base">Nome Completo</Label>
+                <div class="relative">
+                  <User class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="name"
                     type="text"
                     placeholder="Seu nome completo"
-                    className="pl-12 h-12 text-base rounded-xl"
+                    class="pl-12 h-12 text-base rounded-xl"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-base">E-mail</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+              <div class="space-y-2">
+                <Label htmlFor="email" class="text-base">E-mail</Label>
+                <div class="relative">
+                  <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="seu@email.com"
-                    className="pl-12 h-12 text-base rounded-xl"
+                    class="pl-12 h-12 text-base rounded-xl"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-base">Senha</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+              <div class="space-y-2">
+                <Label htmlFor="password" class="text-base">Senha</Label>
+                <div class="relative">
+                  <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="password"
                     type="password"
                     placeholder="Mínimo 8 caracteres"
-                    className="pl-12 h-12 text-base rounded-xl"
+                    class="pl-12 h-12 text-base rounded-xl"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="confirm-password" className="text-base">Confirmar Senha</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+              <div class="space-y-2">
+                <Label htmlFor="confirm-password" class="text-base">Confirmar Senha</Label>
+                <div class="relative">
+                  <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="confirm-password"
                     type="password"
                     placeholder="Digite a senha novamente"
-                    className="pl-12 h-12 text-base rounded-xl"
+                    class="pl-12 h-12 text-base rounded-xl"
                   />
                 </div>
               </div>
 
-              <div className="flex items-start gap-2">
-                <input type="checkbox" id="terms" className="mt-1 rounded" />
-                <label htmlFor="terms" className="text-sm text-muted-foreground">
+              <div class="flex items-start gap-2">
+                <input type="checkbox" id="terms" class="mt-1 rounded" />
+                <label htmlFor="terms" class="text-sm text-muted-foreground">
                   Eu concordo com os
-                  <span to="/termos" className="text-primary hover:underline">
+                  <span to="/termos" class="text-primary hover:underline">
                     Termos de Uso
                   </span>
                   e
-                  <span to="/privacidade" className="text-primary hover:underline">
+                  <span to="/privacidade" class="text-primary hover:underline">
                     Política de Privacidade
                   </span>
                 </label>
               </div>
 
-              <Button type="submit" variant="playful" size="lg" className="w-full">
+              <Button type="submit" variant="playful" size="lg" class="w-full">
                 Criar Conta
               </Button>
             </form>
 
             <!-- Divider -->
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border"></div>
+            <div class="relative">
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-border"></div>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-card px-4 text-muted-foreground">ou</span>
+              <div class="relative flex justify-center text-sm">
+                <span class="bg-card px-4 text-muted-foreground">ou</span>
               </div>
             </div>
 
             <!-- Login link -->
-            <div className="text-center">
-              <span className="text-muted-foreground">Já tem uma conta? </span>
-              <span @click="() => router.push('/login')" className="text-primary hover:underline font-bold">
+            <div class="text-center">
+              <span class="text-muted-foreground">Já tem uma conta? </span>
+              <span @click="() => router.push('/login')" class="text-primary hover:underline font-bold">
                 Faça login
               </span>
             </div>
