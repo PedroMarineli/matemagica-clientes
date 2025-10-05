@@ -14,20 +14,21 @@ const form = reactive({
 
 const handleRegister = async() => {
   const login = {
-    email: form.email,
     username: form.username,
+    email: form.email,
     password: form.password
   }
 
   try {
-    const response = await axios.post('http://localhost:3000/users/register', login)
+    console.log(login)
+    const response = await axios.post('http://localhost:3000/users/register/teacher', login)
     if(response) {
       router.push({ name: 'login' })
     }
   } catch(error) {
     console.log('Tentativa de registro com falha')
   }
-};
+}
 </script>
 
 <template>
@@ -70,10 +71,13 @@ const handleRegister = async() => {
                 <div class="relative">
                   <User class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
-                    id="name"
+                    id="username"
                     type="text"
-                    placeholder="Seu nome completo"
+                    required
+                    v-model="form.username"
+                    placeholder="Usuário"
                     class="pl-12 h-12 text-base rounded-xl"
+
                   />
                 </div>
               </div>
@@ -84,8 +88,9 @@ const handleRegister = async() => {
                   <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="email"
-                    type="email"
-                    placeholder="seu@email.com"
+                    type="text"
+                    required
+                    v-model="form.email"
                     class="pl-12 h-12 text-base rounded-xl"
                   />
                 </div>
@@ -98,7 +103,9 @@ const handleRegister = async() => {
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Mínimo 8 caracteres"
+                    required
+                    v-model="form.password"
+                    placeholder="Senha"
                     class="pl-12 h-12 text-base rounded-xl"
                   />
                 </div>

@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const form = reactive({
-  emailOrUsername: '',
+  email: '',
   password: '',
   error: ''
 })
@@ -17,7 +17,7 @@ const userType = reactive({
 
 const handleLogin = async() => {
   const login = {
-    username: form.emailOrUsername,
+    username: form.email,
     password: form.password
   }
 
@@ -93,7 +93,11 @@ const handleLogin = async() => {
                   <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="email"
+                    name="email"
                     :type="userType.userType === 'professor' ? 'email' : 'text'"
+                    autoComplete="email"
+                    required
+                    v-model="form.email"
                     :placeholder="userType.userType === 'professor' ? 'seu@email.com' : 'seu_usuario'"
                     class="pl-12 h-12 text-base rounded-xl"
                   />
@@ -106,7 +110,11 @@ const handleLogin = async() => {
                   <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="password"
+                    name="password"
                     type="password"
+                    autoComplete="current-password"
+                    required
+                    v-model="form.password"
                     placeholder="••••••••"
                     class="pl-12 h-12 text-base rounded-xl"
                   />

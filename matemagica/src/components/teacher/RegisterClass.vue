@@ -10,7 +10,9 @@ const closeComponent = () => {
 }
 
 const form = reactive({
-    name: ''
+    name: '',
+    description: '',
+    teacher_id: ''
 })
 
 const submitStudent = async() => {
@@ -19,7 +21,7 @@ const submitStudent = async() => {
     }
 
     try {
-    const response = await axios.post('/api/jobs', newClass)
+    const response = await axios.post('http://localhost:3000/classrooms', newClass)
     // toast.success('Aluno adicionado com sucesso')
     // router.push(`/jobs/${response.data.id}`)
 } catch(error) {
