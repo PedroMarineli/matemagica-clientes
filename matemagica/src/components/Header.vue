@@ -2,7 +2,6 @@
 import { useUserStore } from '../userStore';
 
 const userStore = useUserStore()
-console.log(userStore.data)
 </script>
 
 <template>

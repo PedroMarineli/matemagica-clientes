@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import axios from 'axios';
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { defineEmits } from 'vue';
+import { useUserStore } from '../../userStore';
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close'])
+const userStore = useUserStore()
+
+const teacherId = computed(() => userStore.data?.id)
 
 const closeComponent = () => {
   emit('close');
@@ -12,19 +16,17 @@ const closeComponent = () => {
 const form = reactive({
     username: '',
     password: '',
-    teacher_id: '',
     classroom_id: '',
-    photo_url: '',
-    name: '',
-    genre: '',
-    age: ''
+    photo_url: ''
 })
 
 const submitStudent = async() => {
     const newStudent = {
-        name: form.name,
-        genre: form.genre,
-        age: form.age
+        username: form.username,
+        password: form.password,
+        teacher_id: teacherId.value,
+        classroom_id: form.classroom_id,
+        photo_url: form.photo_url
     }
 
     try {
@@ -51,33 +53,33 @@ const submitStudent = async() => {
                 <label class="block text-gray-700 font-bold mb-2">Nome:</label>
                 <input
                     type="text"
-                    v-model="form.name"
-                    id="name"
-                    name="name"
+                    v-model="form.username"
+                    id="username"
+                    name="username"
                     class="border rounded w-full py-2 px-3 mb-2"
                     placeholder="Nome do aluno"
                     required
                 />
             </div>
             <div>
-                <label class="block text-gray-700 font-bold mb-2">Gênero:</label>
+                <label class="block text-gray-700 font-bold mb-2">Senha:</label>
                 <input
                     type="text"
-                    v-model="form.genre"
-                    id="genre"
-                    name="genre"
+                    v-model="form.password"
+                    id="password"
+                    name="password"
                     class="border rounded w-full py-2 px-3 mb-2"
                     placeholder="Gênero do aluno"
                     required
                 />
             </div>
             <div>
-                <label class="block text-gray-700 font-bold mb-2">Data de Nascimento:</label>
+                <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
                 <input
                     type="date"
-                    v-model="form.age"
-                    id="age"
-                    name="age"
+                    v-model="form.classroom_id"
+                    id="classroom_id"
+                    name="classroom_id"
                     class="border rounded w-full py-2 px-3 mb-2"
                     required
                 />

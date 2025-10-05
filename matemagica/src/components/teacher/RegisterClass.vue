@@ -1,33 +1,40 @@
 <script setup lang="ts">
 import axios from 'axios';
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { defineEmits } from 'vue';
+import { useUserStore } from '../../userStore';
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close'])
+const userStore = useUserStore()
+
+const teacherId = computed(() => userStore.data?.id)
 
 const closeComponent = () => {
-  emit('close');
+    emit('close')
 }
 
 const form = reactive({
     name: '',
-    description: '',
-    teacher_id: ''
+    description: ''
 })
 
 const submitStudent = async() => {
     const newClass = {
         name: form.name,
+        description: form.description,
+        teacher_id: teacherId.value
     }
 
     try {
-    const response = await axios.post('http://localhost:3000/classrooms', newClass)
-    // toast.success('Aluno adicionado com sucesso')
-    // router.push(`/jobs/${response.data.id}`)
-} catch(error) {
-    console.error('Error fetching job', error)
-    // toast.error('Aluno não foi adicionado')
-}
+        const response = await axios.post('http://localhost:3000/classrooms', newClass)
+        // toast.success('Aluno adicionado com sucesso')
+        // router.push(`/jobs/${response.data.id}`)
+        if(response) {
+            console.log('Sala registrada')
+        }
+    } catch(error) {
+        console.log('Sala não registrada')
+    }
 }
 </script>
 
@@ -48,6 +55,18 @@ const submitStudent = async() => {
                 name="name"
                 class="border rounded w-full py-2 px-3 mb-2"
                 placeholder="1º Ano A"
+                required
+            />
+        </div>
+        <div>
+            <label class="block text-gray-700 font-bold mb-2">Descrição:</label>
+            <input
+                type="text"
+                v-model="form.description"
+                id="description"
+                name="description"
+                class="border rounded w-full py-2 px-3 mb-2"
+                placeholder="Descrição"
                 required
             />
         </div>

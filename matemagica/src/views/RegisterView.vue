@@ -20,7 +20,6 @@ const handleRegister = async() => {
   }
 
   try {
-    console.log(login)
     const response = await axios.post('http://localhost:3000/users/register/teacher', login)
     if(response) {
       router.push({ name: 'login' })
