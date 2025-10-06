@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 const router = useRouter();
 </script>
 
 <template>
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border shadow-soft">
-      <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 transition-smooth hover:scale-105">
-                <div className="bg-gradient-primary rounded-2xl p-2 shadow-medium">
-                <Sparkles className="w-6 h-6 text-white" />
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border shadow-soft">
+      <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+            <RouterLink to="/" class="flex items-center gap-2 transition-smooth hover:scale-105">
+                <div class="bg-gradient-primary rounded-2xl p-2 shadow-medium">
+                <Sparkles class="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-bold text-gradient-primary">Matemágica</span>
-            </Link>
+                <span class="text-2xl font-bold text-lilac">Matemágica</span>
+            </RouterLink>
 
-            <div className="hidden md:flex items-center gap-6">
-                <Link to="#features" className="text-foreground hover:text-primary transition-smooth font-medium">
+            <div class="hidden md:flex items-center gap-6">
+                <RouterLink to="#features" class="text-foreground hover:text-primary transition-smooth font-medium">
                     Recursos
-                </Link>
-                <Link to="#benefits" className="text-foreground hover:text-primary transition-smooth font-medium">
+                </RouterLink>
+                <RouterLink to="#benefits" class="text-foreground hover:text-primary transition-smooth font-medium">
                     Benefícios
-                </Link>
-                <Link to="#about" className="text-foreground hover:text-primary transition-smooth font-medium">
+                </RouterLink>
+                <RouterLink to="#about" class="text-foreground hover:text-primary transition-smooth font-medium">
                     Sobre
-                </Link>
+                </RouterLink>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div class="flex items-center gap-3">
                 <!-- <Button variant="ghost" asChild @click="() => router.push( 'login' )> -->
                 <button @click="() => router.push('login')">
                     Entrar

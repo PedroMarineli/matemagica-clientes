@@ -1,91 +1,93 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 </script>
 
 <template>
-    <footer className="bg-muted/50 border-t border-border py-12">
-        <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-4 gap-8 mb-8">
+    <footer class="bg-light-gray border-t border-border py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
             <!-- Brand -->
-            <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                <div className="bg-gradient-primary rounded-2xl p-2 shadow-medium">
-                    <Sparkles className="w-5 h-5 text-white" />
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                <div class="bg-gradient-primary rounded-2xl p-2 shadow-medium">
+                    <Sparkles class="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold text-gradient-primary">Matemágica</span>
+                <span class="text-xl font-bold text-lilac">Matemágica</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p class="text-sm text-muted-foreground">
                 Transformando o ensino de matemática através da inclusão e gamificação
                 </p>
             </div>
 
             <!-- Links -->
             <div>
-                <h4 className="font-bold mb-4">Produto</h4>
-                <ul className="space-y-2">
+                <h4 class="font-bold mb-4">Produto</h4>
+                <ul class="space-y-2">
                 <li>
-                    <Link to="#features" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="#features" class="text-muted-foreground hover:text-primary transition-smooth">
                     Recursos
-                    </Link>
+                    </RouterLink>
                 </li>
                 <li>
-                    <Link to="#benefits" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="#benefits" class="text-muted-foreground hover:text-primary transition-smooth">
                     Benefícios
-                    </Link>
+                    </RouterLink>
                 </li>
                 <li>
-                    <Link to="/cadastro" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="/cadastro" class="text-muted-foreground hover:text-primary transition-smooth">
                     Começar
-                    </Link>
+                    </RouterLink>
                 </li>
                 </ul>
             </div>
 
             <div>
-                <h4 className="font-bold mb-4">Suporte</h4>
-                <ul className="space-y-2">
+                <h4 class="font-bold mb-4">Suporte</h4>
+                <ul class="space-y-2">
                 <li>
-                    <Link to="/ajuda" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="/ajuda" class="text-muted-foreground hover:text-primary transition-smooth">
                     Central de Ajuda
-                    </Link>
+                    </RouterLink>
                 </li>
                 <li>
-                    <Link to="/contato" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="/contato" class="text-muted-foreground hover:text-primary transition-smooth">
                     Contato
-                    </Link>
+                    </RouterLink>
                 </li>
                 <li>
-                    <Link to="/documentacao" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="/documentacao" class="text-muted-foreground hover:text-primary transition-smooth">
                     Documentação
-                    </Link>
+                    </RouterLink>
                 </li>
                 </ul>
             </div>
 
             <div>
-                <h4 className="font-bold mb-4">Legal</h4>
-                <ul className="space-y-2">
+                <h4 class="font-bold mb-4">Legal</h4>
+                <ul class="space-y-2">
                 <li>
-                    <Link to="/privacidade" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="/privacidade" class="text-muted-foreground hover:text-primary transition-smooth">
                     Privacidade
-                    </Link>
+                    </RouterLink>
                 </li>
                 <li>
-                    <Link to="/termos" className="text-muted-foreground hover:text-primary transition-smooth">
+                    <RouterLink to="/termos" class="text-muted-foreground hover:text-primary transition-smooth">
                     Termos de Uso
-                    </Link>
+                    </RouterLink>
                 </li>
                 </ul>
             </div>
             </div>
 
             <!-- Bottom -->
-            <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground flex items-center gap-1">
-                Feito com <Heart className="w-4 h-4 text-destructive fill-current" /> para educação inclusiva
+            <div class="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-muted-foreground flex items-center gap-1">
+                Feito com <Heart class="w-4 h-4 text-destructive fill-current" /> para educação inclusiva
             </p>
-            <div className="flex items-center gap-4">
-                <a href="mailto:contato@matemagica.com" className="text-muted-foreground hover:text-primary transition-smooth">
-                <Mail className="w-5 h-5" />
+            <div class="flex items-center gap-4">
+                <a href="mailto:contato@matemagica.com" class="text-muted-foreground hover:text-primary transition-smooth">
+                <Mail class="w-5 h-5" />
                 </a>
             </div>
             </div>
