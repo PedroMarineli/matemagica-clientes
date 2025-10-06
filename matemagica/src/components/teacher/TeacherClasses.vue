@@ -1,17 +1,31 @@
 <script setup lang="ts">
+import axios from 'axios';
 import RegisterClass from './RegisterClass.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 // 4. A função que altera o estado para esconder o componente
 const closeClassRegister = () => {
-  showRegisterForm.value = false;
-};
-const mocks = [
-  { id: 1, class: "1º Ano A", students: 12 },
-  { id: 2, class: "1º Ano A", students: 18 },
-  { id: 3, class: "1º Ano A", students: 14 },
-  { id: 4, class: "1º Ano A", students: 15 }
-];
+  showRegisterForm.value = false
+}
+
+interface Classrooms {
+    id: number
+    name: string
+    description: string
+    teacher_id: number,
+    created_at: string
+}
+
+const classrooms = ref<Classrooms[] | null>(null)
+
+onMounted(async () => {
+    try {
+        const response = await axios.get('http://localhost:3000/classrooms')
+        classrooms.value = response.data
+    } catch(error) {
+        console.error('Error fetching job', error)
+    }
+})
 
 const showRegisterForm = ref(false)
 const callRegister = () => {
@@ -32,16 +46,16 @@ const callRegister = () => {
                         <th>Ação</th>
                     </tr>
                 </thead>
-                <tbody v-if="!mocks || mocks.length === 0">
+                <tbody v-if="!classrooms || classrooms.length === 0">
                     <tr>
                         <td colspan="10">Nenhuma sala cadastrada</td>
                     </tr>
                 </tbody>
-                <tbody v-else v-for="mock in mocks">
+                <tbody v-else v-for="classroom in classrooms">
                     <tr>
-                        <td>{{mock.id}}</td>
-                        <td>{{mock.class}}</td>
-                        <td>{{mock.students}}</td>
+                        <td>{{classroom.id}}</td>
+                        <td>{{classroom.name}}</td>
+                        <td>{{classroom.description}}</td>
                         <td>Dados</td>
                     </tr>
                 </tbody>

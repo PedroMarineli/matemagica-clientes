@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import axios from 'axios';
-import { computed, reactive } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
+
+interface Classroom {
+    id: number
+    name: string
+    description: string
+    teacher_id: number,
+    created_at: string
+}
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -30,14 +38,28 @@ const submitStudent = async() => {
     }
 
     try {
-    const response = await axios.post('http://localhost:3000/users/register/student', newStudent)
-    // toast.success('Aluno adicionado com sucesso')
-    // router.push(`/jobs/${response.data.id}`)
-} catch(error) {
-    console.error('Error fetching job', error)
-    // toast.error('Aluno não foi adicionado')
+        const response = await axios.post('http://localhost:3000/users/register/student', newStudent)
+        // toast.success('Aluno adicionado com sucesso')
+        // router.push(`/jobs/${response.data.id}`)
+        if(response) {
+            console.log('Aluno registrado')
+        }
+    } catch(error) {
+        console.error('Aluno não foi adicionado', error)
+        // toast.error('Aluno não foi adicionado')
+    }
 }
-}
+
+const classrooms = ref<Classroom[] | null>(null)
+
+onMounted(async () => {
+    try {
+        const response = await axios.get('http://localhost:3000/classrooms')
+        classrooms.value = response.data
+    } catch(error) {
+        console.error('Error fetching job', error)
+    }
+})
 </script>
 
 <template>
@@ -75,14 +97,10 @@ const submitStudent = async() => {
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
-                <input
-                    type="date"
-                    v-model="form.classroom_id"
-                    id="classroom_id"
-                    name="classroom_id"
-                    class="border rounded w-full py-2 px-3 mb-2"
-                    required
-                />
+                <select v-model="form.classroom_id">
+                    <option value="" disabled selected>Selecione a Sala</option>
+                    <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
+                </select>
             </div>
         </div>
         <button

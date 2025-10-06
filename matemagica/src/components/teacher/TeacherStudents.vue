@@ -1,18 +1,34 @@
 <script setup lang="ts">
+import axios from 'axios';
 import RegisterStudent from './RegisterStudent.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 // 4. A função que altera o estado para esconder o componente
 const closeStudentRegister = () => {
   showRegisterForm.value = false;
-};
+}
 
-const mocks = [
-  { id: 1, name: "Fabio", genre: "M", age: 20 },
-  { id: 2, name: "Fabio", genre: "M", age: 20 },
-  { id: 3, name: "Fabio", genre: "M", age: 20 },
-  { id: 4, name: "Fabio", genre: "M", age: 20 }
-]
+interface Users {
+    avatar_url: string
+    classroom_id: string
+    created_at: string
+    email: string
+    id: number
+    photo_url: string
+    type: string
+    username: string
+}
+
+const students = ref<Users[] | null>(null)
+
+onMounted(async () => {
+    try {
+        const response = await axios.get('http://localhost:3000/users')
+        students.value = response.data
+    } catch(error) {
+        console.error('Error fetching job', error)
+    }
+})
 
 const showRegisterForm = ref(false)
 const callRegister = () => {
@@ -34,17 +50,17 @@ const callRegister = () => {
                         <th>Ação</th>
                     </tr>
                 </thead>
-                <tbody v-if="!mocks || mocks.length === 0">
+                <tbody v-if="!students || students.length === 0">
                     <tr>
                         <td colspan="10">Nenhum aluno cadastrado</td>
                     </tr>
                 </tbody>
-                <tbody v-else v-for="mock in mocks">
+                <tbody v-else v-for="student in students">
                     <tr>
-                        <td>{{mock.id}}</td>
-                        <td>{{mock.name}}</td>
-                        <td>{{mock.genre}}</td>
-                        <td>{{mock.age}}</td>
+                        <td>{{student.id}}</td>
+                        <td>{{student.username}}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.type}}</td>
                         <td>Dados</td>
                     </tr>
                 </tbody>
