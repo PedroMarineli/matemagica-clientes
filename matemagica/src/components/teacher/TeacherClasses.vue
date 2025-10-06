@@ -2,26 +2,18 @@
 import axios from 'axios';
 import RegisterClass from './RegisterClass.vue';
 import { onMounted, ref } from 'vue';
+import type { IClassrooms } from '../../interfaces/IClassrooms';
 
-// 4. A função que altera o estado para esconder o componente
 const closeClassRegister = () => {
   showRegisterForm.value = false
 }
 
-interface Classrooms {
-    id: number
-    name: string
-    description: string
-    teacher_id: number,
-    created_at: string
-}
-
-const classrooms = ref<Classrooms[] | null>(null)
+const classrooms = ref<IClassrooms[] | null>(null)
 
 onMounted(async () => {
     try {
         const response = await axios.get('http://localhost:3000/classrooms')
-        classrooms.value = response.data
+        classrooms.value = response.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)
     }

@@ -2,29 +2,18 @@
 import axios from 'axios';
 import RegisterStudent from './RegisterStudent.vue';
 import { onMounted, ref } from 'vue';
+import type { IUsers } from '../../interfaces/IUsers';
 
-// 4. A função que altera o estado para esconder o componente
 const closeStudentRegister = () => {
   showRegisterForm.value = false;
 }
 
-interface Users {
-    avatar_url: string
-    classroom_id: string
-    created_at: string
-    email: string
-    id: number
-    photo_url: string
-    type: string
-    username: string
-}
-
-const students = ref<Users[] | null>(null)
+const students = ref<IUsers[] | null>(null)
 
 onMounted(async () => {
     try {
         const response = await axios.get('http://localhost:3000/users')
-        students.value = response.data
+        students.value = response.data as IUsers[]
     } catch(error) {
         console.error('Error fetching job', error)
     }

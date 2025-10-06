@@ -3,14 +3,7 @@ import axios from 'axios';
 import { computed, onMounted, reactive, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
-
-interface Classroom {
-    id: number
-    name: string
-    description: string
-    teacher_id: number,
-    created_at: string
-}
+import type { IClassrooms } from '../../interfaces/IClassrooms';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -50,12 +43,12 @@ const submitStudent = async() => {
     }
 }
 
-const classrooms = ref<Classroom[] | null>(null)
+const classrooms = ref<IClassrooms[] | null>(null)
 
 onMounted(async () => {
     try {
         const response = await axios.get('http://localhost:3000/classrooms')
-        classrooms.value = response.data
+        classrooms.value = response.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)
     }
