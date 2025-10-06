@@ -45,7 +45,7 @@ const callRegister = () => {
                     </tr>
                 </tbody>
                 <tbody v-else v-for="student in students">
-                    <tr>
+                    <tr v-if="student.type === 'student'">
                         <td>{{student.id}}</td>
                         <td>{{student.username}}</td>
                         <td>{{student.email}}</td>

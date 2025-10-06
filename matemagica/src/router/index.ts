@@ -33,7 +33,7 @@ const router = createRouter({
             component: StudentLayout,
             children: [
                 {
-                    path: '',
+                    path: '/alunos',
                     name: 'studentDashboard',
                     component: StudentView,
                 }
@@ -45,17 +45,17 @@ const router = createRouter({
             component: TeacherLayout,
             children: [
                 {
-                    path: '',
+                    path: '/professores',
                     name: 'teacherDashboard',
                     component: TeacherView,
                 },
                 {
-                    path: '/alunos',
+                    path: '/professores/alunos',
                     name: 'teacherStudents',
                     component: TeacherStudents,
                 },
                                 {
-                    path: '/salas',
+                    path: '/professores/salas',
                     name: 'teacherClasses',
                     component: TeacherClasses,
                 }

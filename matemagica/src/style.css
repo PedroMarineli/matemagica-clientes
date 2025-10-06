@@ -1,8 +1,9 @@
 :root {
   /* Variáveis de cores da sua marca */
   --light-brown: #CFC5B0;
-  --light-blue: #CFFEFF;
-  --light-green: #6A9D7D;
+  --light-gray: #f0f1f5;
+  --light-green: rgb(150 65% 55%);
+  --lilac: rgb(270 75% 55%);
 
   /* Outras variáveis que você pode precisar */
   /* --fonte-principal: 'Arial', sans-serif; */
@@ -13,11 +14,17 @@
 .bg-light-brown {
   background-color: var(--light-brown);
 }
-.bg-light-blue {
-  background-color: var(--light-blue);
+.bg-light-gray {
+  background-color: var(--light-gray);
+}
+.bg-lilac {
+  background-color: var(--lilac);
 }
 .bg-light-green {
   background-color: var(--light-green);
+}
+.bg-lilac {
+  background-color: var(--lilac);
 }
 .table {
   @apply bg-white border-separate border-spacing-0 rounded-lg border-2 border-gray-200 overflow-hidden;

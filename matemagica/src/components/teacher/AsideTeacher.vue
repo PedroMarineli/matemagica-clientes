@@ -15,7 +15,19 @@ const top = [
 </script>
 
 <template>
-    <aside class="w-screen md:w-1/4 py-4 md:py-10 lg:w-1/6 bg-light-brown flex flex-col items-center gap-5 border-r-1 border-r-black">
+    <aside className="w-screen md:w-1/4 py-4 md:py-10 lg:w-1/6 bg-white flex flex-col items-center gap-5 border-r-1 border-r-black">
+        <div className="p-4">
+            <nav className="space-y-2">
+                <ul class="flex md:flex-col gap-3">
+                    <li class="flex items-center gap-5 cursor-pointer w-full justify-start" v-for="item in top" :key="item.nome" @click="() => router.push({ name: item.route })">
+                        <img v-if="item.icon" :src="item.icon" :alt="item.nome" class="w-7 h-7"/>
+                        <span class="hidden min-[425px]:block font-bold">{{ item.nome }}</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <!-- <aside class="w-screen md:w-1/4 py-4 md:py-10 lg:w-1/6 bg-light-brown flex flex-col items-center gap-5 border-r-1 border-r-black">
         <span class="hidden md:block font-bold">Menu</span>
         <ul class="flex md:flex-col gap-3">
             <li class="flex items-center gap-5 cursor-pointer" v-for="item in top" :key="item.nome" @click="() => router.push({ name: item.route })">
@@ -23,5 +35,5 @@ const top = [
                 <span class="hidden min-[425px]:block font-bold">{{ item.nome }}</span>
             </li>
         </ul>
-    </aside>
+    </aside> -->
 </template>

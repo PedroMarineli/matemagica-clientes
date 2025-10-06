@@ -4,7 +4,7 @@ import HeaderStudent from '../../components/student/HeaderStudent.vue';
 </script>
 
 <template>
-    <div class="bg-light-blue flex flex-col min-h-screen underline">
+    <div class="bg-light-gray flex flex-col min-h-screen underline">
         <HeaderStudent />
         <main class="w-full flex flex-col items-center">
             <RouterView />

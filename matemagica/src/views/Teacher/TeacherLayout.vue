@@ -5,7 +5,7 @@ import Header from '../../components/Header.vue';
 </script>
 
 <template>
-    <div class="bg-light-blue flex flex-col min-h-screen">
+    <div class="bg-light-gray flex flex-col min-h-screen">
         <Header />
         <div class="flex flex-col md:flex-row flex-1">
             <AsideTeacher />
