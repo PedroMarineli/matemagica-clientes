@@ -3,10 +3,7 @@ import axios from 'axios';
 import RegisterClass from './RegisterClass.vue';
 import { onMounted, ref } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
-
-const closeClassRegister = () => {
-  showRegisterForm.value = false
-}
+import MaintainClass from './MaintainClass.vue';
 
 const classrooms = ref<IClassrooms[] | null>(null)
 
@@ -20,8 +17,31 @@ onMounted(async () => {
 })
 
 const showRegisterForm = ref(false)
+const showMaintainForm = ref(false)
+
+const selectedClass = ref<IClassrooms | null>(null)
+
 const callRegister = () => {
+    if (showMaintainForm.value) {
+        showMaintainForm.value = false
+        selectedClass.value = null
+    }
     showRegisterForm.value = !showRegisterForm.value
+}
+const closeClassRegister = () => {
+  showRegisterForm.value = false
+}
+
+const callMaintain = (classroom: IClassrooms) => {
+    if (showRegisterForm.value) {
+        showRegisterForm.value = false
+    }
+    showMaintainForm.value = !showMaintainForm.value
+    selectedClass.value = classroom 
+}
+const closeMaintainRegister = () => {
+  showMaintainForm.value = false
+  selectedClass.value = null
 }
 </script>
 
@@ -48,7 +68,9 @@ const callRegister = () => {
                         <td>{{classroom.id}}</td>
                         <td>{{classroom.name}}</td>
                         <td>{{classroom.description}}</td>
-                        <td>Dados</td>
+                        <td>
+                            <button @click="callMaintain(classroom)">Dados</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -56,6 +78,9 @@ const callRegister = () => {
         </div>
         <aside v-if="showRegisterForm" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
             <RegisterClass @close="closeClassRegister"/>
+        </aside>
+        <aside v-if="showMaintainForm && selectedClass" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
+            <MaintainClass :class-data="selectedClass" @close="closeMaintainRegister"/>
         </aside>
     </div>
 </template>

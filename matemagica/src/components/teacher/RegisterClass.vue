@@ -18,7 +18,7 @@ const form = reactive({
     description: ''
 })
 
-const submitStudent = async() => {
+const submitClass = async() => {
     const newClass = {
         name: form.name,
         description: form.description,
@@ -39,7 +39,7 @@ const submitStudent = async() => {
 </script>
 
 <template>
-    <form @submit.prevent="submitStudent" class="grid gap-3">
+    <form @submit.prevent="submitClass" class="grid gap-3">
         <div class="flex justify-between">
             <h1 class="font-bold text-lg">Registrar Sala de Aula:</h1>
             <div>

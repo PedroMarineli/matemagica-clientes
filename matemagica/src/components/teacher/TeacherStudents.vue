@@ -3,10 +3,7 @@ import axios from 'axios';
 import RegisterStudent from './RegisterStudent.vue';
 import { onMounted, ref } from 'vue';
 import type { IUsers } from '../../interfaces/IUsers';
-
-const closeStudentRegister = () => {
-  showRegisterForm.value = false;
-}
+import MaintainStudent from './MaintainStudent.vue';
 
 const students = ref<IUsers[] | null>(null)
 
@@ -20,8 +17,31 @@ onMounted(async () => {
 })
 
 const showRegisterForm = ref(false)
+const showMaintainForm = ref(false)
+
+const selectedStudent = ref<IUsers | null>(null)
+
 const callRegister = () => {
+    if (showMaintainForm.value) {
+        showMaintainForm.value = false
+        selectedStudent.value = null
+    }
     showRegisterForm.value = !showRegisterForm.value
+}
+const closeStudentRegister = () => {
+  showRegisterForm.value = false
+}
+
+const callMaintain = (student: IUsers) => {
+    if (showRegisterForm.value) {
+        showRegisterForm.value = false
+    }
+    showMaintainForm.value = !showMaintainForm.value
+    selectedStudent.value = student 
+}
+const closeMaintainRegister = () => {
+  showMaintainForm.value = false
+  selectedStudent.value = null
 }
 </script>
 
@@ -50,7 +70,9 @@ const callRegister = () => {
                         <td>{{student.username}}</td>
                         <td>{{student.email}}</td>
                         <td>{{student.type}}</td>
-                        <td>Dados</td>
+                        <td>
+                            <button @click="callMaintain(student)">Dados</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -58,6 +80,9 @@ const callRegister = () => {
         </div>
         <aside v-if="showRegisterForm" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
             <RegisterStudent @close="closeStudentRegister"/>
+        </aside>
+        <aside v-if="showMaintainForm && selectedStudent" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
+            <MaintainStudent :student-data="selectedStudent" @close="closeMaintainRegister"/>
         </aside>
     </div>
 </template>
