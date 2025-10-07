@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import type { ITasks } from '../../interfaces/ITasks';
-import RegisterTask from './RegisterTask.vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
@@ -22,16 +21,16 @@ const showMaintainForm = ref(false)
 
 const selectedTask = ref<ITasks | null>(null)
 
-const callRegister = () => {
-    if (showMaintainForm.value) {
-        showMaintainForm.value = false
-        selectedTask.value = null
-    }
-    showRegisterForm.value = !showRegisterForm.value
-}
-const closeTaskRegister = () => {
-  showRegisterForm.value = false
-}
+// const callRegister = () => {
+//     if (showMaintainForm.value) {
+//         showMaintainForm.value = false
+//         selectedTask.value = null
+//     }
+//     showRegisterForm.value = !showRegisterForm.value
+// }
+// const closeTaskRegister = () => {
+//   showRegisterForm.value = false
+// }
 
 const callMaintain = (student: ITasks) => {
     if (showRegisterForm.value) {

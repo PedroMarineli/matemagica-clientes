@@ -27,11 +27,11 @@ const submitTask = async() => {
         title: form.title,
         type: form.type,
         teacher_id: teacherId.value,
-        content: form.content,
+        content: currentProblem.value,
         difficulty: form.difficulty,
         classroom_id: form.classroom_id,
     }
-
+    
     try {
         const response = await axios.post('http://localhost:3000/tasks', newTask)
         // toast.success('Aluno adicionado com sucesso')
@@ -219,9 +219,9 @@ function generateAndShowProblem() {
                     <option value="hard">Difícil</option>
                 </select>
             </div>
-            <button @click="generateAndShowProblem()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline">
+            <div @click="generateAndShowProblem()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline">
                 Criar tarefa
-            </button>
+            </div>
             <div class="problem-area mt-8 p-6 border rounded-lg shadow-md">
                 <div v-if="currentProblem">
                     <h2 class="text-xl font-bold text-primary mb-4">
