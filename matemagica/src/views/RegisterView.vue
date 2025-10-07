@@ -54,7 +54,7 @@ const handleRegister = async() => {
                 <div class="bg-gradient-primary rounded-2xl p-3 shadow-medium">
                   <Sparkles class="w-8 h-8 text-white" />
                 </div>
-                <span class="text-3xl font-bold text-lilac">Matemágica</span>
+                <span class="text-3xl font-bold text-gradient-primary">Matemágica</span>
               </div>
             </div>
 

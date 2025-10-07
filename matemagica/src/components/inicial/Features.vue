@@ -40,28 +40,28 @@ const features = [
 </script>
 
 <template>
-    <section id="features" class="py-20 bg-muted/30">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                Recursos que fazem a <span class="text-lilac">diferença</span>
+    <section id="features" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Recursos que fazem a <span className="text-gradient-primary">diferença</span>
             </h2>
-            <p class="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground">
                 Ferramentas completas para transformar o ensino de matemática em uma experiência inclusiva e envolvente
             </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <Card
                     v-for="feature in features" 
                     :key="feature"
-                    class="p-6 hover:shadow-medium transition-smooth hover:-translate-y-2 border-2 bg-card"
+                    className="p-6 hover:shadow-medium transition-smooth hover:-translate-y-2 border-2 bg-card"
                 >
-                    <!-- <div class={`inline-flex p-4 rounded-2xl bg-${feature.color}/10 mb-4 shadow-soft`}>
-                        <feature.icon class={`w-8 h-8 text-${feature.color}`} />
+                    <!-- <div className={`inline-flex p-4 rounded-2xl bg-${feature.color}/10 mb-4 shadow-soft`}>
+                        <feature.icon className={`w-8 h-8 text-${feature.color}`} />
                     </div> -->
-                    <h3 class="text-xl font-bold mb-3">{{ feature.title }}</h3>
-                    <p class="text-muted-foreground leading-relaxed">{{ feature.description }}</p>
+                    <h3 className="text-xl font-bold mb-3">{{ feature.title }}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{{ feature.description }}</p>
                 </Card>
             </div>
         </div>
