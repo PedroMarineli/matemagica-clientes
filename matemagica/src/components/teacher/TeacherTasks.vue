@@ -3,7 +3,9 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import type { ITasks } from '../../interfaces/ITasks';
 import RegisterTask from './RegisterTask.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const tasks = ref<ITasks[] | null>(null)
 
 onMounted(async () => {
@@ -80,11 +82,8 @@ const closeMaintainRegister = () => {
                     </tr>
                 </tbody>
             </table>
-            <button @click="callRegister">Adicionar Tarefa</button>
+            <button @click="() => router.push('/professores/adicionar-tarefa')">Adicionar Tarefa</button>
         </div>
-        <aside v-if="showRegisterForm" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
-            <RegisterTask @close="closeTaskRegister"/>
-        </aside>
         <aside v-if="showMaintainForm && selectedTask" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
             <MaintainTask :task-data="selectedTask" @close="closeMaintainRegister"/>
         </aside>

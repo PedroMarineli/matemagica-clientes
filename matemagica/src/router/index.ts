@@ -9,6 +9,7 @@ import RegisterView from '../views/RegisterView.vue';
 import StudentLayout from '../views/Student/StudentLayout.vue';
 import InicialView from '../views/InicialView.vue';
 import TeacherTasks from '../components/teacher/TeacherTasks.vue';
+import RegisterTask from '../components/teacher/RegisterTask.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +65,11 @@ const router = createRouter({
                     path: '/professores/tarefas',
                     name: 'teacherTasks',
                     component: TeacherTasks,
+                },
+                {
+                    path: '/professores/adicionar-tarefa',
+                    name: 'registerTask',
+                    component: RegisterTask,
                 }
             ],
         },
