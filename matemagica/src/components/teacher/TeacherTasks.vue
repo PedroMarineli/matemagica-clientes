@@ -3,13 +3,14 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import type { ITasks } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
+import MaintainTask from './MaintainTask.vue';
 
 const router = useRouter()
 const tasks = ref<ITasks[] | null>(null)
 
 onMounted(async () => {
     try {
-        const response = await axios.get('http://localhost:3000/tasks?classroom_id=1')
+        const response = await axios.get('http://localhost:3000/tasks')
         tasks.value = response.data as ITasks[]
     } catch(error) {
         console.error('Error fetching job', error)
@@ -67,7 +68,7 @@ const closeMaintainRegister = () => {
                     </tr>
                 </tbody>
                 <tbody v-else v-for="task in tasks">
-                    <tr v-if="task.type === 'task'">
+                    <tr>
                         <td>{{task.id}}</td>
                         <td>{{task.title}}</td>
                         <td>{{task.type}}</td>

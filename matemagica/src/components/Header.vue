@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 import { useUserStore } from '../userStore';
 
 const userStore = useUserStore()
@@ -30,9 +31,10 @@ const userStore = useUserStore()
                         <p className="text-sm text-muted-foreground">{{ userStore.data?.email }}</p>
                     </div>
                     <button variant="ghost" size="icon" asChild>
-                        <div to="/login">
-                            <LogOut className="w-5 h-5" />
-                        </div>
+                        <RouterLink @click="() => userStore.clearUserData()" to="/login">
+                            Logout
+                            <!-- <LogOut className="w-5 h-5" /> -->
+                        </RouterLink>
                     </button>
                 </div>
             </div>

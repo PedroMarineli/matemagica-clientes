@@ -13,8 +13,12 @@ const form = reactive({
   error: ''
 })
 
-const userType = reactive({
-  userType: 'professor'
+type UserRole = 'professor' | 'aluno'
+interface UserState {
+    userType: UserRole
+}
+const userType = reactive<UserState>({
+    userType: 'professor'
 })
 
 const handleLogin = async() => {
@@ -28,12 +32,13 @@ const handleLogin = async() => {
     if(response) {
       const userData = response.data.user
       userStore.setUserData(userData)
-      router.push({ name: 'teacher' })
+      if(userType.userType == 'aluno') router.push({ name: 'student' })
+      else router.push({ name: 'teacher' })
     }
   } catch(error) {
-    console.log('Tentativa de login com falha')
+    console.log('Tentativa de login com falha', error)
   }
-};
+}
 </script>
 
 <template>
@@ -98,7 +103,7 @@ const handleLogin = async() => {
                   <input
                     id="email"
                     name="email"
-                    :type="userType.userType === 'professor' ? 'email' : 'text'"
+                    type="email"
                     autoComplete="email"
                     required
                     v-model="form.email"

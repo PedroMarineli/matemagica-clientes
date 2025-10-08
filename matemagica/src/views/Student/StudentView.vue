@@ -1,19 +1,34 @@
 <script setup lang="ts">
-// import ButtonActivity from '../../components/student/ButtonActivity.vue';
+import { onMounted, ref } from 'vue';
+import { useUserStore } from '../../userStore';
+import axios from 'axios';
+import type { ITasks } from '../../interfaces/ITasks';
 
+const userStore = useUserStore()
+
+const tasks = ref<ITasks[] | null>(null)
+
+onMounted(async () => {
+    try {
+        const response = await axios.get(`http://localhost:3000/tasks?classroom_id=${userStore.data?.classroom_id}`)
+        tasks.value = response.data as ITasks[]
+    } catch(error) {
+        console.error('Error fetching job', error)
+    }
+})
 </script>
 
 <template>
       <div class="container mx-auto px-4 py-8 max-w-6xl">
         <!-- Welcome section with avatar -->
-        <Card class="p-8 mb-8 bg-gradient-warm text-white shadow-glow">
+        <Card class="p-8 mb-8 bg-gradient-warm shadow-glow">
           <div class="flex flex-col md:flex-row items-center gap-6">
             <div class="w-32 h-32 rounded-full bg-white/20 flex items-center justify-center text-6xl border-4 border-white shadow-medium">
               👦
             </div>
             <div class="text-center md:text-left flex-1">
-              <h1 class="text-4xl font-bold mb-2">Olá, Lucas! 🎉</h1>
-              <p class="text-xl text-white/90">Você está indo muito bem!</p>
+              <h1 class="text-4xl font-bold mb-2">Olá, {{ userStore.data?.username }}! 🎉</h1>
+              <p class="text-xl text-black/90">Você está indo muito bem!</p>
             </div>
             <div class="flex gap-4">
               <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
@@ -50,16 +65,16 @@
           
           <div class="grid sm:grid-cols-2 gap-6">
             <!-- Task card 1 -->
-            <Card class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
+            <Card v-for="task in tasks" class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-4xl">➕</span>
                   <span class="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
-                    Fácil
+                    {{ task.difficulty }}
                   </span>
                 </div>
-                <h3 class="text-2xl font-bold">Adição Divertida</h3>
-                <p class="text-muted-foreground text-lg">Vamos somar números com figuras coloridas!</p>
+                <h3 class="text-2xl font-bold">{{ task.title }}</h3>
+                <p class="text-muted-foreground text-lg">{{ task.content }}</p>
                 <div class="space-y-2">
                   <div class="flex justify-between text-sm font-medium">
                     <span>Progresso</span>
