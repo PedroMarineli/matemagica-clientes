@@ -1,16 +1,35 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { useUserStore } from '../../userStore';
+import axios from 'axios';
+import type { ITeacherDashboard } from '../../interfaces/ITeacherDashboard';
 
+const userStore = useUserStore()
+const dashboard = ref<ITeacherDashboard | null>(null)
+console.log(dashboard)
+
+onMounted(async () => {
+    try {
+        const teacherDashboard = await axios.get(`http://localhost:3000/progress/teacher/${ userStore.data?.id }/dashboard?classroom_id=1`)
+        dashboard.value = teacherDashboard.data as ITeacherDashboard
+        const listProgressInATask = await axios.get(`http://localhost:3000/progress/task/1`)
+        console.log(teacherDashboard)
+        console.log(listProgressInATask)
+    } catch(error) {
+        console.error('Error fetching job', error)
+    }
+})
 </script>
 
 <template>
     <!-- Main content -->
     <main class="lg:col-span-3 space-y-6">
         <!-- Welcome section -->
-        <Card class="p-6 bg-gradient-primary text-white">
+        <Card class="p-6 bg-gradient-primar">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold mb-2">Bem-vinda, Ana! 👋</h1>
-                    <p class="text-white/90">Aqui está o resumo das suas turmas hoje</p>
+                    <h1 class="text-3xl font-bold mb-2">Bem-vindo(a), {{ userStore.data?.username }}! 👋</h1>
+                    <p class="text-black/90">Aqui está o resumo das suas turmas hoje</p>
                 </div>
                 <Sparkles class="w-16 h-16 opacity-50" />
             </div>
@@ -24,7 +43,7 @@
                         <Users class="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                        <p class="text-2xl font-bold">24</p>
+                        <p class="text-2xl font-bold">{{ dashboard?.statistics.total_students }}</p>
                         <p class="text-sm text-muted-foreground">Alunos</p>
                     </div>
                 </div>
@@ -36,7 +55,7 @@
                     <BookOpen class="w-6 h-6 text-secondary" />
                 </div>
                 <div>
-                    <p class="text-2xl font-bold">3</p>
+                    <p class="text-2xl font-bold">{{ dashboard?.statistics.total_classrooms }}</p>
                     <p class="text-sm text-muted-foreground">Salas</p>
                 </div>
                 </div>
@@ -48,7 +67,7 @@
                 <FileText class="w-6 h-6 text-accent" />
                 </div>
                 <div>
-                <p class="text-2xl font-bold">12</p>
+                <p class="text-2xl font-bold">{{ dashboard?.statistics.total_tasks }}</p>
                 <p class="text-sm text-muted-foreground">Tarefas Ativas</p>
                 </div>
             </div>
