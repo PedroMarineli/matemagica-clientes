@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import { useUserStore } from '../../userStore';
 import axios from 'axios';
 import type { ITasks } from '../../interfaces/ITasks';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
 const router = useRouter()
