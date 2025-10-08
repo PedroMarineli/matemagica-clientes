@@ -94,7 +94,7 @@ function getRangeByLevel(difficulty: string) {
     switch (difficulty) {
         case 'easy':
             return 20
-        case 'intermediate':
+        case 'medium':
             return 50
         case 'hard':
             return 100
@@ -215,7 +215,7 @@ function generateAndShowProblem() {
                 <select v-model="form.difficulty">
                     <option value="" disabled selected>Selecione a dificuldade da tarefa</option>
                     <option value="easy">Fácil</option>
-                    <option value="intermediate">Médio</option>
+                    <option value="medium">Médio</option>
                     <option value="hard">Difícil</option>
                 </select>
             </div>

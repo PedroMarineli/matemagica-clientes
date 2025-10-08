@@ -3,10 +3,18 @@ import { onMounted, ref } from 'vue';
 import { useUserStore } from '../../userStore';
 import axios from 'axios';
 import type { ITasks } from '../../interfaces/ITasks';
+import { useRoute, useRouter } from 'vue-router';
 
 const userStore = useUserStore()
-
+const router = useRouter()
 const tasks = ref<ITasks[] | null>(null)
+
+const navigateToTask = (task: any) => {
+  router.push({
+    path: `/alunos/tarefa/${task.id}`,
+    state: { taskDetails: task }
+  })
+}
 
 onMounted(async () => {
     try {
@@ -82,10 +90,10 @@ onMounted(async () => {
                   </div>
                   <Progress value={30} class="h-3" />
                 </div>
-                <Button variant="kid" size="lg" class="w-full">
+                <button @click="navigateToTask(task)" variant="kid" size="lg" class="w-full">
                   <Play class="w-5 h-5" />
                   Continuar
-                </Button>
+                </button>
               </div>
             </Card>
 
@@ -107,10 +115,10 @@ onMounted(async () => {
                   </div>
                   <Progress value={0} class="h-3" />
                 </div>
-                <Button variant="success" size="lg" class="w-full">
+                <button variant="success" size="lg" class="w-full">
                   <Star class="w-5 h-5" />
                   Começar
-                </Button>
+                </button>
               </div>
             </Card>
 
@@ -132,10 +140,10 @@ onMounted(async () => {
                   </div>
                   <Progress value={100} class="h-3" />
                 </div>
-                <Button variant="outline" size="lg" class="w-full" disabled>
+                <button variant="outline" size="lg" class="w-full" disabled>
                   <Trophy class="w-5 h-5" />
                   Completo! ⭐
-                </Button>
+                </button>
               </div>
             </Card>
 
@@ -145,9 +153,9 @@ onMounted(async () => {
                 <div class="text-6xl">🔒</div>
                 <h3 class="text-2xl font-bold">Próxima Aventura</h3>
                 <p class="text-muted-foreground text-lg">Complete as tarefas anteriores para desbloquear!</p>
-                <Button variant="ghost" size="lg" class="w-full" disabled>
+                <button variant="ghost" size="lg" class="w-full" disabled>
                   Bloqueado
-                </Button>
+                </button>
               </div>
             </Card>
           </div>

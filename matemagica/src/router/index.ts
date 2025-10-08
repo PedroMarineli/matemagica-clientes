@@ -10,6 +10,7 @@ import StudentLayout from '../views/Student/StudentLayout.vue';
 import InicialView from '../views/InicialView.vue';
 import TeacherTasks from '../components/teacher/TeacherTasks.vue';
 import RegisterTask from '../components/teacher/RegisterTask.vue';
+import Task from '../components/student/Task.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
                     path: '/alunos',
                     name: 'studentDashboard',
                     component: StudentView,
+                },
+                {
+                    path: '/alunos/tarefa/:id',
+                    name: 'task',
+                    component: Task,
                 }
             ],
         },
@@ -73,6 +79,11 @@ const router = createRouter({
                 }
             ],
         },
+        // {
+        //     path: '/:catchAll(.*)',
+        //     name: 'not-found',
+        //     component: NotFoundView
+        // }
     ]
 })
 
