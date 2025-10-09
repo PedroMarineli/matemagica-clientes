@@ -3,9 +3,11 @@ import { onMounted, ref } from 'vue';
 import { useUserStore } from '../../userStore';
 import axios from 'axios';
 import type { ITeacherDashboard } from '../../interfaces/ITeacherDashboard';
+import type { IListProgressInATask } from '../../interfaces/ITasks';
 
 const userStore = useUserStore()
 const dashboard = ref<ITeacherDashboard | null>(null)
+const progresses = ref<IListProgressInATask[] | null>([])
 console.log(dashboard)
 
 onMounted(async () => {
@@ -13,6 +15,7 @@ onMounted(async () => {
         const teacherDashboard = await axios.get(`http://localhost:3000/progress/teacher/${ userStore.data?.id }/dashboard?classroom_id=1`)
         dashboard.value = teacherDashboard.data as ITeacherDashboard
         const listProgressInATask = await axios.get(`http://localhost:3000/progress/task/1`)
+        progresses.value = listProgressInATask.data as IListProgressInATask[]
         console.log(teacherDashboard)
         console.log(listProgressInATask)
     } catch(error) {
@@ -77,7 +80,25 @@ onMounted(async () => {
         <!-- Recent activity -->
         <Card class="p-6">
             <h2 class="text-xl font-bold mb-4">Atividade Recente</h2>
-            <div v-for="item in [1, 2, 3, 4]" :key="item" class="space-y-3">
+            <div v-for="progress in progresses" class="space-y-3">
+                <div key="progress" class="flex items-center gap-4 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-smooth">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        👧
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">{{ progress.username }} completou "Adição Básica"</p>
+                        <p class="text-sm text-muted-foreground">Há 2 horas • Sala 3A</p>
+                        <p class="text-sm text-muted-foreground">{{ progress.status }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-lg font-bold text-success">95%</p>
+                    </div>
+                </div>
+            </div>
+        </Card>
+        <!-- <Card class="p-6">
+            <h2 class="text-xl font-bold mb-4">Atividade Recente</h2>
+            <div v-for="item in [1, 2]" :key="item" class="space-y-3">
                 <div :key="item" class="flex items-center gap-4 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-smooth">
                     <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                         👧
@@ -91,6 +112,6 @@ onMounted(async () => {
                     </div>
                 </div>
             </div>
-        </Card>
+        </Card> -->
     </main>
 </template>

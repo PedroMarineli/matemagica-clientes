@@ -1,25 +1,50 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useUserStore } from '../../userStore';
 import axios from 'axios';
-import type { ITasks } from '../../interfaces/ITasks';
+import type { ITaskProgress } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
 const router = useRouter()
-const tasks = ref<ITasks[] | null>(null)
+const tasks = ref<ITaskProgress[] | null>([])
 
-const navigateToTask = (task: any) => {
+const form = reactive({
+  student_id: userStore.data?.id,
+  status: 'In Progress'
+})
+
+const changeStatus = async(id: any, score: any) => {
+  const statusAltered = {
+    student_id: form.student_id,
+    task_id: id,
+    status: form.status,
+    score: score
+  }
+
+  console.log(statusAltered)
+  try {
+    const response = await axios.put('http://localhost:3000/progress/update', statusAltered)
+    tasks.value = response.data as ITaskProgress[]
+  } catch(error) {
+    console.error('Error fetching job', error)
+  }
+}
+
+const navigateToTask = (task: ITaskProgress) => {
+  if(task.status == 'Not Started') {
+    changeStatus(task.task_id, task.score)
+  }
   router.push({
-    path: `/alunos/tarefa/${task.id}`,
+    path: `/alunos/tarefa/${task.task_id}`,
     state: { taskDetails: task }
   })
 }
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`http://localhost:3000/tasks?classroom_id=${userStore.data?.classroom_id}`)
-        tasks.value = response.data as ITasks[]
+        const response = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.id}?status=pending`)
+        tasks.value = response.data as ITaskProgress[]
     } catch(error) {
         console.error('Error fetching job', error)
     }
@@ -83,6 +108,7 @@ onMounted(async () => {
                 </div>
                 <h3 class="text-2xl font-bold">{{ task.title }}</h3>
                 <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+                <p class="text-muted-foreground text-lg">{{ task.status }}</p>
                 <div class="space-y-2">
                   <div class="flex justify-between text-sm font-medium">
                     <span>Progresso</span>
