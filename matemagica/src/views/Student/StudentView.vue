@@ -7,7 +7,8 @@ import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
 const router = useRouter()
-const tasks = ref<ITaskProgress[] | null>([])
+const pendingTasks = ref<ITaskProgress[] | null>([])
+const completedTasks = ref<ITaskProgress[] | null>([])
 
 const form = reactive({
   student_id: userStore.data?.id,
@@ -25,7 +26,7 @@ const changeStatus = async(id: any, score: any) => {
   console.log(statusAltered)
   try {
     const response = await axios.put('http://localhost:3000/progress/update', statusAltered)
-    tasks.value = response.data as ITaskProgress[]
+    pendingTasks.value = response.data as ITaskProgress[]
   } catch(error) {
     console.error('Error fetching job', error)
   }
@@ -42,8 +43,10 @@ const navigateToTask = (task: ITaskProgress) => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.id}?status=pending`)
-        tasks.value = response.data as ITaskProgress[]
+        const notCompletedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.id}?status=pending`)
+        pendingTasks.value = notCompletedTasks.data as ITaskProgress[]
+        const finishedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.id}?status=completed`)
+        completedTasks.value = finishedTasks.data as ITaskProgress[]
     } catch(error) {
         console.error('Error fetching job', error)
     }
@@ -97,7 +100,7 @@ onMounted(async () => {
           
           <div class="grid sm:grid-cols-2 gap-6">
             <!-- Task card 1 -->
-            <Card v-for="task in tasks" class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
+            <Card v-for="task in pendingTasks" class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-4xl">➕</span>
@@ -183,6 +186,27 @@ onMounted(async () => {
                 </button>
               </div>
             </Card>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
+          <Sparkles class="w-8 h-8 text-primary" />
+          Atividades Concluídas
+        </h2>
+
+        <div v-for="task in completedTasks" class="py-8 px-10 rounded-lg border bg-card text-card-foreground shadow-sm">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-5">
+                <span class="text-4xl">➕</span>
+                <h3 class="text-2xl font-bold">{{ task.title }}</h3>
+              </div>
+              <span class="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
+                {{ task.difficulty }}
+              </span>
+            </div>
+            <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+            <p class="text-muted-foreground text-lg">{{ task.status }}</p>
           </div>
         </div>
 

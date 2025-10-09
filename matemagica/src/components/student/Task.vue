@@ -51,7 +51,25 @@ const extractedNumbers = computed(() => {
 const submitAnswer = () => {
     const num1 = extractedNumbers.value[0]
     const num2 = extractedNumbers.value[1]
-    const result = num1 + num2
+    const operation = task.value?.type
+    let result = 0
+
+    switch (operation) {
+        case 'addition':
+            result = num1 + num2
+            break
+        case 'subtraction':
+            result = num1 - num2
+            break
+        case 'multiplication':
+            result = num1 * num2
+            break
+        case 'division':
+            result = num1 / num2
+            break
+        default:
+            return
+    }
 
     if(form.answer == result) {
         form.score = 10
@@ -86,7 +104,7 @@ const submitTask = async() => {
 <template>
     <div class="container mx-auto px-4 py-8 max-w-6xl">
         <!-- Level progress -->
-        <Card class="p-6 mb-8">
+        <div class="p-6 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="flex items-center justify-between mb-3">
                 <h2 class="text-2xl font-bold flex items-center gap-2">
                 <Trophy class="w-6 h-6 text-accent" />
@@ -96,7 +114,7 @@ const submitTask = async() => {
             </div>
             <!-- <Progress value={65} class="h-4 mb-2" /> -->
             <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
-        </Card>
+        </div>
 
         <!-- Pending tasks -->
         <div class="mb-8">
