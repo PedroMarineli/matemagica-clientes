@@ -36,8 +36,7 @@ const navigateToTask = (task: ITaskProgress) => {
     changeStatus(task.task_id, task.score)
   }
   router.push({
-    path: `/alunos/tarefa/${task.task_id}`,
-    state: { taskDetails: task }
+    path: `/alunos/tarefa/${task.task_id}`
   })
 }
 

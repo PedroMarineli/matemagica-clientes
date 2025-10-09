@@ -1,27 +1,27 @@
 <script setup lang="ts">
 import axios from 'axios';
-import type { ITaskProgress } from '../../interfaces/ITasks';
+import type { ITasks } from '../../interfaces/ITasks';
 import { computed, onMounted, reactive, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../../userStore';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
 
 const route = useRoute()
+const router = useRouter()
 const taskId = route.params.id
 
-const task = ref<ITaskProgress | null>(null)
+const task = ref<ITasks | null>(null)
 
 const state = reactive({
-    task: {},
     isLoading: true
 })
 
 onMounted(async() => {
     try {
         const response = await axios.get(`http://localhost:3000/tasks/${taskId}`)
-        task.value = response.data as ITaskProgress
+        task.value = response.data as ITasks
     } catch (error) {
         console.error('Error fetching task', error)
     } finally {
@@ -31,8 +31,8 @@ onMounted(async() => {
 
 const form = reactive({
     student_id: userStore.data?.id,
-    task_id: task.value?.task_id,
-    status: task.value?.status,
+    task_id: taskId,
+    status: 'Submitted',
     score: 0,
     answer: 0
 })
@@ -53,8 +53,6 @@ const submitAnswer = () => {
     const num2 = extractedNumbers.value[1]
     const result = num1 + num2
 
-    console.log(form)
-
     if(form.answer == result) {
         form.score = 10
         console.log('Parabens vc acertou')
@@ -70,17 +68,18 @@ const submitTask = async() => {
         status: form.status,
         score: form.score
     }
-    
-    // try {
-    //     const response = await axios.put('http://localhost:3000/progress/update', taskAltered)
-    //     // toast.success('Tarefa adicionada com sucesso')
-    //     // router.push(`/jobs/${response.data.id}`)
-    //     if(response) {
-    //         console.log('Progresso de tarefa realizado')
-    //     }
-    // } catch(error) {
-    //     console.log('Progresso de tarefa não realizado')
-    // }
+
+    try {
+        const response = await axios.put('http://localhost:3000/progress/update', taskAltered)
+        // toast.success('Tarefa adicionada com sucesso')
+        // router.push(`/jobs/${response.data.id}`)
+        if(response) {
+            router.push('/alunos')
+            console.log('Progresso de tarefa realizado')
+        }
+    } catch(error) {
+        console.log('Progresso de tarefa não realizado')
+    }
 }
 </script>
 
