@@ -43,125 +43,122 @@ const handleRegister = async() => {
       </div>
 
       <!-- Coluna do Formulário -->
-      <div class="flex items-center justify-center bg-light-brown p-6 sm:p-12">
+      <div class="flex items-center justify-center p-6 sm:p-12">
         <div class="w-full max-w-sm space-y-8">
-        
-      <section class="p-8 shadow-glow border-2 bg-white">
-          <div class="space-y-6">
-            <!-- Logo -->
-            <div class="flex justify-center">
-              <div @click="() => router.push('/')" class="flex items-center gap-2 transition-smooth hover:scale-105">
-                <div class="bg-gradient-primary rounded-2xl p-3 shadow-medium">
-                  <Sparkles class="w-8 h-8 text-white" />
+          <section class="card rounded-4xl py-12">
+            <div class="space-y-6">
+              <!-- Logo -->
+              <div class="flex justify-center">
+                <div @click="() => router.push('/')" class="flex items-center gap-2 transition-smooth hover:scale-105">
+                  <img src="../../public/logo.svg" alt="logo"/>
                 </div>
-                <span class="text-3xl font-bold text-lilac">Matemágica</span>
+              </div>
+
+              <div class="text-center space-y-2">
+                <h1 class="text-2xl font-bold">Criar Conta de Professor</h1>
+                <p class="text-muted-foreground">Preencha os dados para começar</p>
+              </div>
+
+              <!-- Form -->
+              <form @submit.prevent="handleRegister" class="space-y-4">
+                <div class="space-y-2">
+                  <label htmlFor="name" class="text-base">Nome Completo</label>
+                  <div class="relative">
+                    <User class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <input
+                      id="username"
+                      type="text"
+                      required
+                      v-model="form.username"
+                      placeholder="Usuário"
+                      class="pl-12 h-12 text-base rounded-xl"
+
+                    />
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label htmlFor="email" class="text-base">E-mail</label>
+                  <div class="relative">
+                    <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <input
+                      id="email"
+                      type="text"
+                      required
+                      v-model="form.email"
+                      placeholder="seuEmail@email.com"
+                      class="pl-12 h-12 text-base rounded-xl"
+                    />
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label htmlFor="password" class="text-base">Senha</label>
+                  <div class="relative">
+                    <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <input
+                      id="password"
+                      type="password"
+                      required
+                      v-model="form.password"
+                      placeholder="Senha"
+                      class="pl-12 h-12 text-base rounded-xl"
+                    />
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label htmlFor="confirm-password" class="text-base">Confirmar Senha</label>
+                  <div class="relative">
+                    <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <input
+                      id="confirm-password"
+                      type="password"
+                      placeholder="Digite a senha novamente"
+                      class="pl-12 h-12 text-base rounded-xl"
+                    />
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-2">
+                  <input type="checkbox" id="terms" class="mt-1 rounded" />
+                  <label htmlFor="terms" class="text-sm text-muted-foreground">
+                    Eu concordo com os
+                    <span to="/termos" class="text-lilac hover:underline">
+                      Termos de Uso
+                    </span>
+                    e
+                    <span to="/privacidade" class="text-lilac hover:underline">
+                      Política de Privacidade
+                    </span>
+                  </label>
+                </div>
+
+                <Button type="submit" variant="playful" size="lg" class="w-full">
+                  Criar Conta
+                </Button>
+              </form>
+
+              <!-- Divider -->
+              <div class="relative">
+                <div class="absolute inset-0 flex items-center">
+                  <div class="w-full border-t border-border"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                  <span class="bg-white px-4 text-muted-foreground">ou</span>
+                </div>
+              </div>
+
+              <!-- Login link -->
+              <div class="text-center">
+                <span class="text-muted-foreground">Já tem uma conta? </span>
+                <span @click="() => router.push('/login')" class="text-lilac hover:underline font-bold">
+                  Faça login
+                </span>
               </div>
             </div>
-
-            <div class="text-center space-y-2">
-              <h1 class="text-2xl font-bold">Criar Conta de Professor</h1>
-              <p class="text-muted-foreground">Preencha os dados para começar</p>
-            </div>
-
-            <!-- Form -->
-            <form @submit.prevent="handleRegister" class="space-y-4">
-              <div class="space-y-2">
-                <label htmlFor="name" class="text-base">Nome Completo</label>
-                <div class="relative">
-                  <User class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <input
-                    id="username"
-                    type="text"
-                    required
-                    v-model="form.username"
-                    placeholder="Usuário"
-                    class="pl-12 h-12 text-base rounded-xl"
-
-                  />
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <label htmlFor="email" class="text-base">E-mail</label>
-                <div class="relative">
-                  <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <input
-                    id="email"
-                    type="text"
-                    required
-                    v-model="form.email"
-                    class="pl-12 h-12 text-base rounded-xl"
-                  />
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <label htmlFor="password" class="text-base">Senha</label>
-                <div class="relative">
-                  <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <input
-                    id="password"
-                    type="password"
-                    required
-                    v-model="form.password"
-                    placeholder="Senha"
-                    class="pl-12 h-12 text-base rounded-xl"
-                  />
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <label htmlFor="confirm-password" class="text-base">Confirmar Senha</label>
-                <div class="relative">
-                  <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
-                  <input
-                    id="confirm-password"
-                    type="password"
-                    placeholder="Digite a senha novamente"
-                    class="pl-12 h-12 text-base rounded-xl"
-                  />
-                </div>
-              </div>
-
-              <div class="flex items-start gap-2">
-                <input type="checkbox" id="terms" class="mt-1 rounded" />
-                <label htmlFor="terms" class="text-sm text-muted-foreground">
-                  Eu concordo com os
-                  <span to="/termos" class="text-lilac hover:underline">
-                    Termos de Uso
-                  </span>
-                  e
-                  <span to="/privacidade" class="text-lilac hover:underline">
-                    Política de Privacidade
-                  </span>
-                </label>
-              </div>
-
-              <Button type="submit" variant="playful" size="lg" class="w-full">
-                Criar Conta
-              </Button>
-            </form>
-
-            <!-- Divider -->
-            <div class="relative">
-              <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-border"></div>
-              </div>
-              <div class="relative flex justify-center text-sm">
-                <span class="bg-card px-4 text-muted-foreground">ou</span>
-              </div>
-            </div>
-
-            <!-- Login link -->
-            <div class="text-center">
-              <span class="text-muted-foreground">Já tem uma conta? </span>
-              <span @click="() => router.push('/login')" class="text-lilac hover:underline font-bold">
-                Faça login
-              </span>
-            </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
       </div>
       
       <!-- Coluna do Formulário
