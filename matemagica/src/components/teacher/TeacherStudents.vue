@@ -4,8 +4,10 @@ import RegisterStudent from './RegisterStudent.vue';
 import { onMounted, ref } from 'vue';
 import type { IUsers } from '../../interfaces/IUsers';
 import MaintainStudent from './MaintainStudent.vue';
+import type { ITaskProgress } from '../../interfaces/ITasks';
 
 const students = ref<IUsers[] | null>(null)
+const studentTasks = ref<ITaskProgress[] | null>([])
 
 onMounted(async () => {
     try {
@@ -15,6 +17,15 @@ onMounted(async () => {
         console.error('Error fetching job', error)
     }
 })
+
+const exibirDadosAluno = async (student: IUsers) => {
+    try {
+        const notCompletedTasks = await axios.get(`http://localhost:3000/progress/student/${student.id}`)
+        studentTasks.value = notCompletedTasks.data as ITaskProgress[]
+    } catch(error) {
+        console.error('Error fetching job', error)
+    } 
+}
 
 const showRegisterForm = ref(false)
 const showMaintainForm = ref(false)
@@ -65,7 +76,7 @@ const closeMaintainRegister = () => {
                     </tr>
                 </tbody>
                 <tbody v-else v-for="student in students">
-                    <tr v-if="student.type === 'student'">
+                    <tr v-if="student.type === 'student'" :onclick="exibirDadosAluno(student)">
                         <td>{{student.id}}</td>
                         <td>{{student.username}}</td>
                         <td>{{student.email}}</td>
@@ -74,6 +85,24 @@ const closeMaintainRegister = () => {
                             <button @click="callMaintain(student)">Dados</button>
                         </td>
                     </tr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody v-for="tasks in studentTasks">
+                            <tr>
+                                <td colspan="10">{{ tasks.title }}</td>
+                                <td colspan="10">{{ tasks.type }}</td>
+                                <td colspan="10">{{ tasks.status }}</td>
+                                <td colspan="10">{{ tasks.score }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </tbody>
             </table>
             <button @click="callRegister">Adicionar Aluno</button>
