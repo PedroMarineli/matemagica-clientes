@@ -155,7 +155,7 @@ onMounted(async () => {
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-4xl">🔢</span>
-                  <span class="bg-success text-success-foreground px-3 py-1 rounded-full text-sm font-bold">
+                  <span class="bg-success text-light-green-foreground px-3 py-1 rounded-full text-sm font-bold">
                     Fácil
                   </span>
                 </div>

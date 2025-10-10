@@ -20,7 +20,7 @@ const top = [
             <nav className="space-y-2">
                 <ul class="flex md:flex-col gap-3">
                     <li class="flex items-center gap-5 cursor-pointer w-full justify-start" v-for="item in top" :key="item.nome" @click="() => router.push({ name: item.route })">
-                        <img v-if="item.icon" :src="item.icon" :alt="item.nome" class="w-7 h-7"/>
+                        <img v-if="item.icon" :src="item.icon" :alt="item.nome" class="w-6 h-6"/>
                         <span class="hidden min-[425px]:block font-bold">{{ item.nome }}</span>
                     </li>
                 </ul>

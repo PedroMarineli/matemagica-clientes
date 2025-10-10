@@ -32,7 +32,7 @@ onMounted(async () => {
     <!-- Main content -->
     <main class="w-full px-56 py-10 lg:col-span-3 space-y-6">
         <!-- Welcome section -->
-        <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+        <div class="card">
             <div class="flex items-start gap-4">
                 <div>
                     <h1 class="text-3xl font-bold mb-2">Bem-vindo(a), {{ userStore.data?.username }}! 👋</h1>
@@ -43,7 +43,7 @@ onMounted(async () => {
 
         <!-- Stats -->
         <div class="grid sm:grid-cols-3 gap-4">
-            <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+            <div class="card">
                 <div class="flex items-start gap-4">
                     <div class="bg-lilac p-3 rounded-2xl">
                         <img :src="students" alt="Alunos" class="w-6 h-6"/>
@@ -55,7 +55,7 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+            <div class="card">
                 <div class="flex items-start gap-4">
                     <div class="bg-lilac p-3 rounded-2xl">
                         <img :src="classes" alt="Salas" class="w-6 h-6"/>
@@ -67,7 +67,7 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+            <div class="card">
                 <div class="flex items-start gap-4">
                     <div class="bg-lilac p-3 rounded-2xl">
                         <img :src="tasks" alt="Tarefas" class="w-6 h-6"/>
@@ -81,10 +81,10 @@ onMounted(async () => {
         </div>
 
         <!-- Recent activity -->
-        <Card class="p-6">
+        <div class="card">
             <h2 class="text-xl font-bold mb-4">Atividade Recente</h2>
             <div v-for="progress in progresses" class="space-y-3">
-                <div key="progress" class="flex items-center gap-4 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-smooth">
+                <div key="progress" class="bg-background flex items-center gap-4 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-smooth">
                     <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                         👧
                     </div>
@@ -94,11 +94,11 @@ onMounted(async () => {
                         <p class="text-sm text-muted-foreground">{{ progress.status }}</p>
                     </div>
                     <div class="text-right">
-                        <p class="text-lg font-bold text-success">95%</p>
+                        <p class="text-lg font-bold text-light-green">95%</p>
                     </div>
                 </div>
             </div>
-        </Card>
+        </div>
         <!-- <Card class="p-6">
             <h2 class="text-xl font-bold mb-4">Atividade Recente</h2>
             <div v-for="item in [1, 2]" :key="item" class="space-y-3">
@@ -111,7 +111,7 @@ onMounted(async () => {
                         <p class="text-sm text-muted-foreground">Há 2 horas • Sala 3A</p>
                     </div>
                     <div class="text-right">
-                        <p class="text-lg font-bold text-success">95%</p>
+                        <p class="text-lg font-bold text-light-green">95%</p>
                     </div>
                 </div>
             </div>
