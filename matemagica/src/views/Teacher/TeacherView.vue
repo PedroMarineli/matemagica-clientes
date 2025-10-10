@@ -5,6 +5,10 @@ import axios from 'axios';
 import type { ITeacherDashboard } from '../../interfaces/ITeacherDashboard';
 import type { IListProgressInATask } from '../../interfaces/ITasks';
 
+import students from "../../../public/icons/students.png";
+import classes from "../../../public/icons/class.png";
+import tasks from "../../../public/icons/tasks.png";
+
 const userStore = useUserStore()
 const dashboard = ref<ITeacherDashboard | null>(null)
 const progresses = ref<IListProgressInATask[] | null>([])
@@ -26,55 +30,54 @@ onMounted(async () => {
 
 <template>
     <!-- Main content -->
-    <main class="lg:col-span-3 space-y-6">
+    <main class="w-full px-56 py-10 lg:col-span-3 space-y-6">
         <!-- Welcome section -->
-        <Card class="p-6 bg-gradient-primar">
-            <div class="flex items-center justify-between">
+        <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+            <div class="flex items-start gap-4">
                 <div>
                     <h1 class="text-3xl font-bold mb-2">Bem-vindo(a), {{ userStore.data?.username }}! 👋</h1>
                     <p class="text-black/90">Aqui está o resumo das suas turmas hoje</p>
                 </div>
-                <Sparkles class="w-16 h-16 opacity-50" />
             </div>
-        </Card>
+        </div>
 
         <!-- Stats -->
         <div class="grid sm:grid-cols-3 gap-4">
-            <Card class="p-6 hover:shadow-medium transition-smooth">
-                <div class="flex items-center gap-4">
-                    <div class="bg-primary/10 p-3 rounded-2xl">
-                        <Users class="w-6 h-6 text-primary" />
+            <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+                <div class="flex items-start gap-4">
+                    <div class="bg-lilac p-3 rounded-2xl">
+                        <img :src="students" alt="Alunos" class="w-6 h-6"/>
                     </div>
                     <div>
                         <p class="text-2xl font-bold">{{ dashboard?.statistics.total_students }}</p>
                         <p class="text-sm text-muted-foreground">Alunos</p>
                     </div>
                 </div>
-            </Card>
+            </div>
 
-            <Card class="p-6 hover:shadow-medium transition-smooth">
-            <div class="flex items-center gap-4">
-                <div class="bg-secondary/10 p-3 rounded-2xl">
-                    <BookOpen class="w-6 h-6 text-secondary" />
-                </div>
-                <div>
-                    <p class="text-2xl font-bold">{{ dashboard?.statistics.total_classrooms }}</p>
-                    <p class="text-sm text-muted-foreground">Salas</p>
-                </div>
-                </div>
-            </Card>
-
-            <Card class="p-6 hover:shadow-medium transition-smooth">
-            <div class="flex items-center gap-4">
-                <div class="bg-accent/10 p-3 rounded-2xl">
-                <FileText class="w-6 h-6 text-accent" />
-                </div>
-                <div>
-                <p class="text-2xl font-bold">{{ dashboard?.statistics.total_tasks }}</p>
-                <p class="text-sm text-muted-foreground">Tarefas Ativas</p>
+            <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+                <div class="flex items-start gap-4">
+                    <div class="bg-lilac p-3 rounded-2xl">
+                        <img :src="classes" alt="Salas" class="w-6 h-6"/>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold">{{ dashboard?.statistics.total_classrooms }}</p>
+                        <p class="text-sm text-muted-foreground">Salas</p>
+                    </div>
                 </div>
             </div>
-            </Card>
+
+            <div class="p-6 bg-white rounded-lg border border-gray-300 text-card-foreground shadow-sm">
+                <div class="flex items-start gap-4">
+                    <div class="bg-lilac p-3 rounded-2xl">
+                        <img :src="tasks" alt="Tarefas" class="w-6 h-6"/>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold">{{ dashboard?.statistics.total_tasks }}</p>
+                        <p class="text-sm text-muted-foreground">Tarefas Ativas</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Recent activity -->
