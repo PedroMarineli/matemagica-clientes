@@ -21,7 +21,7 @@ const studentBenefits = [
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Benefícios para <span className="text-gradient-primary">todos</span>
+                Benefícios para <span className="text-lilac">todos</span>
             </h2>
             <p className="text-xl text-muted-foreground">
                 Uma solução que atende professores e alunos de forma única
@@ -31,13 +31,13 @@ const studentBenefits = [
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <!-- Para Professores -->
             <div className="space-y-6">
-                    <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full text-primary font-bold shadow-soft">
+                    <div className="inline-flex items-center gap-2 bg-lilac/10 px-4 py-2 rounded-full text-lilac font-bold shadow-soft">
                         👩‍🏫 Para Professores
                     </div>
                     <h3 className="text-3xl font-bold">Simplifique seu trabalho</h3>
                     <ul className="space-y-4">
                         <li v-for="teacherBenefit in teacherBenefits" :key="teacherBenefit" className="flex items-start gap-3">
-                            <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-6 h-6 text-lilac flex-shrink-0 mt-0.5" />
                             <span className="text-lg text-muted-foreground">{{ teacherBenefit }}</span>
                         </li>
                     </ul>

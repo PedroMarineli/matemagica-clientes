@@ -22,7 +22,7 @@ const userStore = useUserStore()
                     <div className="bg-gradient-primary rounded-2xl p-2 shadow-medium">
                     <Sparkles className="w-6 h-6 text-white" />
                     </div>
-                    <span className="text-2xl font-bold text-gradient-primary">Matemágica</span>
+                    <span className="text-2xl font-bold text-lilac">Matemágica</span>
                 </div> -->
 
                 <div className="flex items-center gap-4">

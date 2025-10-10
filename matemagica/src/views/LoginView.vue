@@ -54,29 +54,26 @@ const handleLogin = async() => {
       </div>
       
       <!-- Coluna do Formulário -->
-      <div class="flex items-center justify-center bg-light-brown p-6 sm:p-12">
+      <div class="flex items-center justify-center p-6 sm:p-12">
         <div class="w-full max-w-sm space-y-8">
 
         <!-- Right side - Login form -->
-        <section class="p-8 shadow-glow border-2 bg-white">
+        <section class="card rounded-4xl py-12">
           <div class="space-y-6">
             <!-- Logo -->
             <div class="flex justify-center">
               <div @click="() => router.push('/')" class="flex items-center gap-2 transition-smooth hover:scale-105">
-                <div class="bg-gradient-primary rounded-2xl p-3 shadow-medium">
-                  <Sparkles class="w-8 h-8 text-white" />
-                </div>
-                <span class="text-3xl font-bold text-gradient-primary">Matemágica</span>
+                <img src="../../public/logo.svg" alt="logo"/>
               </div>
             </div>
 
             <!-- User type selector -->
-            <div class="flex gap-2 bg-muted rounded-2xl p-1">
+            <div class="flex gap-2 bg-background rounded-2xl p-1">
               <button
                 @click="userType.userType = ('professor')"
                 class="flex-1 py-3 rounded-xl font-bold transition-smooth"
                 :class="[ userType.userType === 'professor'
-                    ? 'bg-primary text-primary-foreground shadow-soft'
+                    ? 'bg-lilac text-lilac-foreground shadow-soft'
                     : 'text-muted-foreground hover:text-foreground' ]"
               >
                 👩‍🏫 Professor
@@ -135,19 +132,18 @@ const handleLogin = async() => {
                   <input type="checkbox" class="rounded" />
                   <span class="text-muted-foreground">Lembrar de mim</span>
                 </label>
-                <label @click="() => router.push('/recuperar-senha')" class="text-primary hover:underline font-medium">
+                <label @click="() => router.push('/recuperar-senha')" class="text-lilac hover:underline font-medium">
                   Esqueceu a senha?
                 </label>
               </div>
 
-              <Button 
-                type="submit" 
+              <button 
+                type="submit"
+                class="h-12 px-8 text-base w-full bg-lilac font-bold text-white hover:bg-lilac/90 rounded-xl shadow-soft hover:shadow-medium" 
                 :variant="userType.userType === 'professor' ? 'playful' : 'kid'"
-                size="lg" 
-                class="w-full"
               >
                 Entrar
-              </Button>
+              </button>
             </form>
 
             <!-- Divider -->
@@ -156,14 +152,14 @@ const handleLogin = async() => {
                 <div class="w-full border-t border-border"></div>
               </div>
               <div class="relative flex justify-center text-sm">
-                <span class="bg-card px-4 text-muted-foreground">ou</span>
+                <span class="bg-white px-4 text-muted-foreground">ou</span>
               </div>
             </div>
 
             <!-- Sign up link -->
             <div class="text-center">
               <span class="text-muted-foreground">Não tem uma conta? </span>
-              <label @click="() => router.push('/cadastre-se')" class="text-primary hover:underline font-bold">
+              <label @click="() => router.push('/cadastre-se')" class="text-lilac hover:underline font-bold">
                 Cadastre-se grátis
               </label>
             </div>

@@ -54,7 +54,7 @@ const handleRegister = async() => {
                 <div class="bg-gradient-primary rounded-2xl p-3 shadow-medium">
                   <Sparkles class="w-8 h-8 text-white" />
                 </div>
-                <span class="text-3xl font-bold text-gradient-primary">Matemágica</span>
+                <span class="text-3xl font-bold text-lilac">Matemágica</span>
               </div>
             </div>
 
@@ -127,11 +127,11 @@ const handleRegister = async() => {
                 <input type="checkbox" id="terms" class="mt-1 rounded" />
                 <label htmlFor="terms" class="text-sm text-muted-foreground">
                   Eu concordo com os
-                  <span to="/termos" class="text-primary hover:underline">
+                  <span to="/termos" class="text-lilac hover:underline">
                     Termos de Uso
                   </span>
                   e
-                  <span to="/privacidade" class="text-primary hover:underline">
+                  <span to="/privacidade" class="text-lilac hover:underline">
                     Política de Privacidade
                   </span>
                 </label>
@@ -155,7 +155,7 @@ const handleRegister = async() => {
             <!-- Login link -->
             <div class="text-center">
               <span class="text-muted-foreground">Já tem uma conta? </span>
-              <span @click="() => router.push('/login')" class="text-primary hover:underline font-bold">
+              <span @click="() => router.push('/login')" class="text-lilac hover:underline font-bold">
                 Faça login
               </span>
             </div>

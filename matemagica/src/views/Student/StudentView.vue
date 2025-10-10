@@ -85,7 +85,7 @@ onMounted(async () => {
               <Trophy class="w-6 h-6 text-accent" />
               Seu Progresso
             </h2>
-            <span class="text-xl font-bold text-primary">Nível 3</span>
+            <span class="text-xl font-bold text-lilac">Nível 3</span>
           </div>
           <Progress value={65} class="h-4 mb-2" />
           <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
@@ -94,7 +94,7 @@ onMounted(async () => {
         <!-- Pending tasks -->
         <div class="mb-8">
           <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-            <Sparkles class="w-8 h-8 text-primary" />
+            <Sparkles class="w-8 h-8 text-lilac" />
             Suas Atividades
           </h2>
           
@@ -190,7 +190,7 @@ onMounted(async () => {
         </div>
 
         <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-          <Sparkles class="w-8 h-8 text-primary" />
+          <Sparkles class="w-8 h-8 text-lilac" />
           Atividades Concluídas
         </h2>
 
@@ -224,7 +224,7 @@ onMounted(async () => {
                         {{ emoji }}
                     </div>
                 </div>
-                <div class="flex-shrink-0 w-20 h-20 bg-muted rounded-2xl flex items-center justify-center text-4xl opacity-30">
+                <div class="flex-shrink-0 w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl opacity-30">
                     🔒
                 </div>
           </div>

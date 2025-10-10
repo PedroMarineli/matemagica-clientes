@@ -12,17 +12,17 @@ const router = useRouter();
                 <div className="bg-gradient-primary rounded-2xl p-2 shadow-medium">
                 <Sparkles className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-bold text-gradient-primary">Matemágica</span>
+                <span className="text-2xl font-bold text-lilac">Matemágica</span>
             </Link>
 
             <div className="hidden md:flex items-center gap-6">
-                <Link to="#features" className="text-foreground hover:text-primary transition-smooth font-medium">
+                <Link to="#features" className="text-foreground hover:text-lilac transition-smooth font-medium">
                     Recursos
                 </Link>
-                <Link to="#benefits" className="text-foreground hover:text-primary transition-smooth font-medium">
+                <Link to="#benefits" className="text-foreground hover:text-lilac transition-smooth font-medium">
                     Benefícios
                 </Link>
-                <Link to="#about" className="text-foreground hover:text-primary transition-smooth font-medium">
+                <Link to="#about" className="text-foreground hover:text-lilac transition-smooth font-medium">
                     Sobre
                 </Link>
             </div>

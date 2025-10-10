@@ -40,11 +40,11 @@ const features = [
 </script>
 
 <template>
-    <section id="features" className="py-20 bg-muted/30">
+    <section id="features" className="py-20 bg-background/30">
         <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Recursos que fazem a <span className="text-gradient-primary">diferença</span>
+                Recursos que fazem a <span className="text-lilac">diferença</span>
             </h2>
             <p className="text-xl text-muted-foreground">
                 Ferramentas completas para transformar o ensino de matemática em uma experiência inclusiva e envolvente

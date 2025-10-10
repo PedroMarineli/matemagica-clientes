@@ -110,7 +110,7 @@ const submitTask = async() => {
                 <Trophy class="w-6 h-6 text-accent" />
                 Seu Progresso
                 </h2>
-                <span class="text-xl font-bold text-primary">Nível 3</span>
+                <span class="text-xl font-bold text-lilac">Nível 3</span>
             </div>
             <!-- <Progress value={65} class="h-4 mb-2" /> -->
             <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
@@ -119,7 +119,7 @@ const submitTask = async() => {
         <!-- Pending tasks -->
         <div class="mb-8">
             <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-                <Sparkles class="w-8 h-8 text-primary" />
+                <Sparkles class="w-8 h-8 text-lilac" />
                 Suas Atividades
             </h2>
           

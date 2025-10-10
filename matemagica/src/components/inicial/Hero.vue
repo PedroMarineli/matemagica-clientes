@@ -6,20 +6,20 @@
         <!-- Background decorative elements -->
         <div className="absolute inset-0 gradient-background opacity-50"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-40 right-20 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-40 right-20 w-32 h-32 bg-lilac/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/3 right-10 w-24 h-24 bg-secondary/20 rounded-full blur-3xl animate-pulse delay-500"></div>
 
         <div className="container mx-auto px-4 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
             <!-- Left column - Content -->
             <div className="space-y-8 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full text-primary font-medium shadow-soft">
+                <div className="inline-flex items-center gap-2 bg-lilac/10 px-4 py-2 rounded-full text-lilac font-medium shadow-soft">
                 <Sparkles className="w-4 h-4" />
                 <span>Aprendizado mágico de matemática</span>
                 </div>
 
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                Transforme o ensino de <span className="text-gradient-primary">matemática</span> em uma aventura
+                Transforme o ensino de <span className="text-lilac">matemática</span> em uma aventura
                 </h1>
 
                 <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
@@ -41,7 +41,7 @@
                 <!-- Stats -->
                 <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
                 <div className="text-center lg:text-left">
-                    <div className="text-3xl font-bold text-primary flex items-center justify-center lg:justify-start gap-2">
+                    <div className="text-3xl font-bold text-lilac flex items-center justify-center lg:justify-start gap-2">
                     <Heart className="w-6 h-6 fill-current" />
                     100%
                     </div>

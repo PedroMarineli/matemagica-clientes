@@ -35,7 +35,7 @@ onMounted(async () => {
         <div class="card">
             <div class="flex items-start gap-4">
                 <div>
-                    <h1 class="text-3xl font-bold mb-2">Bem-vindo(a), {{ userStore.data?.username }}! 👋</h1>
+                    <h1 class="font-bold mb-2">Bem-vindo(a), {{ userStore.data?.username }}! 👋</h1>
                     <p class="text-black/90">Aqui está o resumo das suas turmas hoje</p>
                 </div>
             </div>
@@ -84,8 +84,8 @@ onMounted(async () => {
         <div class="card">
             <h2 class="text-xl font-bold mb-4">Atividade Recente</h2>
             <div v-for="progress in progresses" class="space-y-3">
-                <div key="progress" class="bg-background flex items-center gap-4 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-smooth">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <div key="progress" class="bg-background flex items-center gap-4 p-3 rounded-xl bg-background/50 hover:bg-background transition-smooth">
+                    <div class="w-10 h-10 rounded-full bg-lilac/10 flex items-center justify-center">
                         👧
                     </div>
                     <div class="flex-1">
@@ -102,8 +102,8 @@ onMounted(async () => {
         <!-- <Card class="p-6">
             <h2 class="text-xl font-bold mb-4">Atividade Recente</h2>
             <div v-for="item in [1, 2]" :key="item" class="space-y-3">
-                <div :key="item" class="flex items-center gap-4 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-smooth">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <div :key="item" class="flex items-center gap-4 p-3 rounded-xl bg-background/50 hover:bg-background transition-smooth">
+                    <div class="w-10 h-10 rounded-full bg-lilac/10 flex items-center justify-center">
                         👧
                     </div>
                     <div class="flex-1">

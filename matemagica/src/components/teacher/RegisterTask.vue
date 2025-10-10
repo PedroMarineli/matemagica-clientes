@@ -224,7 +224,7 @@ function generateAndShowProblem() {
             </div>
             <div class="problem-area mt-8 p-6 border rounded-lg shadow-md">
                 <div v-if="currentProblem">
-                    <h2 class="text-xl font-bold text-primary mb-4">
+                    <h2 class="text-xl font-bold text-lilac mb-4">
                         Tarefa de Matemática:
                     </h2>
                     <p class="text-2xl">{{ currentProblem }}</p>
