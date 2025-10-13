@@ -50,7 +50,7 @@ const closeMaintainRegister = () => {
         <div class="flex px-56 flex-col items-center gap-5 py-5 lg:py-10" :class="{ 'w-full': !showRegisterForm, 'lg:w-2/3': showRegisterForm }">
             <div class="card w-full flex items-center justify-between">
                 <div>
-                    <h1>Salas:</h1>
+                    <h1>Salas</h1>
                     <p>Lista com suas salas de aula</p>
                 </div>
                 <button @click="callRegister">Adicionar Sala</button>

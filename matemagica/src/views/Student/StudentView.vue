@@ -56,9 +56,9 @@ onMounted(async () => {
 <template>
       <div class="container mx-auto px-4 py-8 max-w-6xl">
         <!-- Welcome section with avatar -->
-        <Card class="p-8 mb-8 bg-gradient-warm shadow-glow">
+        <div class="card p-8 mb-8 bg-gradient-warm shadow-glow">
           <div class="flex flex-col md:flex-row items-center gap-6">
-            <div class="w-32 h-32 rounded-full bg-white/20 flex items-center justify-center text-6xl border-4 border-white shadow-medium">
+            <div class="w-32 h-32 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
               👦
             </div>
             <div class="text-center md:text-left flex-1">
@@ -76,10 +76,10 @@ onMounted(async () => {
               </div>
             </div>
           </div>
-        </Card>
+        </div>
 
         <!-- Level progress -->
-        <Card class="p-6 mb-8">
+        <div class="card p-6 mb-8">
           <div class="flex items-center justify-between mb-3">
             <h2 class="text-2xl font-bold flex items-center gap-2">
               <Trophy class="w-6 h-6 text-accent" />
@@ -89,7 +89,7 @@ onMounted(async () => {
           </div>
           <Progress value={65} class="h-4 mb-2" />
           <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
-        </Card>
+        </div>
 
         <!-- Pending tasks -->
         <div class="mb-8">
@@ -100,7 +100,7 @@ onMounted(async () => {
           
           <div class="grid sm:grid-cols-2 gap-6">
             <!-- Task card 1 -->
-            <Card v-for="task in pendingTasks" class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
+            <div v-for="task in pendingTasks" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-lilac">
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-4xl">➕</span>
@@ -123,10 +123,10 @@ onMounted(async () => {
                   Continuar
                 </button>
               </div>
-            </Card>
+            </div>
 
             <!-- Task card 2 -->
-            <Card class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-secondary">
+            <div class="p-6 card hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-secondary">
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-4xl">➖</span>
@@ -148,10 +148,10 @@ onMounted(async () => {
                   Começar
                 </button>
               </div>
-            </Card>
+            </div>
 
             <!-- Task card 3 -->
-            <Card class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-accent">
+            <div class="p-6 card hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-accent">
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-4xl">🔢</span>
@@ -173,10 +173,10 @@ onMounted(async () => {
                   Completo! ⭐
                 </button>
               </div>
-            </Card>
+            </div>
 
             <!-- Locked task -->
-            <Card class="p-6 opacity-60 border-4 border-muted">
+            <div class="p-6 card opacity-60 border-4 border-muted">
               <div class="space-y-4 text-center">
                 <div class="text-6xl">🔒</div>
                 <h3 class="text-2xl font-bold">Próxima Aventura</h3>
@@ -185,7 +185,7 @@ onMounted(async () => {
                   Bloqueado
                 </button>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
 
@@ -194,7 +194,7 @@ onMounted(async () => {
           Atividades Concluídas
         </h2>
 
-        <div v-for="task in completedTasks" class="py-8 px-10 rounded-lg border bg-card text-card-foreground shadow-sm">
+        <div v-for="task in completedTasks" class="card py-8 px-10 rounded-lg border bg-card text-card-foreground shadow-sm">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-5">
@@ -211,23 +211,23 @@ onMounted(async () => {
         </div>
 
         <!-- Achievements -->
-        <Card class="p-6">
+        <div class="card p-6">
           <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
             <Trophy class="w-6 h-6 text-accent" />
             Suas Conquistas
           </h2>
           <div class="flex">
-                <div v-for="emoji in ['🏅', '⭐', '🎖️', '👑', '🌟']" :key="emoji" class="flex gap-4 overflow-x-auto pb-2">
+                <div v-for="emoji in ['🏅', '⭐', '🎖️', '👑', '🌟']" :key="emoji" class="flex gap-10 overflow-x-auto pb-2">
                     <div
-                        class="flex-shrink-0 w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center text-4xl shadow-medium hover:scale-110 transition-bounce cursor-pointer"
+                        class="w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl shadow-medium hover:scale-110 transition-bounce cursor-pointer"
                     >
                         {{ emoji }}
                     </div>
                 </div>
-                <div class="flex-shrink-0 w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl opacity-30">
+                <div class="w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl opacity-30">
                     🔒
                 </div>
           </div>
-        </Card>
+        </div>
       </div>
 </template>

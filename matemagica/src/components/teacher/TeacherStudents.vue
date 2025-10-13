@@ -4,11 +4,13 @@ import RegisterStudent from './RegisterStudent.vue';
 import { onMounted, ref } from 'vue';
 import type { IUsers } from '../../interfaces/IUsers';
 import MaintainStudent from './MaintainStudent.vue';
-import type { ITaskProgress } from '../../interfaces/ITasks';
 import router from '../../router';
 
 const students = ref<IUsers[] | null>(null)
-const studentTasks = ref<ITaskProgress[] | null>([])
+const selectedStudent = ref<IUsers | null>(null)
+
+const showRegisterForm = ref(false)
+const showMaintainForm = ref(false)
 
 onMounted(async () => {
     try {
@@ -26,11 +28,6 @@ const exibirDadosAluno = async (student: IUsers) => {
         console.error('Error fetching job', error)
     } 
 }
-
-const showRegisterForm = ref(false)
-const showMaintainForm = ref(false)
-
-const selectedStudent = ref<IUsers | null>(null)
 
 const callRegister = () => {
     if (showMaintainForm.value) {
@@ -73,7 +70,6 @@ const closeMaintainRegister = () => {
                             <th>Id</th>
                             <th>Nome</th>
                             <th>Gênero</th>
-                            <th>Idade</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
@@ -87,7 +83,6 @@ const closeMaintainRegister = () => {
                             <td>{{student.id}}</td>
                             <td>{{student.username}}</td>
                             <td>{{student.email}}</td>
-                            <td>{{student.type}}</td>
                             <td @click.stop>
                                 <button @click="callMaintain(student)">Dados</button>
                             </td>

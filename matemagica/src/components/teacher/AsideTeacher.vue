@@ -15,17 +15,15 @@ const top = [
 </script>
 
 <template>
-    <aside className="w-screen md:w-1/4 py-4 md:py-10 lg:w-1/6 bg-white flex flex-col items-center gap-5 border-r-1 border-r-black">
-        <div className="p-4">
-            <nav className="space-y-2">
-                <ul class="flex md:flex-col gap-3">
-                    <li class="flex items-center gap-5 cursor-pointer w-full justify-start" v-for="item in top" :key="item.nome" @click="() => router.push({ name: item.route })">
-                        <img v-if="item.icon" :src="item.icon" :alt="item.nome" class="w-6 h-6"/>
-                        <span class="hidden min-[425px]:block font-bold">{{ item.nome }}</span>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+    <aside class="w-screen md:w-1/4 py-4 md:py-10 lg:w-1/6 bg-white flex flex-col items-center gap-5 border-r-1 border-r-gray-300">
+        <nav class="space-y-2 fixed">
+            <ul class="flex md:flex-col gap-3">
+                <li class="flex items-center gap-5 cursor-pointer w-full justify-start" v-for="item in top" :key="item.nome" @click="() => router.push({ name: item.route })">
+                    <img v-if="item.icon" :src="item.icon" :alt="item.nome" class="w-6 h-6"/>
+                    <span class="hidden min-[425px]:block font-bold">{{ item.nome }}</span>
+                </li>
+            </ul>
+        </nav>
     </aside>
     <!-- <aside class="w-screen md:w-1/4 py-4 md:py-10 lg:w-1/6 bg-light-brown flex flex-col items-center gap-5 border-r-1 border-r-black">
         <span class="hidden md:block font-bold">Menu</span>

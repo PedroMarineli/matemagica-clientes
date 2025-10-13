@@ -10,10 +10,6 @@ const userStore = useUserStore()
 
 const teacherId = computed(() => userStore.data?.id)
 
-const closeComponent = () => {
-  emit('close');
-}
-
 const form = reactive({
     title: '',
     type: '',
@@ -183,10 +179,7 @@ function generateAndShowProblem() {
             <div class="card w-full flex items-center justify-between">
                 <form @submit.prevent="submitTask" class="grid gap-3">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg">Registrar Tarefa:</h1>
-                        <div>
-                            <button @click="closeComponent">Fechar</button>
-                        </div>
+                        <h1 class="font-bold text-lg">Registrar Tarefa</h1>
                     </div>
                     <div>
                         <div>
@@ -203,7 +196,7 @@ function generateAndShowProblem() {
                         </div>
                         <div>
                             <label class="block text-gray-700 font-bold mb-2">Categoria:</label>
-                            <select v-model="form.type">
+                            <select v-model="form.type" class="w-full">
                                 <option value="" disabled selected>Selecione a categoria da tarefa</option>
                                 <option value="addition">Adição</option>
                                 <option value="subtraction">Subtração</option>
@@ -212,8 +205,8 @@ function generateAndShowProblem() {
                             </select>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-bold mb-2">Dificuldade:</label>
-                            <select v-model="form.difficulty">
+                            <label class="block text-gray-700 font-bold mb-2 ">Dificuldade:</label>
+                            <select v-model="form.difficulty" class="w-full">
                                 <option value="" disabled selected>Selecione a dificuldade da tarefa</option>
                                 <option value="easy">Fácil</option>
                                 <option value="medium">Médio</option>
@@ -233,7 +226,7 @@ function generateAndShowProblem() {
                         </div>
                         <div>
                             <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
-                            <select v-model="form.classroom_id">
+                            <select v-model="form.classroom_id" class="w-full">
                                 <option value="" disabled selected>Selecione a Sala</option>
                                 <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
                             </select>

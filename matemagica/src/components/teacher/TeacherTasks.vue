@@ -86,7 +86,7 @@ const closeMaintainRegister = () => {
                                 <button @click="callMaintain(task)">Dados</button>
                             </td>
                         </tr>
-                    </tbody>
+                    </tbody>             
                 </table>
             </div>
         </div>
