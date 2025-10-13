@@ -104,7 +104,7 @@ onMounted(async () => {
               <div class="space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-4xl">➕</span>
-                  <span class="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
+                  <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
                     {{ task.difficulty }}
                   </span>
                 </div>
@@ -201,7 +201,7 @@ onMounted(async () => {
                 <span class="text-4xl">➕</span>
                 <h3 class="text-2xl font-bold">{{ task.title }}</h3>
               </div>
-              <span class="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
+              <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
                 {{ task.difficulty }}
               </span>
             </div>

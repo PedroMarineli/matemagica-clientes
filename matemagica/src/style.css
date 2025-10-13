@@ -5,8 +5,11 @@
   --background: hsl(240, 17%, 95%);
   --light-brown: #CFC5B0;
   --light-gray: #eeeff2;
-  --light-green: hsl(150 65% 55%);
+  --green: hsl(150 65% 55%);
+  --light-green: hsl(151, 66%, 92%);
   --lilac: hsl(270 75% 55%);
+  --light-lilac: hsl(269, 43%, 90%);
+  --orange: hsl(35 95% 60%);
   --text-blue: #3D5564;
   --muted-foreground: hsl(260 15% 50%);
 
@@ -62,34 +65,47 @@
   }
 }
 
-
-.text-light-gray {
-  color: var(--light-gray);
-}
-.text-muted-foreground {
-  color: var(--muted-foreground);
-}
-.text-light-green {
-  color: var(--light-green);
-}
-.text-blue {
-  color: var(--text-blue);
-}
-.text-lilac {
-  color: var(--lilac);
-}
-.bg-background {
-  background-color: var(--background);
-}
-.bg-light-brown {
-  background-color: var(--light-brown);
-}
-.bg-lilac {
-  background-color: var(--lilac);
-}
-.bg-light-green {
-  background-color: var(--light-green);
-}
-.bg-lilac {
-  background-color: var(--lilac);
+@layer utilities {
+  .text-light-gray {
+    color: var(--light-gray);
+  }
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+  .text-light-green {
+    color: var(--light-green);
+  }
+  .text-blue {
+    color: var(--text-blue);
+  }
+  .text-lilac {
+    color: var(--lilac);
+  }
+  .text-green {
+    color: var(--green);
+  }
+  .text-orange {
+    color: var(--orange);
+  }
+  .bg-background {
+    background-color: var(--background);
+  }
+  .bg-light-brown {
+    background-color: var(--light-brown);
+  }
+  .bg-lilac {
+    background-color: var(--lilac);
+  }
+  .bg-light-lilac {
+    background-color: var(--light-lilac);
+  }
+  .bg-orange {
+    background-color: var(--orange);
+  }
+  .bg-green {
+    background-color: var(--green);
+  }
+  .bg-light-green {
+    background-color: var(--light-green);
+  }
 }

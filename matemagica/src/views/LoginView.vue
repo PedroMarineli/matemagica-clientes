@@ -82,7 +82,7 @@ const handleLogin = async() => {
                 @click="userType.userType = ('aluno')"
                 class="flex-1 py-3 rounded-xl font-bold transition-smooth"
                 :class="[ userType.userType === 'aluno'
-                    ? 'bg-accent text-accent-foreground shadow-soft'
+                    ? 'bg-orange text-accent-foreground shadow-soft'
                     : 'text-muted-foreground hover:text-foreground' ]"
               >
                 👧 Aluno
@@ -149,7 +149,7 @@ const handleLogin = async() => {
             <!-- Divider -->
             <div class="relative">
               <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-border"></div>
+                <div class="w-full border-t border-gray-300"></div>
               </div>
               <div class="relative flex justify-center text-sm">
                 <span class="bg-white px-4 text-muted-foreground">ou</span>
