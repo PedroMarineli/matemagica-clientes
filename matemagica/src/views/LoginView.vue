@@ -62,7 +62,7 @@ const handleLogin = async() => {
           <div class="space-y-6">
             <!-- Logo -->
             <div class="flex justify-center">
-              <div @click="() => router.push('/')" class="flex items-center gap-2 transition-smooth hover:scale-105">
+              <div @click="() => router.push('/')" class="flex items-center gap-2 transition-smooth hover:scale-105 cursor-pointer">
                 <img src="../../public/logo.svg" alt="logo"/>
               </div>
             </div>
@@ -71,7 +71,7 @@ const handleLogin = async() => {
             <div class="flex gap-2 bg-background rounded-2xl p-1">
               <button
                 @click="userType.userType = ('professor')"
-                class="flex-1 py-3 rounded-xl font-bold transition-smooth"
+                class="flex-1 py-3 rounded-xl font-bold transition-smooth cursor-pointer"
                 :class="[ userType.userType === 'professor'
                     ? 'bg-lilac text-lilac-foreground shadow-soft'
                     : 'text-muted-foreground hover:text-foreground' ]"
@@ -80,7 +80,7 @@ const handleLogin = async() => {
               </button>
               <button
                 @click="userType.userType = ('aluno')"
-                class="flex-1 py-3 rounded-xl font-bold transition-smooth"
+                class="flex-1 py-3 rounded-xl font-bold transition-smooth cursor-pointer"
                 :class="[ userType.userType === 'aluno'
                     ? 'bg-orange text-accent-foreground shadow-soft'
                     : 'text-muted-foreground hover:text-foreground' ]"
@@ -139,8 +139,10 @@ const handleLogin = async() => {
 
               <button 
                 type="submit"
-                class="h-12 px-8 text-base w-full bg-lilac font-bold text-white hover:bg-lilac/90 rounded-xl shadow-soft hover:shadow-medium" 
-                :variant="userType.userType === 'professor' ? 'playful' : 'kid'"
+                class="h-12 px-8 w-full font-bold text-white rounded-xl shadow-soft cursor-pointer" 
+                :class="[ userType.userType === 'aluno'
+                  ? 'bg-orange text-black shadow-soft'
+                  : 'bg-lilac text-white hover:text-foreground' ]"
               >
                 Entrar
               </button>
