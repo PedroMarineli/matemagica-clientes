@@ -12,6 +12,7 @@ import TeacherTasks from '../components/teacher/TeacherTasks.vue';
 import RegisterTask from '../components/teacher/RegisterTask.vue';
 import Task from '../components/student/Task.vue';
 import NotFoundView from '../views/NotFoundView.vue';
+import TeacherStudentTask from '../components/teacher/TeacherStudentTask.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,11 @@ const router = createRouter({
                     path: '/professores/alunos',
                     name: 'teacherStudents',
                     component: TeacherStudents,
+                },
+                {
+                    path: '/professores/aluno/:id',
+                    name: 'teacherStudentTask',
+                    component: TeacherStudentTask,
                 },
                 {
                     path: '/professores/salas',

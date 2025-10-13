@@ -178,71 +178,75 @@ function generateAndShowProblem() {
 </script>
 
 <template>
-    <form @submit.prevent="submitTask" class="grid gap-3">
-        <div class="flex justify-between">
-            <h1 class="font-bold text-lg">Registrar Tarefa:</h1>
-            <div>
-                <button @click="closeComponent">Fechar</button>
+    <div class="h-full flex md:justify-between lg:flex-row flex-1">
+        <div class="flex flex-col px-56 items-center gap-5 py-5 lg:py-10">
+            <div class="card w-full flex items-center justify-between">
+                <form @submit.prevent="submitTask" class="grid gap-3">
+                    <div class="flex justify-between">
+                        <h1 class="font-bold text-lg">Registrar Tarefa:</h1>
+                        <div>
+                            <button @click="closeComponent">Fechar</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Nome:</label>
+                            <input
+                                type="text"
+                                v-model="form.title"
+                                id="title"
+                                name="title"
+                                class="border rounded w-full py-2 px-3 mb-2"
+                                placeholder="Título da tarefa"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Categoria:</label>
+                            <select v-model="form.type">
+                                <option value="" disabled selected>Selecione a categoria da tarefa</option>
+                                <option value="addition">Adição</option>
+                                <option value="subtraction">Subtração</option>
+                                <option value="multiplication">Multiplicação</option>
+                                <option value="division">Divisão</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Dificuldade:</label>
+                            <select v-model="form.difficulty">
+                                <option value="" disabled selected>Selecione a dificuldade da tarefa</option>
+                                <option value="easy">Fácil</option>
+                                <option value="medium">Médio</option>
+                                <option value="hard">Difícil</option>
+                            </select>
+                        </div>
+                        <div @click="generateAndShowProblem()" class="bg-green text-center hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline">
+                            Criar tarefa
+                        </div>
+                        <div class="problem-area mt-8 p-6 border rounded-lg shadow-md">
+                            <div v-if="currentProblem">
+                                <h2 class="text-xl font-bold text-lilac mb-4">
+                                    Tarefa de Matemática:
+                                </h2>
+                                <p class="text-2xl">{{ currentProblem }}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
+                            <select v-model="form.classroom_id">
+                                <option value="" disabled selected>Selecione a Sala</option>
+                                <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button
+                        class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                        type="submit"
+                    >
+                        Adicionar Tarefa
+                    </button>
+                </form>
             </div>
         </div>
-        <div>
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Nome:</label>
-                <input
-                    type="text"
-                    v-model="form.title"
-                    id="title"
-                    name="title"
-                    class="border rounded w-full py-2 px-3 mb-2"
-                    placeholder="Título da tarefa"
-                    required
-                />
-            </div>
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Tipo:</label>
-                <input
-                    type="text"
-                    v-model="form.type"
-                    id="type"
-                    name="type"
-                    class="border rounded w-full py-2 px-3 mb-2"
-                    placeholder="Tipo da tarefa"
-                    required
-                />
-            </div>
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Dificuldade:</label>
-                <select v-model="form.difficulty">
-                    <option value="" disabled selected>Selecione a dificuldade da tarefa</option>
-                    <option value="easy">Fácil</option>
-                    <option value="medium">Médio</option>
-                    <option value="hard">Difícil</option>
-                </select>
-            </div>
-            <div @click="generateAndShowProblem()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline">
-                Criar tarefa
-            </div>
-            <div class="problem-area mt-8 p-6 border rounded-lg shadow-md">
-                <div v-if="currentProblem">
-                    <h2 class="text-xl font-bold text-lilac mb-4">
-                        Tarefa de Matemática:
-                    </h2>
-                    <p class="text-2xl">{{ currentProblem }}</p>
-                </div>
-            </div>
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
-                <select v-model="form.classroom_id">
-                    <option value="" disabled selected>Selecione a Sala</option>
-                    <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
-                </select>
-            </div>
-        </div>
-        <button
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-            type="submit"
-        >
-            Adicionar Tarefa
-        </button>
-    </form>
+    </div>
 </template>

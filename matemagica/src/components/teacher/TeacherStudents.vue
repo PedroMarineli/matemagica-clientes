@@ -5,6 +5,7 @@ import { onMounted, ref } from 'vue';
 import type { IUsers } from '../../interfaces/IUsers';
 import MaintainStudent from './MaintainStudent.vue';
 import type { ITaskProgress } from '../../interfaces/ITasks';
+import router from '../../router';
 
 const students = ref<IUsers[] | null>(null)
 const studentTasks = ref<ITaskProgress[] | null>([])
@@ -20,8 +21,7 @@ onMounted(async () => {
 
 const exibirDadosAluno = async (student: IUsers) => {
     try {
-        const notCompletedTasks = await axios.get(`http://localhost:3000/progress/student/${student.id}`)
-        studentTasks.value = notCompletedTasks.data as ITaskProgress[]
+        router.push(`/professores/aluno/${student.id}`)
     } catch(error) {
         console.error('Error fetching job', error)
     } 
@@ -62,7 +62,7 @@ const closeMaintainRegister = () => {
             <div class="card w-full flex items-center justify-between">
                 <div>
                     <h1>Alunos</h1>
-                    <p class="text-black/90">Lista com seus alunos</p>
+                    <p>Lista com seus alunos</p>
                 </div>
                 <button @click="callRegister">Adicionar Aluno</button>
             </div>
@@ -83,36 +83,17 @@ const closeMaintainRegister = () => {
                         </tr>
                     </tbody>
                     <tbody v-else v-for="student in students">
-                        <tr v-if="student.type === 'student'" :onclick="exibirDadosAluno(student)">
+                        <tr v-if="student.type === 'student'" @click="exibirDadosAluno(student)">
                             <td>{{student.id}}</td>
                             <td>{{student.username}}</td>
                             <td>{{student.email}}</td>
                             <td>{{student.type}}</td>
-                            <td>
+                            <td @click.stop>
                                 <button @click="callMaintain(student)">Dados</button>
                             </td>
                         </tr>
-                        <!-- <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Tipo</th>
-                                    <th>Status</th>
-                                    <th>Nota</th>
-                                </tr>
-                            </thead>
-                            <tbody v-for="tasks in studentTasks">
-                                <tr>
-                                    <td colspan="10">{{ tasks.title }}</td>
-                                    <td colspan="10">{{ tasks.type }}</td>
-                                    <td colspan="10">{{ tasks.status }}</td>
-                                    <td colspan="10">{{ tasks.score }}</td>
-                                </tr>
-                            </tbody>
-                        </table> -->
                     </tbody>
                 </table>
-
             </div>
         </div>
         <aside v-if="showRegisterForm" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
