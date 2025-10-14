@@ -128,10 +128,6 @@ const handleLogin = async() => {
               </div>
 
               <div class="flex items-center justify-between text-sm">
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" class="rounded" />
-                  <span class="text-muted-foreground">Lembrar de mim</span>
-                </label>
                 <label @click="() => router.push('/recuperar-senha')" class="text-lilac hover:underline font-medium">
                   Esqueceu a senha?
                 </label>
