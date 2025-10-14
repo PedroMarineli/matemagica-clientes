@@ -63,6 +63,7 @@ const closeMaintainRegister = () => {
                             <th>Id</th>
                             <th>Nome (Tipo)</th>
                             <th>Conteúdo</th>
+                            <th>Resposta</th>
                             <th>Dificuldade</th>
                             <th>Sala</th>
                             <th>Data criação</th>
@@ -79,6 +80,7 @@ const closeMaintainRegister = () => {
                             <td>{{task.id}}</td>
                             <td>{{task.title}} ({{ task.type }})</td>
                             <td>{{task.content}}</td>
+                            <td>{{task.answer}}</td>
                             <td>{{task.difficulty}}</td>
                             <td>{{task.classroom_id}}</td>
                             <td>{{task.created_at}}</td>

@@ -14,8 +14,9 @@ const form = reactive({
     title: '',
     type: '',
     content: '',
+    answer: 0,
     difficulty: '',
-    classroom_id: ''
+    classroom_id: 0
 })
 
 const submitTask = async() => {
@@ -24,6 +25,7 @@ const submitTask = async() => {
         type: form.type,
         teacher_id: teacherId.value,
         content: currentProblem.value,
+        answer: form.answer,
         difficulty: form.difficulty,
         classroom_id: form.classroom_id,
     }
@@ -159,16 +161,41 @@ function createProblem() {
         frutaAleatoria 
     )
 
-    return problemaPronto
+    return { problemaPronto, x, y }
 }
 
 const currentProblem = ref<string | null>(null)
 
 function generateAndShowProblem() {
-    const novoProblema = createProblem()
+    const problemData = createProblem()
+
+    if (!problemData) {
+        return
+    }
+
+    let x = problemData.x
+    let y = problemData.y
+    const novoProblema = problemData.problemaPronto
     currentProblem.value = novoProblema
-    
-    // Opcional: Aqui você também calcularia e armazenaria a resposta
+
+    const operation = form.type
+
+    switch (operation) {
+        case 'addition':
+            form.answer = x + y
+            break
+        case 'subtraction':
+            form.answer = x - y
+            break
+        case 'multiplication':
+            form.answer = x * y
+            break
+        case 'division':
+            form.answer = x / y
+            break
+        default:
+            return
+    }
 }
 
 </script>

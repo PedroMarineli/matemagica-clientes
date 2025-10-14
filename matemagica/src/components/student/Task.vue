@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import axios from 'axios';
 import type { ITasks } from '../../interfaces/ITasks';
-import { computed, onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../../userStore';
 
@@ -17,6 +17,8 @@ const task = ref<ITasks | null>(null)
 const state = reactive({
     isLoading: true
 })
+
+let number_of_attempts = 1
 
 onMounted(async() => {
     try {
@@ -37,46 +39,13 @@ const form = reactive({
     answer: 0
 })
 
-const extractedNumbers = computed(() => {
-    const content = task.value?.content
-
-    if(content) {
-        // Expressão Regular: /g (global) e \d+ (um ou mais dígitos)
-        const matches = content.match(/\d+/g)
-        if(matches) return matches.map(numStr => parseInt(numStr, 10))
-    }
-    return[]
-})
-
 const submitAnswer = () => {
-    const num1 = extractedNumbers.value[0]
-    const num2 = extractedNumbers.value[1]
-    const operation = task.value?.type
-    let result = 0
-
-    switch (operation) {
-        case 'addition':
-            result = num1 + num2
-            break
-        case 'subtraction':
-            result = num1 - num2
-            break
-        case 'multiplication':
-            result = num1 * num2
-            break
-        case 'division':
-            result = num1 / num2
-            break
-        default:
-            return
-    }
-
-    if(form.answer == result) {
+    if(form.answer == task.value?.answer) {
         form.score = 10
         console.log('Parabens vc acertou')
         submitTask()
     }
-    else console.log('vc errou')
+    else console.log('Num de tentativas: ', number_of_attempts++)
 }
 
 const submitTask = async() => {
@@ -84,7 +53,8 @@ const submitTask = async() => {
         student_id: form.student_id,
         task_id: form.task_id,
         status: form.status,
-        score: form.score
+        score: form.score,
+        number_of_attempts: number_of_attempts
     }
 
     try {
@@ -125,7 +95,7 @@ const submitTask = async() => {
           
             <div class="grid sm:grid-cols-2 gap-6">
                 <!-- Task card 1 -->
-                <Card v-if="task" class="p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
+                <div v-if="task" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="text-4xl">➕</span>
@@ -161,7 +131,7 @@ const submitTask = async() => {
                             </button>
                         </form>
                     </div>
-                </Card>
+                </div>
             </div>
         </div>
     </div>

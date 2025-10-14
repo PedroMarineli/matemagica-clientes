@@ -3,6 +3,7 @@ export interface ITasks {
     title: string
     type: string
     content: string,
+    answer: number,
     difficulty: string,
     classroom_id: number,
     teacher_id: number,
@@ -17,7 +18,8 @@ export interface ITaskProgress {
     difficulty: string
     status: 'Not Started' | 'In Progress' | 'Submitted' | 'Graded',
     score: number,
-    completion_date: string
+    completion_date: string,
+    number_of_attempts: number
 }
 
 // export interface ITaskProgress {
