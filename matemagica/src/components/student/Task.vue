@@ -45,7 +45,9 @@ const submitAnswer = () => {
         console.log('Parabens vc acertou')
         submitTask()
     }
-    else console.log('Num de tentativas: ', number_of_attempts++)
+    else {
+        number_of_attempts++
+    } 
 }
 
 const submitTask = async() => {
@@ -60,7 +62,6 @@ const submitTask = async() => {
     try {
         const response = await axios.put('http://localhost:3000/progress/update', taskAltered)
         // toast.success('Tarefa adicionada com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
             router.push('/alunos')
             console.log('Progresso de tarefa realizado')
@@ -74,13 +75,13 @@ const submitTask = async() => {
 <template>
     <div class="container mx-auto px-4 py-8 max-w-6xl">
         <!-- Level progress -->
-        <div class="p-6 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
+        <div class="card p-6 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="flex items-center justify-between mb-3">
                 <h2 class="text-2xl font-bold flex items-center gap-2">
-                <Trophy class="w-6 h-6 text-accent" />
-                Seu Progresso
+                    <Trophy class="w-6 h-6 text-accent" />
+                    Seu Progresso
                 </h2>
-                <span class="text-xl font-bold text-lilac">Nível 3</span>
+                <span class="text-xl font-bold text-lilac">Nível 1</span>
             </div>
             <!-- <Progress value={65} class="h-4 mb-2" /> -->
             <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>

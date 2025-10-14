@@ -85,7 +85,7 @@ onMounted(async () => {
               <Trophy class="w-6 h-6 text-accent" />
               Seu Progresso
             </h2>
-            <span class="text-xl font-bold text-lilac">Nível 3</span>
+            <span class="text-xl font-bold text-lilac">Nível 1</span>
           </div>
           <Progress value={65} class="h-4 mb-2" />
           <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
@@ -99,114 +99,68 @@ onMounted(async () => {
           </h2>
           
           <div class="grid sm:grid-cols-2 gap-6">
-            <!-- Task card 1 -->
-            <div v-for="task in pendingTasks" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-lilac">
-              <div class="space-y-4">
-                <div class="flex items-center justify-between">
-                  <span class="text-4xl">➕</span>
-                  <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
-                    {{ task.difficulty }}
-                  </span>
-                </div>
-                <h3 class="text-2xl font-bold">{{ task.title }}</h3>
-                <p class="text-muted-foreground text-lg">{{ task.content }}</p>
-                <p class="text-muted-foreground text-lg">{{ task.status }}</p>
-                <div class="space-y-2">
-                  <div class="flex justify-between text-sm font-medium">
-                    <span>Progresso</span>
-                    <span>3/10 questões</span>
+            <template v-if="pendingTasks && pendingTasks.length >= 1">
+              <div v-for="task in pendingTasks" :key="task.task_id" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-lilac">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-4xl">➕➖🔢</span>
+                    <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
+                      {{ task.difficulty }}
+                    </span>
                   </div>
-                  <Progress value={30} class="h-3" />
-                </div>
-                <button @click="navigateToTask(task)" variant="kid" size="lg" class="w-full">
-                  <Play class="w-5 h-5" />
-                  Continuar
-                </button>
-              </div>
-            </div>
-
-            <!-- Task card 2 -->
-            <div class="p-6 card hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-secondary">
-              <div class="space-y-4">
-                <div class="flex items-center justify-between">
-                  <span class="text-4xl">➖</span>
-                  <span class="bg-warning text-warning-foreground px-3 py-1 rounded-full text-sm font-bold">
-                    Médio
-                  </span>
-                </div>
-                <h3 class="text-2xl font-bold">Subtração Mágica</h3>
-                <p class="text-muted-foreground text-lg">Descubra quanto sobra depois de subtrair!</p>
-                <div class="space-y-2">
-                  <div class="flex justify-between text-sm font-medium">
-                    <span>Progresso</span>
-                    <span>0/10 questões</span>
+                  <h3 class="text-2xl font-bold">{{ task.title }}</h3>
+                  <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+                  <p class="text-muted-foreground text-lg">{{ task.status }}</p>
+                  <div class="space-y-2">
+                    <div class="flex justify-between text-sm font-medium">
+                      <span>Progresso</span>
+                      <span>3/10 questões</span>
+                    </div>
+                    <Progress value={30} class="h-3" />
                   </div>
-                  <Progress value={0} class="h-3" />
+                  <button @click="navigateToTask(task)" variant="kid" size="lg" class="w-full cursor-pointer">
+                    <Play class="w-5 h-5" />
+                    Continuar
+                  </button>
                 </div>
-                <button variant="success" size="lg" class="w-full">
-                  <Star class="w-5 h-5" />
-                  Começar
-                </button>
               </div>
-            </div>
+            </template>
 
-            <!-- Task card 3 -->
-            <div class="p-6 card hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-accent">
-              <div class="space-y-4">
-                <div class="flex items-center justify-between">
-                  <span class="text-4xl">🔢</span>
-                  <span class="bg-success text-light-green-foreground px-3 py-1 rounded-full text-sm font-bold">
-                    Fácil
-                  </span>
-                </div>
-                <h3 class="text-2xl font-bold">Conte os Objetos</h3>
-                <p class="text-muted-foreground text-lg">Quantos objetos você consegue contar?</p>
-                <div class="space-y-2">
-                  <div class="flex justify-between text-sm font-medium">
-                    <span>Progresso</span>
-                    <span>10/10 questões</span>
-                  </div>
-                  <Progress value={100} class="h-3" />
-                </div>
-                <button variant="outline" size="lg" class="w-full" disabled>
-                  <Trophy class="w-5 h-5" />
-                  Completo! ⭐
-                </button>
-              </div>
-            </div>
-
-            <!-- Locked task -->
-            <div class="p-6 card opacity-60 border-4 border-muted">
+            <div v-else class="p-6 card opacity-60 border-4 border-muted">
               <div class="space-y-4 text-center">
                 <div class="text-6xl">🔒</div>
-                <h3 class="text-2xl font-bold">Próxima Aventura</h3>
-                <p class="text-muted-foreground text-lg">Complete as tarefas anteriores para desbloquear!</p>
-                <button variant="ghost" size="lg" class="w-full" disabled>
-                  Bloqueado
-                </button>
+                <h3 class="text-2xl font-bold">Sem tarefas</h3>
+                <p class="text-muted-foreground text-lg">Não foram adicionadas tarefas para você!</p>
               </div>
             </div>
           </div>
         </div>
 
-        <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-          <Sparkles class="w-8 h-8 text-lilac" />
-          Atividades Concluídas
-        </h2>
-
-        <div v-for="task in completedTasks" class="card py-8 px-10 rounded-lg border bg-card text-card-foreground shadow-sm">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-5">
-                <span class="text-4xl">➕</span>
-                <h3 class="text-2xl font-bold">{{ task.title }}</h3>
+        <div v-if="completedTasks">
+          <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
+            <Sparkles class="w-8 h-8 text-lilac" />
+            Atividades Concluídas
+          </h2>
+  
+          <div class="card py-8 px-10 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
+            <div v-for="task in completedTasks" class="bg-background px-10 py-4 space-y-4 rounded-4xl">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-5">
+                  <span class="text-4xl">➕</span>
+                  <h3 class="text-2xl font-bold">{{ task.title }}</h3>
+                </div>
+                <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
+                  {{ task.difficulty }}
+                </span>
               </div>
-              <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
-                {{ task.difficulty }}
-              </span>
+              <div class="w-full flex justify-between">
+                <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+                <button variant="outline" size="lg" disabled>
+                  <Trophy class="w-5 h-5" />
+                  Completo! ⭐
+                </button>
+              </div>
             </div>
-            <p class="text-muted-foreground text-lg">{{ task.content }}</p>
-            <p class="text-muted-foreground text-lg">{{ task.status }}</p>
           </div>
         </div>
 
@@ -217,16 +171,16 @@ onMounted(async () => {
             Suas Conquistas
           </h2>
           <div class="flex">
-                <div v-for="emoji in ['🏅', '⭐', '🎖️', '👑', '🌟']" :key="emoji" class="flex gap-10 overflow-x-auto pb-2">
-                    <div
-                        class="w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl shadow-medium hover:scale-110 transition-bounce cursor-pointer"
-                    >
-                        {{ emoji }}
-                    </div>
+            <div v-for="emoji in ['🏅', '⭐', '🎖️', '👑', '🌟']" :key="emoji" class="flex gap-10 overflow-x-auto pb-2">
+                <div
+                    class="w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl shadow-medium hover:scale-110 transition-bounce cursor-pointer"
+                >
+                    {{ emoji }}
                 </div>
-                <div class="w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl opacity-30">
-                    🔒
-                </div>
+            </div>
+            <div class="w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl opacity-30">
+                🔒
+            </div>
           </div>
         </div>
       </div>

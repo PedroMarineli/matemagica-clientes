@@ -9,6 +9,6 @@ import HeaderStudent from '../../components/student/HeaderStudent.vue';
         <main class="w-full flex flex-col items-center">
             <RouterView />
         </main>
-        <footer class="bottom-0">Rodapé do Aluno</footer>
     </div>
+    <footer class="text-center pt-10 bottom-0 text-muted-foreground">Matemágica - 2025</footer>
 </template>
