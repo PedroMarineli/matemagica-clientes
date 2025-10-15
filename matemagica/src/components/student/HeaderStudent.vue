@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { useUserStore } from '../../userStore';
+import { MdSharpLogout } from '@kalimahapps/vue-icons';
 
 const userStore = useUserStore()
 </script>
@@ -19,6 +20,7 @@ const userStore = useUserStore()
                     <button variant="ghost" size="icon" asChild>
                         <RouterLink @click="() => userStore.clearUserData()" to="/login">
                             Logout
+                            <MdSharpLogout/>
                             <!-- <LogOut className="w-5 h-5" /> -->
                         </RouterLink>
                     </button>

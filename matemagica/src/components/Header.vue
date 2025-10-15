@@ -33,7 +33,6 @@ const userStore = useUserStore()
                     <button variant="ghost" size="icon" asChild>
                         <RouterLink @click="() => userStore.clearUserData()" to="/login">
                             Logout
-                            <!-- <LogOut className="w-5 h-5" /> -->
                         </RouterLink>
                     </button>
                 </div>

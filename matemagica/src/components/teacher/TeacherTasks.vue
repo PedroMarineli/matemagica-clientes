@@ -92,7 +92,7 @@ const closeMaintainRegister = () => {
                 </table>
             </div>
         </div>
-        <aside v-if="showMaintainForm && selectedTask" class="w-full py-5 lg:w-1/3 bg-white px-16 lg:py-10">
+        <aside v-if="showMaintainForm && selectedTask" class="py-5 lg:py-10 bg-white px-16 z-50 fixed top-0 right-0 h-screen w-full lg:w-1/3 shadow-xl">
             <MaintainTask :task-data="selectedTask" @close="closeMaintainRegister"/>
         </aside>
     </div>
