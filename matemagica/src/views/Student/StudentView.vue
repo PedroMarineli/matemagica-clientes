@@ -136,7 +136,7 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div v-if="completedTasks">
+        <div v-if="completedTasks && completedTasks.length > 0">
           <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
             <Sparkles class="w-8 h-8 text-lilac" />
             Atividades Concluídas

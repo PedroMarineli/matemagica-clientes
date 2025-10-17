@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { useUserStore } from '../userStore';
+import logout from "../../../public/icons/logout.png";
 
 const userStore = useUserStore()
 </script>
@@ -32,7 +33,7 @@ const userStore = useUserStore()
                     </div>
                     <button variant="ghost" size="icon" asChild>
                         <RouterLink @click="() => userStore.clearUserData()" to="/login">
-                            Logout
+                            <img :src="logout" alt="Logout" class="w-8 h-8"/>
                         </RouterLink>
                     </button>
                 </div>
