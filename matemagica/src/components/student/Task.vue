@@ -14,6 +14,18 @@ const taskId = route.params.id
 
 const task = ref<ITasks | null>(null)
 
+const numerosEncontrados = task.value?.content.match(/\d+/g)
+
+let x = null
+let y = null
+
+if (numerosEncontrados && numerosEncontrados.length >= 2) {
+    [x, y] = numerosEncontrados
+
+    x = parseInt(x, 10);
+    y = parseInt(y, 10);
+}
+
 const state = reactive({
     isLoading: true
 })
@@ -48,6 +60,12 @@ const submitAnswer = () => {
     else {
         number_of_attempts++
     } 
+}
+
+const help = ref(false)
+
+const askHekp = () => {
+    help.value = !help.value
 }
 
 const submitTask = async() => {
@@ -94,7 +112,7 @@ const submitTask = async() => {
                 Suas Atividades
             </h2>
           
-            <div class="grid sm:grid-cols-2 gap-6">
+            <div class="grid sm:grid-cols-2 gap-6 items-center">
                 <!-- Task card 1 -->
                 <div v-if="task" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
                     <div class="space-y-4">
@@ -107,9 +125,8 @@ const submitTask = async() => {
                         <h3 class="text-2xl font-bold">{{ task.title }}</h3>
                         <p class="text-muted-foreground text-lg">{{ task.content }}</p>
                         <div class="space-y-2">
-                            <div class="flex justify-between text-sm font-medium">
-                                <span>Progresso</span>
-                                <span>3/10 questões</span>
+                            <div @click="askHekp" class="flex justify-between text-sm font-medium">
+                                <span>Ajuda?</span>
                             </div>
                             <!-- <Progress value={30} class="h-3" /> -->
                         </div>
@@ -132,6 +149,18 @@ const submitTask = async() => {
                             </button>
                         </form>
                     </div>
+                </div>
+                <div v-if="help" class="flex flex-col items-end font-bold text-4xl w-min">
+                    <!-- <span>{{ x }}</span> -->
+                    <span class="text-8xl">12</span>
+
+                    <div class="flex items-center justify-between">
+                        <span class="text-8xl mr-2">x</span> 
+                        <!-- <span>{{ y }}</span> -->
+                        <span class="text-8xl">4</span>
+                    </div>
+
+                    <div class="w-full border-b-10 border-black mt-5"></div> 
                 </div>
             </div>
         </div>

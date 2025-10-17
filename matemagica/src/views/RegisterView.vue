@@ -44,7 +44,7 @@ const handleRegister = async() => {
 
       <!-- Coluna do Formulário -->
       <div class="flex items-center justify-center p-6 sm:p-12">
-        <div class="w-full max-w-sm space-y-8">
+        <div class="max-w-full md:max-w-lg lg:max-w-2xl md:space-y-8 lg:w-1/2">
           <section class="card rounded-4xl py-12">
             <div class="space-y-6">
               <!-- Logo -->
@@ -71,8 +71,7 @@ const handleRegister = async() => {
                       required
                       v-model="form.username"
                       placeholder="Usuário"
-                      class="pl-12 h-12 text-base rounded-xl"
-
+                      class="input-register-login bg-background"
                     />
                   </div>
                 </div>
@@ -87,7 +86,7 @@ const handleRegister = async() => {
                       required
                       v-model="form.email"
                       placeholder="seuEmail@email.com"
-                      class="pl-12 h-12 text-base rounded-xl"
+                      class="input-register-login bg-background"
                     />
                   </div>
                 </div>
@@ -102,12 +101,12 @@ const handleRegister = async() => {
                       required
                       v-model="form.password"
                       placeholder="Senha"
-                      class="pl-12 h-12 text-base rounded-xl"
+                      class="input-register-login bg-background"
                     />
                   </div>
                 </div>
 
-                <div class="space-y-2">
+                <div class="space-y-2 mb-10">
                   <label htmlFor="confirm-password" class="text-base">Confirmar Senha</label>
                   <div class="relative">
                     <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
@@ -115,28 +114,14 @@ const handleRegister = async() => {
                       id="confirm-password"
                       type="password"
                       placeholder="Digite a senha novamente"
-                      class="pl-12 h-12 text-base rounded-xl"
+                      class="input-register-login bg-background"
                     />
                   </div>
                 </div>
 
-                <div class="flex items-start gap-2">
-                  <input type="checkbox" id="terms" class="mt-1 rounded" />
-                  <label htmlFor="terms" class="text-sm text-muted-foreground">
-                    Eu concordo com os
-                    <span to="/termos" class="text-lilac hover:underline">
-                      Termos de Uso
-                    </span>
-                    e
-                    <span to="/privacidade" class="text-lilac hover:underline">
-                      Política de Privacidade
-                    </span>
-                  </label>
-                </div>
-
-                <Button type="submit" variant="playful" size="lg" class="w-full">
+                <button type="submit" class="w-full h-12 px-8 text-base bg-lilac text-white hover:scale-105 transition-bounce rounded-2xl shadow-medium hover:shadow-glow font-bold cursor-pointer">
                   Criar Conta
-                </Button>
+                </button>
               </form>
 
               <!-- Divider -->

@@ -29,7 +29,7 @@ const submitStudent = async() => {
         classroom_id: form.classroom_id,
         photo_url: form.photo_url
     }
-
+    console.log(newStudent)
     try {
         const response = await axios.post('http://localhost:3000/users/register/student', newStudent)
         // toast.success('Aluno adicionado com sucesso')
@@ -84,13 +84,13 @@ onMounted(async () => {
                     id="password"
                     name="password"
                     class="border rounded w-full py-2 px-3 mb-2"
-                    placeholder="Gênero do aluno"
+                    placeholder="Senha do aluno"
                     required
                 />
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
-                <select v-model="form.classroom_id">
+                <select v-model="form.classroom_id" class="w-full">
                     <option value="" disabled selected>Selecione a Sala</option>
                     <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
                 </select>

@@ -55,7 +55,7 @@ const handleLogin = async() => {
       
       <!-- Coluna do Formulário -->
       <div class="flex items-center justify-center p-6 sm:p-12">
-        <div class="w-full max-w-sm space-y-8">
+        <div class="max-w-full md:max-w-lg lg:max-w-2xl md:space-y-8 lg:w-1/2">
 
         <!-- Right side - Login form -->
         <section class="card rounded-4xl py-12">
@@ -105,7 +105,7 @@ const handleLogin = async() => {
                     required
                     v-model="form.email"
                     :placeholder="userType.userType === 'professor' ? 'seu@email.com' : 'seu_usuario'"
-                    class="pl-12 h-12 text-base rounded-xl"
+                    class="input-register-login bg-background"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ const handleLogin = async() => {
                     required
                     v-model="form.password"
                     placeholder="••••••••"
-                    class="pl-12 h-12 text-base rounded-xl"
+                    class="input-register-login bg-background"
                   />
                 </div>
               </div>
@@ -135,7 +135,7 @@ const handleLogin = async() => {
 
               <button 
                 type="submit"
-                class="h-12 px-8 w-full font-bold text-white rounded-xl shadow-soft cursor-pointer" 
+                class="w-full h-12 px-8 text-base bg-lilac text-white hover:scale-105 transition-bounce rounded-2xl shadow-medium hover:shadow-glow font-bold cursor-pointer"
                 :class="[ userType.userType === 'aluno'
                   ? 'bg-orange text-black shadow-soft'
                   : 'bg-lilac text-white hover:text-foreground' ]"

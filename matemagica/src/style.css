@@ -21,6 +21,9 @@
   .card {
     @apply p-6 bg-white rounded-lg border border-gray-300 shadow-sm;
   }
+  .input-register-login {
+    @apply w-full pl-12 h-12 text-base border border-gray-300 rounded-xl;
+  }
   .table {
     @apply bg-white border-separate border-spacing-0 rounded-lg border-2 border-gray-200 overflow-hidden;
     border-radius: 0.5rem;
