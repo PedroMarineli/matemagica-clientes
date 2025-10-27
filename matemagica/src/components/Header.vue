@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { useUserStore } from '../userStore';
-import logout from "../../../public/icons/logout.png";
+import logout from "../../public/icons/logout.png";
 
 const userStore = useUserStore()
 </script>

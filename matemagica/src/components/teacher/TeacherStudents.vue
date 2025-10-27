@@ -69,7 +69,7 @@ const closeMaintainRegister = () => {
                         <tr>
                             <th>Id</th>
                             <th>Nome</th>
-                            <th>Gênero</th>
+                            <th>Email</th>
                             <th>Ação</th>
                         </tr>
                     </thead>

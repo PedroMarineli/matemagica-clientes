@@ -164,9 +164,9 @@ function createProblem() {
     return { problemaPronto, x, y }
 }
 
-const currentProblem = ref<string | null>(null)
 
 function generateAndShowProblem() {
+    const currentProblem = ref<string | null>(null)
     const problemData = createProblem()
 
     if (!problemData) {
@@ -196,13 +196,15 @@ function generateAndShowProblem() {
         default:
             return
     }
+
+    
 }
 
 </script>
 
 <template>
     <div class="h-full flex md:justify-between lg:flex-row flex-1">
-        <div class="flex flex-col px-56 items-center gap-5 py-5 lg:py-10">
+        <div class="flex px-56 items-center gap-5 py-5 lg:py-10">
             <div class="card w-full flex items-center justify-between">
                 <form @submit.prevent="submitTask" class="grid gap-3">
                     <div class="flex justify-between">
@@ -240,17 +242,6 @@ function generateAndShowProblem() {
                                 <option value="hard">Difícil</option>
                             </select>
                         </div>
-                        <div @click="generateAndShowProblem()" class="bg-green text-center hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline">
-                            Criar tarefa
-                        </div>
-                        <div class="problem-area mt-8 p-6 border rounded-lg shadow-md">
-                            <div v-if="currentProblem">
-                                <h2 class="text-xl font-bold text-lilac mb-4">
-                                    Tarefa de Matemática:
-                                </h2>
-                                <p class="text-2xl">{{ currentProblem }}</p>
-                            </div>
-                        </div>
                         <div>
                             <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
                             <select v-model="form.classroom_id" class="w-full">
@@ -258,14 +249,27 @@ function generateAndShowProblem() {
                                 <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
                             </select>
                         </div>
+                        <div @click="generateAndShowProblem()" class="bg-green text-center hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline">
+                            Criar tarefa
+                        </div>
                     </div>
-                    <button
-                        class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        Adicionar Tarefa
-                    </button>
                 </form>
+            </div>
+            <div class="card w-full flex flex-col items-center justify-between">
+                <h2 class="text-xl font-bold text-lilac mb-4">
+                    Tarefa de Matemática:
+                </h2>
+                <div class="problem-area p-6 border rounded-lg shadow-md">
+                    <div v-if="currentProblem">
+                        <p>{{ currentProblem }}</p>
+                    </div>
+                </div>
+                <button
+                    class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                    type="submit"
+                >
+                    Adicionar Tarefa
+                </button>
             </div>
         </div>
     </div>
