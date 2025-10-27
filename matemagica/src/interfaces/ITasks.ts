@@ -2,12 +2,16 @@ export interface ITasks {
     id: number
     title: string
     type: string
-    content: string,
-    answer: number,
+    content: IContent[],
     difficulty: string,
     classroom_id: number,
     teacher_id: number,
     created_at: string
+}
+
+export interface IContent {
+    content: string,
+    answer: number
 }
 
 export interface ITaskProgress {

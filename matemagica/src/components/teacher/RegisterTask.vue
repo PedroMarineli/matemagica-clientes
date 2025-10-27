@@ -4,6 +4,7 @@ import { computed, onMounted, reactive, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
+import type { IContent } from '../../interfaces/ITasks';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -24,7 +25,7 @@ const submitTask = async() => {
         title: form.title,
         type: form.type,
         teacher_id: teacherId.value,
-        content: currentProblem.value,
+        content: listOfProblems.value,
         answer: form.answer,
         difficulty: form.difficulty,
         classroom_id: form.classroom_id,
@@ -164,10 +165,12 @@ function createProblem() {
     return { problemaPronto, x, y }
 }
 
+const listOfProblems = ref<IContent[] | null>(null)
 
 function generateAndShowProblem() {
     const currentProblem = ref<string | null>(null)
     const problemData = createProblem()
+    let answer = 0
 
     if (!problemData) {
         return
@@ -182,31 +185,40 @@ function generateAndShowProblem() {
 
     switch (operation) {
         case 'addition':
-            form.answer = x + y
+            answer = x + y
             break
         case 'subtraction':
-            form.answer = x - y
+            answer = x - y
             break
         case 'multiplication':
-            form.answer = x * y
+            answer = x * y
             break
         case 'division':
-            form.answer = x / y
+            answer = x / y
             break
         default:
             return
     }
 
+    const newProblem = {
+        content: novoProblema,
+        answer: answer
+    }
+
+    if (!listOfProblems.value) {
+        listOfProblems.value = []
+    }
     
+    listOfProblems.value.push(newProblem)
 }
 
 </script>
 
 <template>
     <div class="h-full flex md:justify-between lg:flex-row flex-1">
-        <div class="flex px-56 items-center gap-5 py-5 lg:py-10">
-            <div class="card w-full flex items-center justify-between">
-                <form @submit.prevent="submitTask" class="grid gap-3">
+        <form @submit.prevent="submitTask" class="grid gap-3">
+            <div class="flex px-56 items-center gap-5 py-5 lg:py-10">
+                <div class="card w-full flex flex-col items-center justify-between">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg">Registrar Tarefa</h1>
                     </div>
@@ -253,24 +265,27 @@ function generateAndShowProblem() {
                             Criar tarefa
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="card w-full flex flex-col items-center justify-between">
-                <h2 class="text-xl font-bold text-lilac mb-4">
-                    Tarefa de Matemática:
-                </h2>
-                <div class="problem-area p-6 border rounded-lg shadow-md">
-                    <div v-if="currentProblem">
-                        <p>{{ currentProblem }}</p>
-                    </div>
                 </div>
-                <button
-                    class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                    type="submit"
-                >
-                    Adicionar Tarefa
-                </button>
+                <div class="card w-full flex flex-col items-center justify-between">
+                    <h2 class="text-xl font-bold text-lilac mb-4">
+                        Tarefa de Matemática:
+                    </h2>
+                    <div class="problem-area p-6 border rounded-lg shadow-md">
+                        <div v-if="listOfProblems">
+                            <div v-for="problem in listOfProblems">
+                                <p>{{ problem.content }}</p>
+                                <p>{{ problem.answer }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                        type="submit"
+                    >
+                        Adicionar Tarefa
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </template>
