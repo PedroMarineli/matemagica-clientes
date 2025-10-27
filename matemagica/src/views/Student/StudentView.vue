@@ -15,6 +15,8 @@ const form = reactive({
   status: 'In Progress'
 })
 
+const avatar = userStore.data?.cartoon_image_path
+
 const changeStatus = async(id: any, score: any) => {
   const statusAltered = {
     student_id: form.student_id,
@@ -55,40 +57,47 @@ onMounted(async () => {
 
 <template>
       <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- Welcome section with avatar -->
-        <div class="card p-8 mb-8 bg-gradient-warm shadow-glow">
-          <div class="flex flex-col md:flex-row items-center gap-6">
-            <div class="w-32 h-32 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
-              👦
-            </div>
-            <div class="text-center md:text-left flex-1">
-              <h1 class="text-4xl font-bold mb-2">Olá, {{ userStore.data?.username }}! 🎉</h1>
-              <p class="text-xl text-black/90">Você está indo muito bem!</p>
-            </div>
-            <div class="flex gap-4">
-              <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
-                <div class="text-3xl font-bold">⭐ 45</div>
-                <div class="text-sm">Estrelas</div>
+        <div class="flex gap-10">
+          <div>
+            <!-- Welcome section with avatar -->
+            <div class="card p-8 mb-8 bg-gradient-warm shadow-glow">
+              <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="w-32 h-32 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
+                  👦
+                </div>
+                <div class="text-center md:text-left flex-1">
+                  <h1 class="text-4xl font-bold mb-2">Olá, {{ userStore.data?.username }}! 🎉</h1>
+                  <p class="text-xl text-black/90">Você está indo muito bem!</p>
+                </div>
+                <div class="flex gap-4">
+                  <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
+                    <div class="text-3xl font-bold">⭐ 45</div>
+                    <div class="text-sm">Estrelas</div>
+                  </div>
+                  <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
+                    <div class="text-3xl font-bold">🏆 5</div>
+                    <div class="text-sm">Troféus</div>
+                  </div>
+                </div>
               </div>
-              <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
-                <div class="text-3xl font-bold">🏆 5</div>
-                <div class="text-sm">Troféus</div>
+            </div>
+    
+            <!-- Level progress -->
+            <div class="card p-6 mb-8">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-2xl font-bold flex items-center gap-2">
+                  <Trophy class="w-6 h-6 text-accent" />
+                  Seu Progresso
+                </h2>
+                <span class="text-xl font-bold text-lilac">Nível 1</span>
               </div>
+              <Progress value={65} class="h-4 mb-2" />
+              <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
             </div>
           </div>
-        </div>
-
-        <!-- Level progress -->
-        <div class="card p-6 mb-8">
-          <div class="flex items-center justify-between mb-3">
-            <h2 class="text-2xl font-bold flex items-center gap-2">
-              <Trophy class="w-6 h-6 text-accent" />
-              Seu Progresso
-            </h2>
-            <span class="text-xl font-bold text-lilac">Nível 1</span>
+          <div>
+            <img :src="avatar" alt="Imagem do Avatar">
           </div>
-          <Progress value={65} class="h-4 mb-2" />
-          <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
         </div>
 
         <!-- Pending tasks -->

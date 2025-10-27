@@ -5,6 +5,8 @@ export interface IUsers {
     email: string
     id: number
     photo_url: string
+    photo_path: string
+    cartoon_image_path: string
     type: string
     username: string
 }
