@@ -91,7 +91,7 @@ onMounted(async () => {
                 </h2>
                 <span class="text-xl font-bold text-lilac">Nível 1</span>
               </div>
-              <Progress value={65} class="h-4 mb-2" />
+              <!-- <Progress value={65} class="h-4 mb-2" /> -->
               <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
             </div>
           </div>
@@ -114,21 +114,28 @@ onMounted(async () => {
                   <div class="flex items-center justify-between">
                     <span class="text-4xl">➕➖🔢</span>
                     <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
-                      {{ task.difficulty }}
+                      {{ task.difficulty === 'easy' ? 'Fácil' : 
+                         task.difficulty === 'medium' ? 'Médio' : 
+                         task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}
                     </span>
                   </div>
                   <h3 class="text-2xl font-bold">{{ task.title }}</h3>
-                  <p class="text-muted-foreground text-lg">{{ task.content }}</p>
-                  <p class="text-muted-foreground text-lg">{{ task.status }}</p>
+                  <p class="text-muted-foreground text-lg">{{ task.problems }}</p>
+                  <p class="text-muted-foreground text-lg">
+                      {{ task.status === 'In Progress' ? 'Em Progresso' : 
+                         task.status === 'Not Started' ? 'Não Iniciado' : 
+                         task.status === 'Graded' ? 'Corriido' : 
+                         task.status === 'Submitted' ? 'Submetido' : 'Desconhecido' }}
+                  </p>
                   <div class="space-y-2">
                     <div class="flex justify-between text-sm font-medium">
                       <span>Progresso</span>
                       <span>3/10 questões</span>
                     </div>
-                    <Progress value={30} class="h-3" />
+                    <!-- <Progress value={30} class="h-3" /> -->
                   </div>
-                  <button @click="navigateToTask(task)" variant="kid" size="lg" class="w-full cursor-pointer">
-                    <Play class="w-5 h-5" />
+                  <button @click="navigateToTask(task)" class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-orange text-accent-foreground shadow-soft">
+                    <!-- <Play class="w-5 h-5" /> -->
                     Continuar
                   </button>
                 </div>
@@ -147,7 +154,7 @@ onMounted(async () => {
 
         <div v-if="completedTasks && completedTasks.length > 0">
           <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-            <Sparkles class="w-8 h-8 text-lilac" />
+            <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
             Atividades Concluídas
           </h2>
   
@@ -163,9 +170,9 @@ onMounted(async () => {
                 </span>
               </div>
               <div class="w-full flex justify-between">
-                <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+                <p class="text-muted-foreground text-lg">{{ task.problems }}</p>
                 <button variant="outline" size="lg" disabled>
-                  <Trophy class="w-5 h-5" />
+                  <!-- <Trophy class="w-5 h-5" /> -->
                   Completo! ⭐
                 </button>
               </div>
@@ -176,7 +183,7 @@ onMounted(async () => {
         <!-- Achievements -->
         <div class="card p-6">
           <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <Trophy class="w-6 h-6 text-accent" />
+            <!-- <Trophy class="w-6 h-6 text-accent" /> -->
             Suas Conquistas
           </h2>
           <div class="flex">

@@ -2,14 +2,14 @@ export interface ITasks {
     id: number
     title: string
     type: string
-    content: IContent[],
+    problems: IProblems[],
     difficulty: string,
     classroom_id: number,
     teacher_id: number,
     created_at: string
 }
 
-export interface IContent {
+export interface IProblems {
     content: string,
     answer: number
 }
@@ -18,7 +18,7 @@ export interface ITaskProgress {
     task_id: number
     title: string
     type: string
-    content: string
+    problems: string
     difficulty: string
     status: 'Not Started' | 'In Progress' | 'Submitted' | 'Graded',
     score: number,

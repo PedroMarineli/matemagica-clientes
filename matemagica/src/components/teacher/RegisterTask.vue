@@ -4,7 +4,7 @@ import { computed, onMounted, reactive, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
-import type { IContent } from '../../interfaces/ITasks';
+import type { IProblems } from '../../interfaces/ITasks';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -165,7 +165,7 @@ function createProblem() {
     return { problemaPronto, x, y }
 }
 
-const listOfProblems = ref<IContent[] | null>(null)
+const listOfProblems = ref<IProblems[] | null>(null)
 
 function generateAndShowProblem() {
     const currentProblem = ref<string | null>(null)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import axios from 'axios';
-import type { ITasks } from '../../interfaces/ITasks';
+import type { IProblems, ITasks } from '../../interfaces/ITasks';
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../../userStore';
@@ -13,18 +13,17 @@ const router = useRouter()
 const taskId = route.params.id
 
 const task = ref<ITasks | null>(null)
+const problems = ref<IProblems[]>([])
 
-const numerosEncontrados = task.value?.content.match(/\d+/g)
+console.log(task)
+console.log(problems)
 
-let x = null
-let y = null
+const i = ref(0)
 
-if (numerosEncontrados && numerosEncontrados.length >= 2) {
-    [x, y] = numerosEncontrados
+// const numerosEncontrados = task.value?.content.match(/\d+/g)
 
-    x = parseInt(x, 10);
-    y = parseInt(y, 10);
-}
+const x = ref(0)
+const y = ref(0)
 
 const state = reactive({
     isLoading: true
@@ -32,10 +31,26 @@ const state = reactive({
 
 let number_of_attempts = 1
 
+const updateCurrentProblem = () => {
+    const currentProblem = problems.value[i.value]
+
+    if(!currentProblem) return problems.value[0]
+
+    const numerosEncontrados = currentProblem.content.match(/\d+/g)
+
+    if (numerosEncontrados && numerosEncontrados.length >= 2) {
+        x.value = parseInt(numerosEncontrados[0], 10)
+        y.value = parseInt(numerosEncontrados[1], 10)
+    }
+}
+
 onMounted(async() => {
     try {
         const response = await axios.get(`http://localhost:3000/tasks/${taskId}`)
         task.value = response.data as ITasks
+        problems.value = task.value.problems || []
+
+        updateCurrentProblem()
     } catch (error) {
         console.error('Error fetching task', error)
     } finally {
@@ -48,17 +63,26 @@ const form = reactive({
     task_id: taskId,
     status: 'Submitted',
     score: 0,
-    answer: 0
+    answer: null
 })
 
 const submitAnswer = () => {
-    if(form.answer == task.value?.answer) {
+    const currentProblem = problems.value[i.value]
+
+    if(form.answer == currentProblem.answer) {
         form.score = 10
         console.log('Parabens vc acertou')
-        submitTask()
+        if (i.value < problems.value.length - 1) {
+            i.value++
+            updateCurrentProblem()
+            form.answer = null        
+        } else {
+            submitTask()
+        }
     }
     else {
         number_of_attempts++
+        console.log('Resposta incorreta. Tentativas:', number_of_attempts)
     } 
 }
 
@@ -79,7 +103,6 @@ const submitTask = async() => {
 
     try {
         const response = await axios.put('http://localhost:3000/progress/update', taskAltered)
-        // toast.success('Tarefa adicionada com sucesso')
         if(response) {
             router.push('/alunos')
             console.log('Progresso de tarefa realizado')
@@ -96,7 +119,7 @@ const submitTask = async() => {
         <div class="card p-6 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="flex items-center justify-between mb-3">
                 <h2 class="text-2xl font-bold flex items-center gap-2">
-                    <Trophy class="w-6 h-6 text-accent" />
+                    <!-- <Trophy class="w-6 h-6 text-accent" /> -->
                     Seu Progresso
                 </h2>
                 <span class="text-xl font-bold text-lilac">Nível 1</span>
@@ -108,7 +131,7 @@ const submitTask = async() => {
         <!-- Pending tasks -->
         <div class="mb-8">
             <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-                <Sparkles class="w-8 h-8 text-lilac" />
+                <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
                 Suas Atividades
             </h2>
           
@@ -119,11 +142,13 @@ const submitTask = async() => {
                         <div class="flex items-center justify-between">
                             <span class="text-4xl">➕</span>
                             <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
-                                {{ task.difficulty }}
+                                {{ task.difficulty === 'easy' ? 'Fácil' : 
+                                   task.difficulty === 'medium' ? 'Médio' : 
+                                   task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}
                             </span>
                         </div>
                         <h3 class="text-2xl font-bold">{{ task.title }}</h3>
-                        <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+                        <p class="text-muted-foreground text-lg">{{ problems[i].content }}</p>
                         <div class="space-y-2">
                             <div @click="askHekp" class="flex justify-between text-sm font-medium">
                                 <span>Ajuda?</span>
@@ -143,21 +168,23 @@ const submitTask = async() => {
                                     required
                                 />
                             </div>
-                            <button variant="kid" size="lg" class="w-full">
-                                <Play class="w-5 h-5" />
-                                Entregar
-                            </button>
+                            <div class="w-full flex justify-center items-center">
+                                <button class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-orange text-accent-foreground shadow-soft">
+                                    <!-- <Play class="w-5 h-5" /> -->
+                                    Entregar
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
                 <div v-if="help" class="flex flex-col items-end font-bold text-4xl w-min">
                     <!-- <span>{{ x }}</span> -->
-                    <span class="text-8xl">12</span>
+                    <span class="text-8xl">{{ x }}</span>
 
                     <div class="flex items-center justify-between">
                         <span class="text-8xl mr-2">x</span> 
                         <!-- <span>{{ y }}</span> -->
-                        <span class="text-8xl">4</span>
+                        <span class="text-8xl">{{ y }}</span>
                     </div>
 
                     <div class="w-full border-b-10 border-black mt-5"></div> 
