@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import axios from 'axios';
-import { reactive, type PropType } from 'vue';
+import { reactive, ref, type PropType } from 'vue';
 import { defineEmits } from 'vue';
-import type { ITasks } from '../../interfaces/ITasks';
+import type { IProblems, ITasks } from '../../interfaces/ITasks';
 
 const emit = defineEmits(['close'])
-
-const closeComponent = () => {
-    emit('close')
-}
 
 const props = defineProps({
   taskData: {
@@ -16,6 +12,22 @@ const props = defineProps({
     required: true,
   },
 })
+
+const problems = ref<IProblems[]>([])
+const jsonString = props.taskData.content
+
+const closeComponent = () => {
+    emit('close')
+}
+
+if (jsonString && typeof jsonString === 'string') {
+    try {
+        const problemsArray = JSON.parse(jsonString)
+        problems.value = problemsArray
+    } catch (error) {
+        console.error("Erro ao analisar o JSON do conteúdo da tarefa:", error)
+    }
+}
 
 const form = reactive({
     title: props.taskData.title,
@@ -33,8 +45,6 @@ const submitTask = async() => {
 
     try {
         const response = await axios.put(`http://localhost:3000/tasks/${props.taskData.id}`, taskAltered)
-        // toast.success('Tarefa adicionada com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
             console.log('Sala registrada')
         }
@@ -46,14 +56,11 @@ const submitTask = async() => {
 const deleteTask = async() => {
     try {
         const response = await axios.delete(`http://localhost:3000/tasks/${props.taskData.id}`)
-        // toast.success('Tarefa adicionada com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
             console.log('Tarefa deletada')
         }
     } catch(error) {
         console.error('Tarefa não foi deletada', error)
-        // toast.error('Tarefa não foi deletada')
     }
 }
 </script>
@@ -80,24 +87,24 @@ const deleteTask = async() => {
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2">Tipo:</label>
-                <input
-                    type="text"
-                    v-model="form.type"
-                    id="type"
-                    name="type"
-                    class="border rounded w-full py-2 px-3 mb-2"
-                    placeholder="Tipo"
-                />
+                <label class="block text-gray-700 mb-2">{{ props.taskData.type }}</label>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-bold mb-2">Conteúdo:</label>
+                <div v-for="problem in problems" class="flex gap-8 items-center">
+                    <label class="block text-gray-700 mb-2">{{ problem.content }}</label>
+                    <label class="block text-gray-700 mb-2">{{ problem.answer }}</label>
+                </div>
             </div>
             <button
-                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline cursor-pointer"
                 type="submit"
             >
                 Alterar Tarefa
             </button>
         </form>
         <button
-            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline cursor-pointer"
             @click="deleteTask"
         >
             Excluir Tarefa

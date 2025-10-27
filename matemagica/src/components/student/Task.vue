@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import axios from 'axios';
-import type { IProblems, ITasks } from '../../interfaces/ITasks';
+import type { IProblems, ITasksProgress } from '../../interfaces/ITasks';
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../../userStore';
@@ -12,11 +12,8 @@ const route = useRoute()
 const router = useRouter()
 const taskId = route.params.id
 
-const task = ref<ITasks | null>(null)
+const task = ref<ITasksProgress | null>(null)
 const problems = ref<IProblems[]>([])
-
-console.log(task)
-console.log(problems)
 
 const i = ref(0)
 
@@ -47,7 +44,7 @@ const updateCurrentProblem = () => {
 onMounted(async() => {
     try {
         const response = await axios.get(`http://localhost:3000/tasks/${taskId}`)
-        task.value = response.data as ITasks
+        task.value = response.data as ITasksProgress
         problems.value = task.value.problems || []
 
         updateCurrentProblem()

@@ -30,7 +30,7 @@
     overflow: hidden;
   }
   thead tr {
-    @apply bg-gray-700 text-white;
+    @apply text-white;
   }
   tbody tr {
     @apply border-b-2 border-solid border-gray-200;

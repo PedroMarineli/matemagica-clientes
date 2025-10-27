@@ -5,6 +5,7 @@ import { onMounted, ref } from 'vue';
 import type { IUsers } from '../../interfaces/IUsers';
 import MaintainStudent from './MaintainStudent.vue';
 import router from '../../router';
+import points from "../../../public/icons/points.png";
 
 const students = ref<IUsers[] | null>(null)
 const selectedStudent = ref<IUsers | null>(null)
@@ -61,11 +62,11 @@ const closeMaintainRegister = () => {
                     <h1>Alunos</h1>
                     <p>Lista com seus alunos</p>
                 </div>
-                <button @click="callRegister">Adicionar Aluno</button>
+                <button @click="callRegister" class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-lilac text-white shadow-soft">Adicionar Aluno</button>
             </div>
             <div class="card w-full grid justify-center">
                 <table class="table">
-                    <thead>
+                    <thead class="bg-lilac">
                         <tr>
                             <th>Id</th>
                             <th>Nome</th>
@@ -84,7 +85,9 @@ const closeMaintainRegister = () => {
                             <td>{{student.username}}</td>
                             <td>{{student.email}}</td>
                             <td @click.stop>
-                                <button @click="callMaintain(student)">Dados</button>
+                                <button @click="callMaintain(student)">
+                                    <img :src="points" alt="Mais" class="w-8 h-8 cursor-pointer"/>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

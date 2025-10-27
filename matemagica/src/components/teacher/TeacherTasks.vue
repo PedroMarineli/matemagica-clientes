@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue';
 import type { ITasks } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
 import MaintainTask from './MaintainTask.vue';
+import points from "../../../public/icons/points.png";
 
 const router = useRouter()
 const tasks = ref<ITasks[] | null>(null)
@@ -38,7 +39,7 @@ const callMaintain = (student: ITasks) => {
         showRegisterForm.value = false
     }
     showMaintainForm.value = !showMaintainForm.value
-    selectedTask.value = student 
+    selectedTask.value = student
 }
 const closeMaintainRegister = () => {
   showMaintainForm.value = false
@@ -54,16 +55,14 @@ const closeMaintainRegister = () => {
                     <h1>Tarefas</h1>
                     <p>Lista com suas tarefas</p>
                 </div>
-                <button @click="() => router.push('/professores/adicionar-tarefa')">Adicionar Tarefa</button>
+                <button @click="() => router.push('/professores/adicionar-tarefa')" class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-lilac text-white shadow-soft">Adicionar Tarefa</button>
             </div>
             <div class="card w-full grid justify-center">
                 <table class="table">
-                    <thead>
+                    <thead class="bg-lilac">
                         <tr>
                             <th>Id</th>
                             <th>Nome (Tipo)</th>
-                            <th>Conteúdo</th>
-                            <th>Resposta</th>
                             <th>Dificuldade</th>
                             <th>Sala</th>
                             <th>Data criação</th>
@@ -79,13 +78,15 @@ const closeMaintainRegister = () => {
                         <tr>
                             <td>{{task.id}}</td>
                             <td>{{task.title}} ({{ task.type }})</td>
-                            <td>{{task.content}}</td>
-                            <td>{{task.answer}}</td>
-                            <td>{{task.difficulty}}</td>
+                            <td>{{ task.difficulty === 'easy' ? 'Fácil' : 
+                                   task.difficulty === 'medium' ? 'Médio' : 
+                                   task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}</td>
                             <td>{{task.classroom_id}}</td>
                             <td>{{task.created_at}}</td>
                             <td>
-                                <button @click="callMaintain(task)">Dados</button>
+                                <button @click="callMaintain(task)">
+                                    <img :src="points" alt="Mais" class="w-8 h-8 cursor-pointer"/>
+                                </button>
                             </td>
                         </tr>
                     </tbody>             

@@ -4,6 +4,7 @@ import RegisterClass from './RegisterClass.vue';
 import { onMounted, ref } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import MaintainClass from './MaintainClass.vue';
+import points from "../../../public/icons/points.png";
 
 const classrooms = ref<IClassrooms[] | null>(null)
 
@@ -53,11 +54,11 @@ const closeMaintainRegister = () => {
                     <h1>Salas</h1>
                     <p>Lista com suas salas de aula</p>
                 </div>
-                <button @click="callRegister">Adicionar Sala</button>
+                <button @click="callRegister" class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-lilac text-white shadow-soft">Adicionar Sala</button>
             </div>
             <div class="card w-full grid justify-center">
                 <table class="table">
-                    <thead>
+                    <thead class="bg-lilac">
                         <tr>
                             <th>Id</th>
                             <th>Salas</th>
@@ -76,7 +77,9 @@ const closeMaintainRegister = () => {
                             <td>{{classroom.name}}</td>
                             <td>{{classroom.description}}</td>
                             <td>
-                                <button @click="callMaintain(classroom)">Dados</button>
+                                <button @click="callMaintain(classroom)">
+                                    <img :src="points" alt="Mais" class="w-8 h-8 cursor-pointer"/>
+                                </button>                      
                             </td>
                         </tr>
                     </tbody>
