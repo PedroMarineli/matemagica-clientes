@@ -21,6 +21,13 @@ onMounted(async () => {
         console.error('Error fetching job', error)
     }
 })
+
+const formatData = (dataString: string) => {
+    if (!dataString) return ''
+    const date = new Date(dataString)
+    
+    return date.toLocaleDateString('pt-BR')
+}
 </script>
 
 <template>
@@ -55,7 +62,7 @@ onMounted(async () => {
                                task.status === 'Graded' ? 'Corriido' : 
                                task.status === 'Submitted' ? 'Submetido' : 'Desconhecido' }}</td>
                         <td>{{ task.score }}</td>
-                        <td>{{ task.completion_date }}</td>
+                        <td>{{ formatData(task.completion_date) }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -71,6 +71,13 @@ onMounted(async () => {
     console.error('Error fetching job', error)
   }
 })
+
+const formatData = (dataString: string) => {
+    if (!dataString) return ''
+    const date = new Date(dataString)
+    
+    return date.toLocaleDateString('pt-BR')
+}
 </script>
 
 <template>
@@ -180,7 +187,7 @@ onMounted(async () => {
         Atividades Concluídas
       </h2>
 
-      <div class="grid gap-10 card py-8 px-10 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="grid gap-5 card py-8 px-10 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
         <div v-for="task in completedTasks" class="bg-background px-10 py-4 space-y-4 rounded-4xl">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-5">
@@ -209,16 +216,16 @@ onMounted(async () => {
             </button>
           </div>
           <div class="flex justify-between">
-            <div class="flex gap-2">
-              <span>Concluído em:</span>
-              <span>{{ task.completion_date }}</span>
+            <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
+              <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Concluído em:</span>
+              <span>{{ formatData(task.completion_date) }}</span>
             </div>
-            <div class="flex gap-2">
-              <span>Tentativas:</span>
+            <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
+              <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Tentativas:</span>
               <span>{{ task.number_of_attempts }}</span>
             </div>
-            <div class="flex gap-2">
-              <span>Nota:</span>
+            <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
+              <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Nota:</span>
               <span>{{ task.score }}</span>
             </div>
           </div>

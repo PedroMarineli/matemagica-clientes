@@ -123,15 +123,15 @@ const submitTask = async() => {
         </div>
 
         <!-- Pending tasks -->
-        <div class="mb-8">
+        <div>
             <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
                 <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
                 Suas Atividades
             </h2>
           
-            <div class="grid sm:grid-cols-2 gap-6 items-center">
+            <div v-if="task" class="flex items-center">
                 <!-- Task card 1 -->
-                <div v-if="task" class="flex items-center">
+                <div class="grid sm:grid-cols-2 gap-6 items-center">
                     <div class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
@@ -145,7 +145,7 @@ const submitTask = async() => {
                             <h3 class="text-2xl font-bold">{{ task.title }}</h3>
                             <p class="text-muted-foreground text-lg">{{ problems[i].content }}</p>
                             <div class="space-y-2">
-                                <div @click="askHekp" class="flex justify-between text-sm font-medium">
+                                <div @click="askHekp" class="flex justify-between text-sm font-medium cursor-pointer">
                                     <span>Ajuda?</span>
                                 </div>
                                 <!-- <Progress value={30} class="h-3" /> -->
@@ -172,20 +172,20 @@ const submitTask = async() => {
                             </form>
                         </div>
                     </div>
-                    <div v-if="help" class="flex flex-col items-end font-bold text-4xl w-min">
-                        <span class="text-8xl">{{ x }}</span>
-    
-                        <div class="flex items-center justify-between">
-                            <span class="text-8xl mr-2">
-                                {{ task.type === 'addition' ? '+' : 
-                                   task.type === 'subtraction' ? '-' : 
-                                   task.type === 'multiplication' ? 'x' : 
-                                   task.type === 'division' ? '/' : '' }}
-                            </span> 
-                            <span class="text-8xl">{{ y }}</span>
+                    <div class="grid justify-center">
+                        <div v-if="help" class="flex flex-col items-end justify-center font-bold text-4xl w-min">
+                            <span class="text-8xl">{{ x }}</span>
+                            <div class="flex items-center justify-between">
+                                <span class="text-8xl mr-2">
+                                    {{ task.type === 'addition' ? '+' : 
+                                       task.type === 'subtraction' ? '-' : 
+                                       task.type === 'multiplication' ? 'x' : 
+                                       task.type === 'division' ? '/' : '' }}
+                                </span> 
+                                <span class="text-8xl">{{ y }}</span>
+                            </div>
+                            <div class="w-full border-b-10 border-black mt-5"></div> 
                         </div>
-    
-                        <div class="w-full border-b-10 border-black mt-5"></div> 
                     </div>
                 </div>
             </div>

@@ -23,6 +23,13 @@ const showMaintainForm = ref(false)
 
 const selectedTask = ref<ITasks | null>(null)
 
+const formatData = (dataString: string) => {
+    if (!dataString) return ''
+    const date = new Date(dataString)
+    
+    return date.toLocaleDateString('pt-BR')
+}
+
 // const callRegister = () => {
 //     if (showMaintainForm.value) {
 //         showMaintainForm.value = false
@@ -41,6 +48,7 @@ const callMaintain = (student: ITasks) => {
     showMaintainForm.value = !showMaintainForm.value
     selectedTask.value = student
 }
+
 const closeMaintainRegister = () => {
   showMaintainForm.value = false
   selectedTask.value = null
@@ -82,7 +90,7 @@ const closeMaintainRegister = () => {
                                    task.difficulty === 'medium' ? 'Médio' : 
                                    task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}</td>
                             <td>{{task.classroom_id}}</td>
-                            <td>{{task.created_at}}</td>
+                            <td>{{formatData(task.created_at)}}</td>
                             <td>
                                 <button @click="callMaintain(task)">
                                     <img :src="points" alt="Mais" class="w-8 h-8 cursor-pointer"/>
