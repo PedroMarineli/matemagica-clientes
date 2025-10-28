@@ -71,6 +71,7 @@ const closeMaintainRegister = () => {
                             <th>Id</th>
                             <th>Nome</th>
                             <th>Email</th>
+                            <th>Sala de Aula</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
@@ -80,10 +81,11 @@ const closeMaintainRegister = () => {
                         </tr>
                     </tbody>
                     <tbody v-else v-for="student in students">
-                        <tr v-if="student.type === 'student'" @click="exibirDadosAluno(student)">
+                        <tr class="cursor-pointer" v-if="student.type === 'student'" @click="exibirDadosAluno(student)">
                             <td>{{student.id}}</td>
                             <td>{{student.username}}</td>
                             <td>{{student.email}}</td>
+                            <td>{{student.classroom_id}}</td>
                             <td @click.stop>
                                 <button @click="callMaintain(student)">
                                     <img :src="points" alt="Mais" class="w-8 h-8 cursor-pointer"/>

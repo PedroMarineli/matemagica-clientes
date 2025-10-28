@@ -33,7 +33,7 @@ onMounted(async () => {
         </div>
         <div class="card w-full grid justify-center">
             <table class="table">
-                <thead>
+                <thead class="bg-lilac">
                     <tr>
                         <th>Nome</th>
                         <th>Tipo</th>
@@ -47,8 +47,13 @@ onMounted(async () => {
                     <tr>
                         <td>{{ task.title }}</td>
                         <td>{{ task.type }}</td>
-                        <td>{{ task.difficulty }}</td>
-                        <td>{{ task.status }}</td>
+                        <td>{{ task.difficulty === 'easy' ? 'Fácil' : 
+                               task.difficulty === 'medium' ? 'Médio' : 
+                               task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}</td>
+                        <td>{{ task.status === 'In Progress' ? 'Em Progresso' : 
+                               task.status === 'Not Started' ? 'Não Iniciado' : 
+                               task.status === 'Graded' ? 'Corriido' : 
+                               task.status === 'Submitted' ? 'Submetido' : 'Desconhecido' }}</td>
                         <td>{{ task.score }}</td>
                         <td>{{ task.completion_date }}</td>
                     </tr>

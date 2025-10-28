@@ -16,9 +16,6 @@ const task = ref<ITasksProgress | null>(null)
 const problems = ref<IProblems[]>([])
 
 const i = ref(0)
-
-// const numerosEncontrados = task.value?.content.match(/\d+/g)
-
 const x = ref(0)
 const y = ref(0)
 

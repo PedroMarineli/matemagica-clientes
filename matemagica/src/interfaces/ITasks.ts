@@ -29,7 +29,7 @@ export interface ITaskProgress {
     task_id: number
     title: string
     type: string
-    problems: string
+    content: string
     difficulty: string
     status: 'Not Started' | 'In Progress' | 'Submitted' | 'Graded',
     score: number,

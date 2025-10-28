@@ -61,8 +61,8 @@ const closeMaintainRegister = () => {
                     <thead class="bg-lilac">
                         <tr>
                             <th>Id</th>
-                            <th>Salas</th>
-                            <th>Alunos</th>
+                            <th>Sala</th>
+                            <th>Descrição</th>
                             <th>Ação</th>
                         </tr>
                     </thead>

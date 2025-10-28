@@ -18,7 +18,9 @@ const userStore = useUserStore()
     <header className="bg-white bg-card border-1 border-b-gray-300 shadow-soft sticky top-0 z-10">
         <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
-                <img src="../../public/logo.svg" alt="logo" class='lg:top-0 lg:right-0 lg:left-0 w-3xs bottom-0'/>
+                <RouterLink to="/professores">
+                    <img src="../../public/logo.svg" alt="logo" class='lg:top-0 lg:right-0 lg:left-0 w-3xs bottom-0'/>
+                </RouterLink>
                 <!-- <div to="/" className="flex items-center gap-2 transition-smooth hover:scale-105">
                     <div className="bg-gradient-primary rounded-2xl p-2 shadow-medium">
                     <Sparkles className="w-6 h-6 text-white" />

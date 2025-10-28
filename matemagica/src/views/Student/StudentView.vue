@@ -10,6 +10,8 @@ const router = useRouter()
 const pendingTasks = ref<ITaskProgress[] | null>([])
 const completedTasks = ref<ITaskProgress[] | null>([])
 
+// const problems = ref<IProblems[]>([])
+
 const form = reactive({
   student_id: userStore.data?.id,
   status: 'In Progress'
@@ -120,7 +122,7 @@ onMounted(async () => {
                     </span>
                   </div>
                   <h3 class="text-2xl font-bold">{{ task.title }}</h3>
-                  <p class="text-muted-foreground text-lg">{{ task.problems }}</p>
+                  <p class="text-muted-foreground text-lg">{{ task.content }}</p>
                   <p class="text-muted-foreground text-lg">
                       {{ task.status === 'In Progress' ? 'Em Progresso' : 
                          task.status === 'Not Started' ? 'Não Iniciado' : 
@@ -130,7 +132,7 @@ onMounted(async () => {
                   <div class="space-y-2">
                     <div class="flex justify-between text-sm font-medium">
                       <span>Progresso</span>
-                      <span>3/10 questões</span>
+                      <span>{{ task.content.length }} questões</span>
                     </div>
                     <!-- <Progress value={30} class="h-3" /> -->
                   </div>
@@ -166,11 +168,17 @@ onMounted(async () => {
                   <h3 class="text-2xl font-bold">{{ task.title }}</h3>
                 </div>
                 <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
-                  {{ task.difficulty }}
+                  {{ task.difficulty === 'easy' ? 'Fácil' : 
+                     task.difficulty === 'medium' ? 'Médio' : 
+                     task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}
                 </span>
               </div>
-              <div class="w-full flex justify-between">
-                <p class="text-muted-foreground text-lg">{{ task.problems }}</p>
+              <div class="w-full flex justify-between gap-8">
+                <!-- <div v-for="problem in problems" class="flex gap-8 items-center">
+                  <label class="block text-gray-700 mb-2">{{ problem.content }}</label>
+                  <label class="block text-gray-700 mb-2">{{ problem.answer }}</label>
+                </div> -->
+                <p class="text-muted-foreground text-lg">{{ task.content }}</p>
                 <button variant="outline" size="lg" disabled>
                   <!-- <Trophy class="w-5 h-5" /> -->
                   Completo! ⭐
@@ -187,9 +195,9 @@ onMounted(async () => {
             Suas Conquistas
           </h2>
           <div class="flex">
-            <div v-for="emoji in ['🏅', '⭐', '🎖️', '👑', '🌟']" :key="emoji" class="flex gap-10 overflow-x-auto pb-2">
+            <div v-for="emoji in ['🏅', '⭐', '🎖️', '👑', '🌟']" :key="emoji" class="flex pb-2">
                 <div
-                    class="w-20 h-20 bg-background rounded-2xl flex items-center justify-center text-4xl shadow-medium hover:scale-110 transition-bounce cursor-pointer"
+                    class="w-20 h-20 mr-7 bg-background rounded-2xl flex items-center justify-center text-4xl shadow-medium hover:scale-110 transition-bounce cursor-pointer"
                 >
                     {{ emoji }}
                 </div>

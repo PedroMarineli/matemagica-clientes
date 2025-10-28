@@ -3,6 +3,7 @@ import axios from 'axios';
 import { reactive, type PropType } from 'vue';
 import { defineEmits } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
+import close from "../../../public/icons/close.png";
 
 const emit = defineEmits(['close'])
 
@@ -58,11 +59,11 @@ const deleteClass = async() => {
 <template>
     <div class="grid gap-3">
         <form @submit.prevent="submitClass" class="grid gap-3">
-            <div class="flex justify-between">
+            <div class="flex justify-between items-center">
                 <h1 class="font-bold text-lg">Alterar Sala de Aula:</h1>
-                <div>
-                    <button @click="closeComponent">Fechar</button>
-                </div>
+                <button @click="closeComponent">
+                    <img :src="close" alt="Fechar" class="w-5 h-5 cursor-pointer"/>
+                </button>
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2">Nome:</label>

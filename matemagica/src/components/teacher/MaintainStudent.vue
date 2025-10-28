@@ -4,6 +4,7 @@ import { onMounted, reactive, ref, type PropType } from 'vue';
 import { defineEmits } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import type { IUsers } from '../../interfaces/IUsers';
+import close from "../../../public/icons/close.png";
 
 const emit = defineEmits(['close'])
 
@@ -19,7 +20,7 @@ const closeComponent = () => {
 }
 
 const form = reactive({
-    email: '',
+    email: props.studentData.email || '',
     photo_path: ''
 })
 
@@ -149,11 +150,11 @@ onMounted(async () => {
 <template>
     <div class="grid gap-3">
         <form @submit.prevent="submitStudent" class="grid gap-3">
-            <div class="flex justify-between">
+            <div class="flex justify-between items-center">
                 <h1 class="font-bold text-lg">Registrar Aluno:</h1>
-                <div>
-                    <button @click="closeComponent">Fechar</button>
-                </div>
+                <button @click="closeComponent">
+                    <img :src="close" alt="Fechar" class="w-5 h-5 cursor-pointer"/>
+                </button>
             </div>
             <div>
                 <div class="flex gap-5">
@@ -172,7 +173,6 @@ onMounted(async () => {
                         id="email"
                         name="email"
                         class="border rounded w-full py-2 px-3 mb-2"
-                        placeholder="Email do aluno"
                     />
                 </div>
                 <div>
