@@ -2,7 +2,7 @@
 import { onMounted, reactive, ref } from 'vue';
 import { useUserStore } from '../../userStore';
 import axios from 'axios';
-import type { ITaskProgress } from '../../interfaces/ITasks';
+import type { IProblems, ITaskProgress } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
@@ -10,7 +10,23 @@ const router = useRouter()
 const pendingTasks = ref<ITaskProgress[] | null>([])
 const completedTasks = ref<ITaskProgress[] | null>([])
 
-// const problems = ref<IProblems[]>([])
+const parseContentToJson = (jsonString: string): IProblems[] => {
+  if (!jsonString || typeof jsonString !== 'string' || !jsonString.startsWith('[')) {
+    return []
+  }
+
+  try {
+    const problemsArray = JSON.parse(jsonString)
+
+    if (Array.isArray(problemsArray)) {
+      return problemsArray as IProblems[]
+    }
+    return []
+  } catch (error) {
+    console.error("Erro ao analisar JSON de problema:", error)
+    return []
+  }
+}
 
 const form = reactive({
   student_id: userStore.data?.id,
@@ -88,7 +104,7 @@ onMounted(async () => {
         <div class="card p-6 mb-8">
           <div class="flex items-center justify-between mb-3">
             <h2 class="text-2xl font-bold flex items-center gap-2">
-              <Trophy class="w-6 h-6 text-accent" />
+              <!-- <Trophy class="w-6 h-6 text-accent" /> -->
               Seu Progresso
             </h2>
             <span class="text-xl font-bold text-lilac">Nível 1</span>
@@ -105,7 +121,7 @@ onMounted(async () => {
     <!-- Pending tasks -->
     <div class="mb-8">
       <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-        <Sparkles class="w-8 h-8 text-lilac" />
+        <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
         Suas Atividades
       </h2>
       
@@ -122,7 +138,11 @@ onMounted(async () => {
                 </span>
               </div>
               <h3 class="text-2xl font-bold">{{ task.title }}</h3>
-              <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+              <div class="flex flex-col">
+                <div v-for="(problem, index) in parseContentToJson(task.content)" :key="index">
+                  <label class="block text-gray-700 mb-2">{{ problem.content }}</label>
+                </div>
+              </div>
               <p class="text-muted-foreground text-lg">
                   {{ task.status === 'In Progress' ? 'Em Progresso' : 
                       task.status === 'Not Started' ? 'Não Iniciado' : 
@@ -160,7 +180,7 @@ onMounted(async () => {
         Atividades Concluídas
       </h2>
 
-      <div class="card py-8 px-10 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="grid gap-10 card py-8 px-10 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
         <div v-for="task in completedTasks" class="bg-background px-10 py-4 space-y-4 rounded-4xl">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-5">
@@ -174,15 +194,33 @@ onMounted(async () => {
             </span>
           </div>
           <div class="w-full flex justify-between gap-8">
-            <!-- <div v-for="problem in problems" class="flex gap-8 items-center">
-              <label class="block text-gray-700 mb-2">{{ problem.content }}</label>
-              <label class="block text-gray-700 mb-2">{{ problem.answer }}</label>
-            </div> -->
-            <p class="text-muted-foreground text-lg">{{ task.content }}</p>
+            <div class="flex flex-col">
+              <div v-for="(problem, index) in parseContentToJson(task.content)" :key="index" class="flex gap-8 items-center">
+                <label class="block text-gray-700 mb-2">{{ problem.content }}</label>
+                <div class="flex gap-2">
+                  <label>Resposta:</label>
+                  <label class="block text-gray-700 mb-2">{{ problem.answer }}</label>
+                </div>
+              </div>
+            </div>
             <button variant="outline" size="lg" disabled>
               <!-- <Trophy class="w-5 h-5" /> -->
               Completo! ⭐
             </button>
+          </div>
+          <div class="flex justify-between">
+            <div class="flex gap-2">
+              <span>Concluído em:</span>
+              <span>{{ task.completion_date }}</span>
+            </div>
+            <div class="flex gap-2">
+              <span>Tentativas:</span>
+              <span>{{ task.number_of_attempts }}</span>
+            </div>
+            <div class="flex gap-2">
+              <span>Nota:</span>
+              <span>{{ task.score }}</span>
+            </div>
           </div>
         </div>
       </div>
