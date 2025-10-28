@@ -37,16 +37,6 @@ export interface ITaskProgress {
     number_of_attempts: number
 }
 
-// export interface ITaskProgress {
-//     id: number
-//     student_id: number
-//     task_id: number
-//     status: 'Not Started' | 'In Progress' | 'Submitted' | 'Graded',
-//     score: number,
-//     completion_date: string,
-//     created_at: string
-// }
-
 export interface IListProgressInATask {
     completion_date: string,
     email: string,

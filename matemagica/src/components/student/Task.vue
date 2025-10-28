@@ -131,57 +131,62 @@ const submitTask = async() => {
           
             <div class="grid sm:grid-cols-2 gap-6 items-center">
                 <!-- Task card 1 -->
-                <div v-if="task" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
-                    <div class="space-y-4">
+                <div v-if="task" class="flex items-center">
+                    <div class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-4xl">➕</span>
+                                <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
+                                    {{ task.difficulty === 'easy' ? 'Fácil' : 
+                                       task.difficulty === 'medium' ? 'Médio' : 
+                                       task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}
+                                </span>
+                            </div>
+                            <h3 class="text-2xl font-bold">{{ task.title }}</h3>
+                            <p class="text-muted-foreground text-lg">{{ problems[i].content }}</p>
+                            <div class="space-y-2">
+                                <div @click="askHekp" class="flex justify-between text-sm font-medium">
+                                    <span>Ajuda?</span>
+                                </div>
+                                <!-- <Progress value={30} class="h-3" /> -->
+                            </div>
+                            <form @submit.prevent="submitAnswer">
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-2">Digite sua Resposta:</label>
+                                    <input
+                                        type="text"
+                                        v-model="form.answer"
+                                        id="answer"
+                                        name="answer"
+                                        class="border rounded w-full py-2 px-3 mb-2"
+                                        placeholder="45"
+                                        required
+                                    />
+                                </div>
+                                <div class="w-full flex justify-center items-center">
+                                    <button class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-orange text-accent-foreground shadow-soft">
+                                        <!-- <Play class="w-5 h-5" /> -->
+                                        Entregar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div v-if="help" class="flex flex-col items-end font-bold text-4xl w-min">
+                        <span class="text-8xl">{{ x }}</span>
+    
                         <div class="flex items-center justify-between">
-                            <span class="text-4xl">➕</span>
-                            <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
-                                {{ task.difficulty === 'easy' ? 'Fácil' : 
-                                   task.difficulty === 'medium' ? 'Médio' : 
-                                   task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}
-                            </span>
+                            <span class="text-8xl mr-2">
+                                {{ task.type === 'addition' ? '+' : 
+                                   task.type === 'subtraction' ? '-' : 
+                                   task.type === 'multiplication' ? 'x' : 
+                                   task.type === 'division' ? '/' : '' }}
+                            </span> 
+                            <span class="text-8xl">{{ y }}</span>
                         </div>
-                        <h3 class="text-2xl font-bold">{{ task.title }}</h3>
-                        <p class="text-muted-foreground text-lg">{{ problems[i].content }}</p>
-                        <div class="space-y-2">
-                            <div @click="askHekp" class="flex justify-between text-sm font-medium">
-                                <span>Ajuda?</span>
-                            </div>
-                            <!-- <Progress value={30} class="h-3" /> -->
-                        </div>
-                        <form @submit.prevent="submitAnswer">
-                            <div>
-                                <label class="block text-gray-700 font-bold mb-2">Digite sua Resposta:</label>
-                                <input
-                                    type="text"
-                                    v-model="form.answer"
-                                    id="answer"
-                                    name="answer"
-                                    class="border rounded w-full py-2 px-3 mb-2"
-                                    placeholder="45"
-                                    required
-                                />
-                            </div>
-                            <div class="w-full flex justify-center items-center">
-                                <button class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-orange text-accent-foreground shadow-soft">
-                                    <!-- <Play class="w-5 h-5" /> -->
-                                    Entregar
-                                </button>
-                            </div>
-                        </form>
+    
+                        <div class="w-full border-b-10 border-black mt-5"></div> 
                     </div>
-                </div>
-                <div v-if="help" class="flex flex-col items-end font-bold text-4xl w-min">
-                    <!-- <span>{{ x }}</span> -->
-                    <span class="text-8xl">{{ x }}</span>
-
-                    <div class="flex items-center justify-between">
-                        <span class="text-8xl mr-2">x</span> 
-                        <!-- <span>{{ y }}</span> -->
-                        <span class="text-8xl">{{ y }}</span>
-                    </div>
-
-                    <div class="w-full border-b-10 border-black mt-5"></div> 
                 </div>
             </div>
         </div>
