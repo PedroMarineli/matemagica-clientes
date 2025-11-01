@@ -6,17 +6,21 @@ import type { IUsers } from '../../interfaces/IUsers';
 import MaintainStudent from './MaintainStudent.vue';
 import router from '../../router';
 import points from "../../../public/icons/points.png";
+import type { IClassrooms } from '../../interfaces/IClassrooms';
 
 const students = ref<IUsers[] | null>(null)
 const selectedStudent = ref<IUsers | null>(null)
+const classrooms = ref<IClassrooms[] | null>(null)
 
 const showRegisterForm = ref(false)
 const showMaintainForm = ref(false)
 
 onMounted(async () => {
     try {
-        const response = await axios.get('http://localhost:3000/users')
-        students.value = response.data as IUsers[]
+        const users = await axios.get('http://localhost:3000/users')
+        students.value = users.data as IUsers[]
+        const classes = await axios.get('http://localhost:3000/classrooms')
+        classrooms.value = classes.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)
     }
@@ -28,6 +32,16 @@ const exibirDadosAluno = async (student: IUsers) => {
     } catch(error) {
         console.error('Error fetching job', error)
     } 
+}
+
+const verifyClass = (id: number): string => {
+    if(!id || !classrooms.value) return ''
+
+    const foundClassroom = classrooms.value.find(
+        classroom => classroom.id === id
+    )
+
+    return foundClassroom ? foundClassroom.name : ''
 }
 
 const callRegister = () => {
@@ -55,8 +69,8 @@ const closeMaintainRegister = () => {
 </script>
 
 <template>
-    <div class="w-full h-full flex md:justify-between lg:flex-row flex-1" :class="{'flex-col-reverse md:h-min': showRegisterForm }">
-        <div class="flex px-56 flex-col items-center gap-5 py-5 lg:py-10" :class="{ 'w-full': !showRegisterForm, 'lg:w-2/3': showRegisterForm }">
+    <div class="w-full h-full flex md:justify-between lg:flex-row flex-1" :class="{'flex-col-reverse md:h-min': showRegisterForm || showMaintainForm }">
+        <div class="flex flex-col items-center gap-5 py-5 lg:py-10" :class="{ 'w-full px-56': !showRegisterForm || showMaintainForm, 'lg:w-2/3 px-40': showRegisterForm || showMaintainForm }">
             <div class="card w-full flex items-center justify-between">
                 <div>
                     <h1>Alunos</h1>
@@ -85,7 +99,7 @@ const closeMaintainRegister = () => {
                             <td>{{student.id}}</td>
                             <td>{{student.username}}</td>
                             <td>{{student.email}}</td>
-                            <td>{{student.classroom_id}}</td>
+                            <td>{{verifyClass(student.classroom_id)}}</td>
                             <td @click.stop>
                                 <button @click="callMaintain(student)">
                                     <img :src="points" alt="Mais" class="w-8 h-8 cursor-pointer"/>

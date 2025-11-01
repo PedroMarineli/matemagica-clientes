@@ -5,14 +5,18 @@ import type { ITasks } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
 import MaintainTask from './MaintainTask.vue';
 import points from "../../../public/icons/points.png";
+import type { IClassrooms } from '../../interfaces/IClassrooms';
 
 const router = useRouter()
 const tasks = ref<ITasks[] | null>(null)
+const classrooms = ref<IClassrooms[] | null>(null)
 
 onMounted(async () => {
     try {
         const response = await axios.get('http://localhost:3000/tasks')
         tasks.value = response.data as ITasks[]
+        const classes = await axios.get('http://localhost:3000/classrooms')
+        classrooms.value = classes.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)
     }
@@ -28,6 +32,16 @@ const formatData = (dataString: string) => {
     const date = new Date(dataString)
     
     return date.toLocaleDateString('pt-BR')
+}
+
+const verifyClass = (id: number): string => {
+    if(!id || !classrooms) return ''
+
+    const foundClassroom = classrooms.value?.find(
+        classroom => classroom.id === id
+    )
+
+    return foundClassroom ? foundClassroom.name : ''
 }
 
 // const callRegister = () => {
@@ -89,7 +103,7 @@ const closeMaintainRegister = () => {
                             <td>{{ task.difficulty === 'easy' ? 'Fácil' : 
                                    task.difficulty === 'medium' ? 'Médio' : 
                                    task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}</td>
-                            <td>{{task.classroom_id}}</td>
+                            <td>{{verifyClass(task.classroom_id)}}</td>
                             <td>{{formatData(task.created_at)}}</td>
                             <td>
                                 <button @click="callMaintain(task)">

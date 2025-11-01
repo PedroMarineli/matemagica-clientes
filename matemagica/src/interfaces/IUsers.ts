@@ -1,6 +1,6 @@
 export interface IUsers {
     avatar_url: string
-    classroom_id: string
+    classroom_id: number
     created_at: string
     email: string
     id: number

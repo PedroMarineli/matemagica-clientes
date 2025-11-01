@@ -4,6 +4,7 @@ import { computed, onMounted, reactive, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
+import close from "../../../public/icons/close.png";
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -59,9 +60,9 @@ onMounted(async () => {
     <form @submit.prevent="submitStudent" class="grid gap-3">
         <div class="flex justify-between">
             <h1 class="font-bold text-lg">Registrar Aluno:</h1>
-            <div>
-                <button @click="closeComponent">Fechar</button>
-            </div>
+            <button @click="closeComponent">
+                <img :src="close" alt="Fechar" class="w-5 h-5 cursor-pointer"/>
+            </button>
         </div>
         <div>
             <div>

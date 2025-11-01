@@ -3,6 +3,7 @@ import axios from 'axios';
 import { computed, reactive } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
+import close from "../../../public/icons/close.png";
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -42,9 +43,9 @@ const submitClass = async() => {
     <form @submit.prevent="submitClass" class="grid gap-3">
         <div class="flex justify-between">
             <h1 class="font-bold text-lg">Registrar Sala de Aula:</h1>
-            <div>
-                <button @click="closeComponent">Fechar</button>
-            </div>
+            <button @click="closeComponent">
+                <img :src="close" alt="Fechar" class="w-5 h-5 cursor-pointer"/>
+            </button>
         </div>
         <div>
             <label class="block text-gray-700 font-bold mb-2">Nome:</label>
@@ -71,7 +72,7 @@ const submitClass = async() => {
             />
         </div>
         <button
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline cursor-pointer"
             type="submit"
         >
             Adicionar Sala de Aula

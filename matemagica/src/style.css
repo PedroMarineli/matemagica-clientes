@@ -33,7 +33,7 @@
     @apply text-white;
   }
   tbody tr {
-    @apply border-b-2 border-solid border-gray-200;
+    @apply border-b-2 border-solid border-gray-200 hover:bg-gray-200;
   }
   th, td {
     @apply px-5 py-2;

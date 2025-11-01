@@ -47,8 +47,8 @@ const closeMaintainRegister = () => {
 </script>
 
 <template>
-    <div class="w-full h-full flex md:justify-between lg:flex-row flex-1" :class="{'flex-col-reverse md:h-min': showRegisterForm }">
-        <div class="flex px-56 flex-col items-center gap-5 py-5 lg:py-10" :class="{ 'w-full': !showRegisterForm, 'lg:w-2/3': showRegisterForm }">
+    <div class="w-full h-full flex md:justify-between lg:flex-row flex-1" :class="{'flex-col-reverse md:h-min': showRegisterForm || showMaintainForm }">
+        <div class="flex flex-col items-center gap-5 py-5 lg:py-10" :class="{ 'w-full px-56': !showRegisterForm || showMaintainForm, 'lg:w-2/3 px-40': showRegisterForm || showMaintainForm }">
             <div class="card w-full flex items-center justify-between">
                 <div>
                     <h1>Salas</h1>
