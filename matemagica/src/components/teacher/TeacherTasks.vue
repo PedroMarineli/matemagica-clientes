@@ -70,8 +70,8 @@ const closeMaintainRegister = () => {
 </script>
 
 <template>
-    <div class="w-full h-full flex md:justify-between lg:flex-row flex-1" :class="{'flex-col-reverse md:h-min': showRegisterForm }">
-        <div class="flex flex-col px-56 items-center gap-5 py-5 lg:py-10" :class="{ 'w-full': !showRegisterForm, 'lg:w-2/3': showRegisterForm }">
+    <div class="w-full h-full flex md:justify-between lg:flex-row flex-1">
+        <div class="w-full flex flex-col px-20 items-center gap-5 py-5 lg:py-10 xl:px-56">
             <div class="card w-full flex items-center justify-between">
                 <div>
                     <h1>Tarefas</h1>
@@ -79,8 +79,8 @@ const closeMaintainRegister = () => {
                 </div>
                 <button @click="() => router.push('/professores/adicionar-tarefa')" class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-lilac text-white shadow-soft">Adicionar Tarefa</button>
             </div>
-            <div class="card w-full grid justify-center">
-                <table class="table">
+            <div class="card w-full overflow-x-auto justify-center">
+                <table class="table w-full">
                     <thead class="bg-lilac">
                         <tr>
                             <th>Id</th>

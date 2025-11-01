@@ -27,7 +27,7 @@ onMounted(async () => {
 
 <template>
     <!-- Main content -->
-    <main class="w-full px-56 py-10 lg:col-span-3 space-y-6">
+    <main class="w-full px-20 py-10 lg:col-span-3 space-y-6 xl:px-56">
         <!-- Welcome section -->
         <div class="card">
             <div class="flex items-start gap-4">
@@ -83,7 +83,7 @@ onMounted(async () => {
             <div v-for="progress in progresses" class="space-y-3">
                 <div v-if="progress.status === 'Submitted'" class="grid gap-5">
                     <div key="progress" class="bg-background flex items-center gap-4 p-3 rounded-xl bg-background/50 hover:bg-background transition-smooth">
-                        <div class="w-10 h-10 rounded-full bg-lilac/10 flex items-center justify-center">
+                        <div class="hidden sm:block w-10 h-10 rounded-full bg-lilac/10 items-center justify-center">
                             👧
                         </div>
                         <div class="flex-1">
@@ -91,7 +91,7 @@ onMounted(async () => {
                             <p class="text-sm text-muted-foreground">Há 2 horas • Nota {{ progress.score }}</p>
                             <p class="text-sm text-muted-foreground">Submetido</p>
                         </div>
-                        <div class="text-right">
+                        <div class="hidden sm:block text-right">
                             <p class="text-lg font-bold">100%</p>
                         </div>
                     </div>

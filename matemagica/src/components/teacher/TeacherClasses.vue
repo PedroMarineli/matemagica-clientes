@@ -48,7 +48,7 @@ const closeMaintainRegister = () => {
 
 <template>
     <div class="w-full h-full flex md:justify-between lg:flex-row flex-1" :class="{'flex-col-reverse md:h-min': showRegisterForm || showMaintainForm }">
-        <div class="flex flex-col items-center gap-5 py-5 lg:py-10" :class="{ 'w-full px-56': !showRegisterForm || showMaintainForm, 'lg:w-2/3 px-40': showRegisterForm || showMaintainForm }">
+        <div class="flex flex-col items-center gap-5 py-5 lg:py-10" :class="{ 'px-20 xl:px-56 w-full': !showRegisterForm && !showMaintainForm, 'px-20 lg:w-2/3': showRegisterForm || showMaintainForm }">
             <div class="card w-full flex items-center justify-between">
                 <div>
                     <h1>Salas</h1>
@@ -56,7 +56,7 @@ const closeMaintainRegister = () => {
                 </div>
                 <button @click="callRegister" class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-lilac text-white shadow-soft">Adicionar Sala</button>
             </div>
-            <div class="card w-full grid justify-center">
+            <div class="card w-full grid overflow-x-auto justify-center">
                 <table class="table">
                     <thead class="bg-lilac">
                         <tr>
