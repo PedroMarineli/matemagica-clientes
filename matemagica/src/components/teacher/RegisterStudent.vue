@@ -91,7 +91,7 @@ onMounted(async () => {
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
-                <select v-model="form.classroom_id" class="w-full">
+                <select v-model="form.classroom_id" class="w-full border rounded py-2 px-3">
                     <option value="" disabled selected>Selecione a Sala</option>
                     <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
                 </select>

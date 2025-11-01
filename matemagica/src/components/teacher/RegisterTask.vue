@@ -217,12 +217,12 @@ function generateAndShowProblem() {
 <template>
     <div class="h-full flex md:justify-between lg:flex-row flex-1">
         <form @submit.prevent="submitTask" class="grid gap-3">
-            <div class="flex px-56 items-center gap-5 py-5 lg:py-10">
-                <div class="card w-full flex flex-col items-center justify-between">
+            <div class="grid px-20 items-center gap-10 py-5 lg:py-10 lg:grid-cols-2 xl:px-56">
+                <div class="card w-full flex flex-col gap-5 items-center justify-between">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg">Registrar Tarefa</h1>
+                        <h1 class="text-xl font-bold text-lilac">Registrar Tarefa</h1>
                     </div>
-                    <div>
+                    <div class="grid gap-5">
                         <div>
                             <label class="block text-gray-700 font-bold mb-2">Nome:</label>
                             <input
@@ -230,14 +230,14 @@ function generateAndShowProblem() {
                                 v-model="form.title"
                                 id="title"
                                 name="title"
-                                class="border rounded w-full py-2 px-3 mb-2"
+                                class="border rounded w-full py-2 px-3"
                                 placeholder="Título da tarefa"
                                 required
                             />
                         </div>
                         <div>
                             <label class="block text-gray-700 font-bold mb-2">Categoria:</label>
-                            <select v-model="form.type" class="w-full">
+                            <select v-model="form.type" class="w-full border rounded py-2 px-3">
                                 <option value="" disabled selected>Selecione a categoria da tarefa</option>
                                 <option value="addition">Adição</option>
                                 <option value="subtraction">Subtração</option>
@@ -246,8 +246,8 @@ function generateAndShowProblem() {
                             </select>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-bold mb-2 ">Dificuldade:</label>
-                            <select v-model="form.difficulty" class="w-full">
+                            <label class="block text-gray-700 font-bold mb-2">Dificuldade:</label>
+                            <select v-model="form.difficulty" class="w-full border rounded py-2 px-3">
                                 <option value="" disabled selected>Selecione a dificuldade da tarefa</option>
                                 <option value="easy">Fácil</option>
                                 <option value="medium">Médio</option>
@@ -256,34 +256,39 @@ function generateAndShowProblem() {
                         </div>
                         <div>
                             <label class="block text-gray-700 font-bold mb-2">Sala de Aula:</label>
-                            <select v-model="form.classroom_id" class="w-full">
+                            <select v-model="form.classroom_id" class="w-full border rounded py-2 px-3">
                                 <option value="" disabled selected>Selecione a Sala</option>
                                 <option v-for="classroom in classrooms" :key="classroom.id" :value="classroom.id">{{ classroom.name }}</option>
                             </select>
                         </div>
-                        <div @click="generateAndShowProblem()" class="bg-green text-center hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline">
+                        <div @click="generateAndShowProblem()" class="bg-green text-center hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline cursor-pointer">
                             Criar tarefa
                         </div>
                     </div>
                 </div>
-                <div class="card w-full flex flex-col items-center justify-between">
-                    <h2 class="text-xl font-bold text-lilac mb-4">
-                        Tarefa de Matemática:
-                    </h2>
-                    <div class="problem-area p-6 border rounded-lg shadow-md">
-                        <div v-if="listOfProblems">
-                            <div v-for="problem in listOfProblems">
+                <div class="card w-full px-10">
+                    <div v-if="listOfProblems" class="flex flex-col gap-5 items-center justify-between">
+                        <h2 class="text-xl font-bold text-lilac">
+                            Tarefa de Matemática:
+                        </h2>
+                        <div class="grid gap-3 problem-area">
+                            <div v-for="problem in listOfProblems" class="grid sm:flex gap-5 items-center">
                                 <p>{{ problem.content }}</p>
-                                <p>{{ problem.answer }}</p>
+                                <p class="bg-lilac text-white px-3 py-1 rounded-full text-center text-sm font-bold whitespace-nowrap">R: {{ problem.answer }}</p>
                             </div>
                         </div>
+                        <button
+                            class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline cursor-pointer"
+                            type="submit"
+                        >
+                            Adicionar Tarefa
+                        </button>
                     </div>
-                    <button
-                        class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        Adicionar Tarefa
-                    </button>
+                    <div v-else>
+                        <h2 class="text-xl font-bold text-lilac">
+                            Nenhuma Tarefa Adicionada
+                        </h2>
+                    </div>
                 </div>
             </div>
         </form>
