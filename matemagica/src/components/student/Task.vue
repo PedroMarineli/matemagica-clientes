@@ -14,6 +14,7 @@ const taskId = route.params.id
 
 const task = ref<ITasksProgress | null>(null)
 const problems = ref<IProblems[]>([])
+const showError = ref(false)
 
 const i = ref(0)
 const x = ref(0)
@@ -23,7 +24,7 @@ const state = reactive({
     isLoading: true
 })
 
-let number_of_attempts = 1
+let number_of_attempts = 0
 
 const updateCurrentProblem = () => {
     const currentProblem = problems.value[i.value]
@@ -62,6 +63,7 @@ const form = reactive({
 
 const submitAnswer = () => {
     const currentProblem = problems.value[i.value]
+    number_of_attempts++
 
     if(form.answer == currentProblem.answer) {
         form.score = 10
@@ -69,15 +71,20 @@ const submitAnswer = () => {
         if (i.value < problems.value.length - 1) {
             i.value++
             updateCurrentProblem()
-            form.answer = null        
         } else {
             submitTask()
         }
     }
     else {
-        number_of_attempts++
+        showError.value = true
+
+        setTimeout(() => {
+            showError.value = false
+        }, 2000)
+
         console.log('Resposta incorreta. Tentativas:', number_of_attempts)
-    } 
+    }
+    form.answer = null
 }
 
 const help = ref(false)
@@ -172,19 +179,27 @@ const submitTask = async() => {
                             </form>
                         </div>
                     </div>
-                    <div class="grid justify-center">
+                    <div class="flex gap-5 justify-center">
                         <div v-if="help" class="flex flex-col items-end justify-center font-bold text-4xl w-min">
-                            <span class="text-8xl">{{ x }}</span>
+                            <span class="text-7xl">{{ x }}</span>
                             <div class="flex items-center justify-between">
-                                <span class="text-8xl mr-2">
+                                <span class="text-7xl mr-2">
                                     {{ task.type === 'addition' ? '+' : 
                                        task.type === 'subtraction' ? '-' : 
                                        task.type === 'multiplication' ? 'x' : 
                                        task.type === 'division' ? '/' : '' }}
                                 </span> 
-                                <span class="text-8xl">{{ y }}</span>
+                                <span class="text-7xl">{{ y }}</span>
                             </div>
-                            <div class="w-full border-b-10 border-black mt-5"></div> 
+                            <div class="w-full border-b-8 border-black mt-5"></div> 
+                        </div>
+                        <div class="flex flex-col">
+                            <div>
+                                Aqui ficará a imagem da mascote
+                            </div>
+                            <div v-if="showError" class="transform bg-red-500 text-white px-6 py-3 rounded-lg shadow-xl transition-opacity duration-300">
+                                ❌ Quase! Tente de novo
+                            </div>
                         </div>
                     </div>
                 </div>

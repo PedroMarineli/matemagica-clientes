@@ -10,6 +10,8 @@ const router = useRouter()
 const pendingTasks = ref<ITaskProgress[] | null>([])
 const completedTasks = ref<ITaskProgress[] | null>([])
 
+console.log(completedTasks)
+
 const parseContentToJson = (jsonString: string): IProblems[] => {
   if (!jsonString || typeof jsonString !== 'string' || !jsonString.startsWith('[')) {
     return []
@@ -159,7 +161,7 @@ const formatData = (dataString: string) => {
               <div class="space-y-2">
                 <div class="flex justify-between text-sm font-medium">
                   <span>Progresso</span>
-                  <span>{{ task.content.length }} questões</span>
+                  <span>{{ parseContentToJson(task.content).length }} questões</span>
                 </div>
                 <!-- <Progress value={30} class="h-3" /> -->
               </div>
