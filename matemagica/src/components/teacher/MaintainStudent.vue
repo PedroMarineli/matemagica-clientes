@@ -5,6 +5,7 @@ import { defineEmits } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import type { IUsers } from '../../interfaces/IUsers';
 import close from "../../../public/icons/close.png";
+import { showNotification } from '../../stores/notificationStore';
 
 const emit = defineEmits(['close'])
 
@@ -87,10 +88,11 @@ const submitStudent = async () => {
         const response = await axios.put(`http://localhost:3000/users/${props.studentData.id}`, studentAltered)
         
         if (response) {
-            console.log('Dados do aluno alterados', response.data)
+            showNotification('Dados do aluno altados com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch (error) {
-        console.error('Dados do aluno não foram alterados', error)
+        showNotification('Não foi possível alterar aluno', 'bg-red-500')
     }
 }
 
@@ -124,14 +126,12 @@ const submitStudent = async () => {
 const deleteStudent = async() => {
     try {
         const response = await axios.delete(`http://localhost:3000/users/${props.studentData.id}`)
-        // toast.success('Aluno adicionado com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
-            console.log('Aluno deletado')
+            showNotification('Aluno deletado com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch(error) {
-        console.error('Aluno não foi deletado', error)
-        // toast.error('Aluno não foi adicionado')
+        showNotification('Não foi possível deletar aluno.', 'bg-red-500')
     }
 }
 

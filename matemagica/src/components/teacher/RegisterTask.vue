@@ -5,6 +5,8 @@ import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import type { IProblems } from '../../interfaces/ITasks';
+import { showNotification } from '../../stores/notificationStore';
+import router from '../../router';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -33,14 +35,13 @@ const submitTask = async() => {
     
     try {
         const response = await axios.post('http://localhost:3000/tasks', newTask)
-        // toast.success('Aluno adicionado com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
+
         if(response) {
-            console.log('Tarefa registrado')
+            router.push('/professores/tarefas')
+            showNotification('Tarefa adicionada com sucesso!', 'bg-green-500')
         }
     } catch(error) {
-        console.error('Tarefa não foi adicionada', error)
-        // toast.error('Aluno não foi adicionado')
+        showNotification('Não foi possível adicionar tarefa', 'bg-red-500')
     }
 }
 

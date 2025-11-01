@@ -5,6 +5,7 @@ import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import close from "../../../public/icons/close.png";
+import { showNotification } from '../../stores/notificationStore';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -30,17 +31,14 @@ const submitStudent = async() => {
         classroom_id: form.classroom_id,
         photo_url: form.photo_url
     }
-    console.log(newStudent)
     try {
         const response = await axios.post('http://localhost:3000/users/register/student', newStudent)
-        // toast.success('Aluno adicionado com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
-            console.log('Aluno registrado')
+            showNotification('Aluno adicionado com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch(error) {
-        console.error('Aluno não foi adicionado', error)
-        // toast.error('Aluno não foi adicionado')
+        showNotification('Não foi possível adicionar aluno', 'bg-red-500')
     }
 }
 
@@ -98,7 +96,7 @@ onMounted(async () => {
             </div>
         </div>
         <button
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline cursor-pointer"
             type="submit"
         >
             Adicionar Aluno

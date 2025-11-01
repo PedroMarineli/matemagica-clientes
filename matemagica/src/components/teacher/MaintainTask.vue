@@ -4,6 +4,7 @@ import { reactive, ref, type PropType } from 'vue';
 import { defineEmits } from 'vue';
 import type { IProblems, ITasks } from '../../interfaces/ITasks';
 import close from "../../../public/icons/close.png";
+import { showNotification } from '../../stores/notificationStore';
 
 const emit = defineEmits(['close'])
 
@@ -47,10 +48,11 @@ const submitTask = async() => {
     try {
         const response = await axios.put(`http://localhost:3000/tasks/${props.taskData.id}`, taskAltered)
         if(response) {
-            console.log('Sala registrada')
+            showNotification('Tarefa alterada com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch(error) {
-        console.log('Sala não registrada')
+        showNotification('Não foi possível alterar tarefa', 'bg-red-500')
     }
 }
 
@@ -58,10 +60,11 @@ const deleteTask = async() => {
     try {
         const response = await axios.delete(`http://localhost:3000/tasks/${props.taskData.id}`)
         if(response) {
-            console.log('Tarefa deletada')
+            showNotification('Tarefa deletada com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch(error) {
-        console.error('Tarefa não foi deletada', error)
+        showNotification('Não foi possível deletar tarefa', 'bg-red-500')
     }
 }
 </script>

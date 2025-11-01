@@ -4,6 +4,7 @@ import { computed, reactive } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import close from "../../../public/icons/close.png";
+import { showNotification } from '../../stores/notificationStore';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -28,13 +29,12 @@ const submitClass = async() => {
 
     try {
         const response = await axios.post('http://localhost:3000/classrooms', newClass)
-        // toast.success('Aluno adicionado com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
-            console.log('Sala registrada')
+            showNotification('Sala adicionada com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch(error) {
-        console.log('Sala não registrada')
+        showNotification('Não foi possível adicionar sala', 'bg-red-500')
     }
 }
 </script>

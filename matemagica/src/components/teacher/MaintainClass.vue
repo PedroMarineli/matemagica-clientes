@@ -4,6 +4,7 @@ import { reactive, type PropType } from 'vue';
 import { defineEmits } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import close from "../../../public/icons/close.png";
+import { showNotification } from '../../stores/notificationStore';
 
 const emit = defineEmits(['close'])
 
@@ -31,27 +32,24 @@ const submitClass = async() => {
 
     try {
         const response = await axios.put(`http://localhost:3000/classrooms/${props.classData.id}`, classAltered)
-        // toast.success('Aluno adicionado com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
-            console.log('Sala registrada')
+            showNotification('Sala alterada com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch(error) {
-        console.log('Sala não registrada')
+        showNotification('Não foi possível alterar a sala', 'bg-red-500')
     }
 }
 
 const deleteClass = async() => {
     try {
         const response = await axios.delete(`http://localhost:3000/classrooms/${props.classData.id}`)
-        // toast.success('Aluno adicionado com sucesso')
-        // router.push(`/jobs/${response.data.id}`)
         if(response) {
-            console.log('Aluno deletado')
+            showNotification('Sala deletada com sucesso!', 'bg-green-500')
+            location.reload()
         }
     } catch(error) {
-        console.error('Aluno não foi deletado', error)
-        // toast.error('Aluno não foi adicionado')
+        showNotification('Não foi possível deletar sala', 'bg-red-500')
     }
 }
 </script>
