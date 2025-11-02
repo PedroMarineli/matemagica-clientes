@@ -31,6 +31,7 @@ const handleLogin = async() => {
     const response = await axios.post('http://localhost:3000/users/login', login)
     if(response) {
       const userData = response.data
+      console.log(userData)
       userStore.setUserData(userData)
       if(userType.userType == 'aluno') router.push({ name: 'student' })
       else router.push({ name: 'teacher' })
@@ -96,7 +97,7 @@ const handleLogin = async() => {
                   {{ userType.userType === "professor" ? "E-mail" : "Usuário" }}
                 </label>
                 <div class="relative">
-                  <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                  <!-- <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                   <input
                     id="email"
                     name="email"
@@ -113,7 +114,7 @@ const handleLogin = async() => {
               <div class="space-y-2">
                 <label htmlFor="password" class="text-base">Senha</label>
                 <div class="relative">
-                  <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                  <!-- <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                   <input
                     id="password"
                     name="password"

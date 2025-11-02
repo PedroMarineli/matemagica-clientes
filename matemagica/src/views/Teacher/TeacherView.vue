@@ -14,9 +14,9 @@ const progresses = ref<IListProgressInATask[] | null>([])
 
 onMounted(async () => {
     try {
-        const teacherDashboard = await axios.get(`http://localhost:3000/progress/teacher/${ userStore.data?.id }/dashboard?classroom_id=1`)
+        const teacherDashboard = await axios.get('http://localhost:3000/progress/teacher/dashboard')
         dashboard.value = teacherDashboard.data as ITeacherDashboard
-        const listProgressInATask = await axios.get(`http://localhost:3000/progress/task/8`)
+        const listProgressInATask = await axios.get(`http://localhost:3000/progress/task/10`)
         progresses.value = listProgressInATask.data as IListProgressInATask[]
         // listProgressInATask -> arrumar isso para aparecer de todas as atividades
     } catch(error) {
@@ -32,7 +32,7 @@ onMounted(async () => {
         <div class="card">
             <div class="flex items-start gap-4">
                 <div>
-                    <h1 class="font-bold mb-2">Bem-vindo(a), {{ userStore.data?.username }}! 👋</h1>
+                    <h1 class="font-bold mb-2">Bem-vindo(a), {{ userStore.data?.user.username }}! 👋</h1>
                     <p class="text-black/90">Aqui está o resumo das suas turmas hoje</p>
                 </div>
             </div>
@@ -46,7 +46,7 @@ onMounted(async () => {
                         <img :src="students" alt="Alunos" class="w-6 h-6"/>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold">{{ dashboard?.statistics.total_students }}</p>
+                        <p class="text-2xl font-bold">{{ dashboard?.generalStats.total_students }}</p>
                         <p class="text-sm text-muted-foreground">Alunos</p>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ onMounted(async () => {
                         <img :src="classes" alt="Salas" class="w-6 h-6"/>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold">{{ dashboard?.statistics.total_classrooms }}</p>
+                        <p class="text-2xl font-bold">{{ dashboard?.generalStats.total_classrooms }}</p>
                         <p class="text-sm text-muted-foreground">Salas</p>
                     </div>
                 </div>
@@ -70,7 +70,7 @@ onMounted(async () => {
                         <img :src="tasks" alt="Tarefas" class="w-6 h-6"/>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold">{{ dashboard?.statistics.total_tasks }}</p>
+                        <p class="text-2xl font-bold">{{ dashboard?.generalStats.total_tasks }}</p>
                         <p class="text-sm text-muted-foreground">Tarefas Ativas</p>
                     </div>
                 </div>

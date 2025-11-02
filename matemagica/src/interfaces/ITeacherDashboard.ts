@@ -1,6 +1,6 @@
 export interface ITeacherDashboard {
-    "statistics": {
-        average_score: number,
+    "generalStats": {
+        average_score: string,
         completed_tasks: string,
         pending_tasks: string,
         total_classrooms: string,
@@ -10,12 +10,19 @@ export interface ITeacherDashboard {
     },
     "studentPerformance": [
         {
-            average_score: number,
-            classroom_name: string,
-            student_id: number,
-            tasks_completed: string,
-            total_tasks_assigned: string,
+            average_score: string,
+            completed_tasks: string,
+            id: number,
             username: string
+        }
+    ],
+    "tasktPerformance": [
+        {
+            average_score: string,
+            completions: string,
+            id: number,
+            title: string,
+            total_assigned: string
         }
     ]
 }

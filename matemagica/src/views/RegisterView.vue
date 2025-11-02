@@ -64,7 +64,7 @@ const handleRegister = async() => {
                 <div class="space-y-2">
                   <label htmlFor="name" class="text-base">Nome Completo</label>
                   <div class="relative">
-                    <User class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <!-- <User class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                     <input
                       id="username"
                       type="text"
@@ -79,7 +79,7 @@ const handleRegister = async() => {
                 <div class="space-y-2">
                   <label htmlFor="email" class="text-base">E-mail</label>
                   <div class="relative">
-                    <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <!-- <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                     <input
                       id="email"
                       type="text"
@@ -94,7 +94,7 @@ const handleRegister = async() => {
                 <div class="space-y-2">
                   <label htmlFor="password" class="text-base">Senha</label>
                   <div class="relative">
-                    <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <!-- <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                     <input
                       id="password"
                       type="password"
@@ -109,7 +109,7 @@ const handleRegister = async() => {
                 <div class="space-y-2 mb-10">
                   <label htmlFor="confirm-password" class="text-base">Confirmar Senha</label>
                   <div class="relative">
-                    <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+                    <!-- <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                     <input
                       id="confirm-password"
                       type="password"
