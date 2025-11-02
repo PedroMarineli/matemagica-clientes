@@ -31,7 +31,6 @@ const handleLogin = async() => {
     const response = await axios.post('http://localhost:3000/users/login', login)
     if(response) {
       const userData = response.data
-      console.log(userData)
       userStore.setUserData(userData)
       if(userType.userType == 'aluno') router.push({ name: 'student' })
       else router.push({ name: 'teacher' })
