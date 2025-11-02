@@ -5,8 +5,13 @@ import { onMounted, ref } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import MaintainClass from './MaintainClass.vue';
 import points from "../../../public/icons/points.png";
+import router from '../../router';
 
 const classrooms = ref<IClassrooms[] | null>(null)
+const selectedClass = ref<IClassrooms | null>(null)
+
+const showRegisterForm = ref(false)
+const showMaintainForm = ref(false)
 
 onMounted(async () => {
     try {
@@ -17,10 +22,13 @@ onMounted(async () => {
     }
 })
 
-const showRegisterForm = ref(false)
-const showMaintainForm = ref(false)
-
-const selectedClass = ref<IClassrooms | null>(null)
+const exibirDadosSala = async (classroom: IClassrooms) => {
+    try {
+        router.push(`/professores/sala/${classroom.id}`)
+    } catch(error) {
+        console.error('Error fetching job', error)
+    } 
+}
 
 const callRegister = () => {
     if (showMaintainForm.value) {
@@ -72,14 +80,14 @@ const closeMaintainRegister = () => {
                         </tr>
                     </tbody>
                     <tbody v-else v-for="classroom in classrooms">
-                        <tr>
+                        <tr class="cursor-pointer" @click="exibirDadosSala(classroom)">
                             <td>{{classroom.id}}</td>
                             <td>{{classroom.name}}</td>
                             <td>{{classroom.description}}</td>
-                            <td>
+                            <td @click.stop>
                                 <button @click="callMaintain(classroom)">
                                     <img :src="points" alt="Mais" class="w-8 h-8 cursor-pointer"/>
-                                </button>                      
+                                </button>
                             </td>
                         </tr>
                     </tbody>

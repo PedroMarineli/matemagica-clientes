@@ -50,6 +50,11 @@ const formatData = (dataString: string) => {
                         <th>Data</th>
                     </tr>
                 </thead>
+                <tbody v-if="!studentTasks || studentTasks.length === 0">
+                    <tr>
+                        <td colspan="10">Nenhuma atividade atribuída a {{ student?.username }}</td>
+                    </tr>
+                </tbody>
                 <tbody v-for="task in studentTasks">
                     <tr>
                         <td>{{ task.title }}</td>
