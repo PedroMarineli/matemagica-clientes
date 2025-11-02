@@ -31,11 +31,11 @@ const parseContentToJson = (jsonString: string): IProblems[] => {
 }
 
 const form = reactive({
-  student_id: userStore.data?.id,
+  student_id: userStore.data?.user.id,
   status: 'In Progress'
 })
 
-const avatar = userStore.data?.cartoon_image_path
+const avatar = userStore.data?.user.cartoon_image_path
 
 const changeStatus = async(id: any, score: any) => {
   const statusAltered = {
@@ -65,9 +65,9 @@ const navigateToTask = (task: ITaskProgress) => {
 
 onMounted(async () => {
   try {
-    const notCompletedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.id}?status=pending`)
+    const notCompletedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.user.id}?status=pending`)
     pendingTasks.value = notCompletedTasks.data as ITaskProgress[]
-    const finishedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.id}?status=completed`)
+    const finishedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.user.id}?status=completed`)
     completedTasks.value = finishedTasks.data as ITaskProgress[]
   } catch(error) {
     console.error('Error fetching job', error)
@@ -93,7 +93,7 @@ const formatData = (dataString: string) => {
               👦
             </div>
             <div class="text-center md:text-left flex-1">
-              <h1 class="text-4xl font-bold mb-2">Olá, {{ userStore.data?.username }}! 🎉</h1>
+              <h1 class="text-4xl font-bold mb-2">Olá, {{ userStore.data?.user.username }}! 🎉</h1>
               <p class="text-xl text-black/90">Você está indo muito bem!</p>
             </div>
             <div class="flex gap-4">
@@ -186,11 +186,11 @@ const formatData = (dataString: string) => {
     <div v-if="completedTasks && completedTasks.length > 0">
       <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
         <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
-        Atividades Concluídas
+        Atividades Concluídas ⭐
       </h2>
 
       <div class="grid gap-5 card py-8 px-10 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
-        <div v-for="task in completedTasks" class="bg-background px-10 py-4 space-y-4 rounded-4xl">
+        <div v-for="task in completedTasks" class="bg-background px-10 py-4 space-y-4 rounded-4xl shadow-sm">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-5">
               <span class="text-4xl">➕</span>
@@ -202,7 +202,7 @@ const formatData = (dataString: string) => {
                   task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}
             </span>
           </div>
-          <div class="w-full flex justify-between gap-8">
+          <div class="w-full flex justify-between items-center gap-8">
             <div class="flex flex-col">
               <div v-for="(problem, index) in parseContentToJson(task.content)" :key="index" class="flex gap-8 items-center">
                 <label class="block text-gray-700 mb-2">{{ problem.content }}</label>
@@ -212,19 +212,11 @@ const formatData = (dataString: string) => {
                 </div>
               </div>
             </div>
-            <button variant="outline" size="lg" disabled>
-              <!-- <Trophy class="w-5 h-5" /> -->
-              Completo! ⭐
-            </button>
           </div>
-          <div class="flex justify-between">
+          <div class="flex justify-around">
             <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
               <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Concluído em:</span>
               <span>{{ formatData(task.completion_date) }}</span>
-            </div>
-            <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
-              <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Tentativas:</span>
-              <span>{{ task.number_of_attempts }}</span>
             </div>
             <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
               <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Nota:</span>

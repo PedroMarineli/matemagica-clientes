@@ -16,7 +16,7 @@ const userStore = useUserStore()
 
                 <div className="flex items-center gap-4">
                     <div className="text-right hidden sm:block">
-                        <p className="font-bold">{{ userStore.data?.username }}</p>
+                        <p className="font-bold">{{ userStore.data?.user.username }}</p>
                         <p className="text-sm text-muted-foreground">Aluno</p>
                     </div>
                     <button variant="ghost" size="icon" asChild>
