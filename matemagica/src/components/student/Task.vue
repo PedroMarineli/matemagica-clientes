@@ -54,7 +54,7 @@ onMounted(async() => {
 })
 
 const form = reactive({
-    student_id: userStore.data?.id,
+    student_id: userStore.data?.user.id,
     task_id: taskId,
     status: 'Submitted',
     score: 0,

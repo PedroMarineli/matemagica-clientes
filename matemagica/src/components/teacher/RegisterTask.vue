@@ -11,7 +11,7 @@ import router from '../../router';
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
 
-const teacherId = computed(() => userStore.data?.id)
+const teacherId = computed(() => userStore.data?.user.id)
 
 const form = reactive({
     title: '',

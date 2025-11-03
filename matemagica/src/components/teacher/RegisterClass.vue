@@ -9,7 +9,7 @@ import { showNotification } from '../../stores/notificationStore';
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
 
-const teacherId = computed(() => userStore.data?.id)
+const teacherId = computed(() => userStore.data?.user.id)
 
 const closeComponent = () => {
     emit('close')
