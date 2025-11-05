@@ -66,24 +66,36 @@ const names = [
 
 const problems = {
     addition: [
+        "{x} + {y}"
+    ],
+    subtraction: [
+        "{x} - {y}"
+    ],
+    multiplication: [
+        "{x} * {y}"
+    ],
+    division: [
+        "{x} / {y}"
+    ],
+    additionWithProblems: [
         "{names} tem {x} **{fruits}**s. Seu amigo deu mais {y} **{fruits}**s. Quantas **{fruits}**s {names} tem no total?",
         "Em uma caixa havia {x} blocos azuis e {y} blocos vermelhos. Quantos blocos há na caixa?",
         "{names} passou {x} minutos brincando e {y} minutos desenhando. Quantos minutos ela gastou no total?",
 
     ],
-    subtraction: [
+    subtractionWithProblems: [
         "{names} comprou {x} adesivos. Ela usou {y} adesivos em seu caderno. Quantos adesivos restaram?",
         "No jardim havia {x} joaninhas. {y} delas voaram. Quantas joaninhas ficaram no jardim?",
         "{names} tinha {x} reais. Ele gastou {y} reais em um brinquedo. Com quantos reais ele ficou?",
 
     ],
-    multiplication: [
+    multiplicationWithProblems: [
         "{names} tem {x} caixas, e em cada caixa há {y} lápis. Quantos lápis {names} tem ao todo?",
         "Uma semana tem {x} dias. {names} faz exercícios por {y} semanas. Por quantos dias ela fez exercícios?",
         "Uma abelha tem {x} pernas. Quantas pernas {y} abelhas têm no total?",
 
     ],
-    division: [
+    divisionWithProblems: [
         "{names} tem {x} biscoitos para dividir igualmente entre {y} amigos. Quantos biscoitos cada amigo receberá?",
         "Uma régua tem {x} centímetros. Queremos dividir a régua em {y} partes iguais. Quantos centímetros terá cada parte?",
         "Há {x} bolas. Queremos guardar {y} bolas em cada cesto. De quantos cestos precisaremos?"
@@ -186,15 +198,19 @@ function generateAndShowProblem() {
 
     switch (operation) {
         case 'addition':
+        case 'additionWithProblems':
             answer = x + y
             break
         case 'subtraction':
+        case 'subtractionWithProblems':
             answer = x - y
             break
         case 'multiplication':
+        case 'multiplicationWithProblems':
             answer = x * y
             break
         case 'division':
+        case 'divisionWithProblems':
             answer = x / y
             break
         default:
@@ -244,6 +260,10 @@ function generateAndShowProblem() {
                                 <option value="subtraction">Subtração</option>
                                 <option value="multiplication">Multiplicação</option>
                                 <option value="division">Divisão</option>
+                                <option value="additionWithProblems">Adição com Problemas</option>
+                                <option value="subtractionWithProblems">Subtração com Problemas</option>
+                                <option value="multiplicationWithProblems">Multiplicação com Problemas</option>
+                                <option value="divisionWithProblems">Divisão com Problemas</option>
                             </select>
                         </div>
                         <div>

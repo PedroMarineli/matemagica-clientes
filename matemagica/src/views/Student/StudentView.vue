@@ -35,7 +35,9 @@ const form = reactive({
   status: 'In Progress'
 })
 
-const avatar = userStore.data?.user.cartoon_image_path
+// const avatar = userStore.data?.user.cartoon_image_path
+
+console.log(userStore.data?.user)
 
 const changeStatus = async(id: any, score: any) => {
   const statusAltered = {
@@ -123,7 +125,7 @@ const formatData = (dataString: string) => {
         </div>
       </div>
       <div>
-        <img :src="avatar" alt="Imagem do Avatar">
+        <img :src="userStore.data?.user.photo_path" alt="Imagem do Avatar">
       </div>
     </div>
 

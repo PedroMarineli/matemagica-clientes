@@ -99,7 +99,15 @@ const closeMaintainRegister = () => {
                     <tbody v-else v-for="task in tasks">
                         <tr>
                             <td>{{task.id}}</td>
-                            <td>{{task.title}} ({{ task.type }})</td>
+                            <td>{{task.title}}
+                                ({{ task.type === 'addition' ? 'Adição' :
+                                    task.type === 'subtraction' ? 'Subtração' :
+                                    task.type === 'multiplication' ? 'Multiplicação' :
+                                    task.type === 'division' ? 'Divisão' :
+                                    task.type === 'additionWithProblems' ? 'Adição com Problemas' :
+                                    task.type === 'subtractionWithProblems' ? 'Subtração com Problemas' :
+                                    task.type === 'multiplicationWithProblems' ? 'Multiplicação com Problemas' :
+                                    task.type === 'divisionWithProblems' ? 'Divisão com Problemas' : 'Desconhecido' }})</td>
                             <td>{{ task.difficulty === 'easy' ? 'Fácil' : 
                                    task.difficulty === 'medium' ? 'Médio' : 
                                    task.difficulty === 'hard' ? 'Difícil' : 'Desconhecido' }}</td>
