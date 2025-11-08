@@ -57,8 +57,8 @@ onMounted(async () => {
     }
 })
 
-const fruits = [
-    "Maçã", "Pêra", "Banana", "Laranja", "Uva", "Manga", "Morango", "Kiwi", "Abacate"
+const objects = [
+    "🍎 Maçã", "🍐 Pêra", "🍌 Banana", "🍊 Laranja", "🍇 Uva", "🥭 Manga", "🍓 Morango", "🥝 Kiwi", "🥑 Abacate", "🍉 Melancia", "🥕 Cenoura", "🥔 Batata", "🍅 Tomate", "🥖 Baguete", "🍕 Pizza", "🍰 Bolo", "🍩 Rosquinha", "🍪 Biscoito", "🍫 Chocolate", "🍦 Sorvete", "🍬 Bala", "🥤 Refrigerante", "📚 Livro", "🖊️ Caneta", "📎 Clipe de Papel", "✂️ Tesoura", "📏 Régua"
 ]
 
 const names = [
@@ -79,27 +79,61 @@ const problems = {
         "{x} / {y}"
     ],
     additionWithProblems: [
-        "{names} tem {x} **{fruits}**s. Seu amigo deu mais {y} **{fruits}**s. Quantas **{fruits}**s {names} tem no total?",
-        "Em uma caixa havia {x} blocos azuis e {y} blocos vermelhos. Quantos blocos há na caixa?",
-        "{names} passou {x} minutos brincando e {y} minutos desenhando. Quantos minutos ela gastou no total?",
+        "{names} tem {x} **{objects}**s. Seu amigo deu mais {y} **{objects}**s. Qual o total de **{objects}**s que {names} tem agora?",
+        "Em uma caixa havia {x} blocos azuis e {y} blocos vermelhos. Quantos blocos há na caixa? 🟦🟥",
+        "{names} passou {x} minutos brincando e {y} minutos desenhando. Quantos minutos ela gastou no total? ⏰",
+        "Uma árvore de Natal tem {x} enfeites vermelhos e {y} enfeites dourados. Quantos enfeites a árvore tem no total? 🎄",
+        "Na biblioteca há {x} livros de aventura e {y} livros de história. Qual o número total de livros na biblioteca? 📚",
+        "{names} colecionou {x} figurinhas este mês e {y} no mês passado. Quantas figurinhas ela tem agora? 🖼️",
+        "No estacionamento havia {x} carros de manhã e {y} carros chegaram à tarde. Quantos carros estão no estacionamento agora? 🚗",
+        "Uma pizzaria vendeu {x} pizzas de queijo e {y} pizzas de calabresa. Quantas pizzas foram vendidas no total? 🍕",
+        "No primeiro dia, {names} encontrou {x} **{objects}**s e no segundo dia, {y} **{objects}**s. Qual o total de **{objects}**s que {names} encontrou?",
+        "Um armário tem {x} **{objects}**s na prateleira de cima e {y} **{objects}**s na prateleira de baixo. Qual o total de **{objects}**s no armário?",
+        "A loja recebeu uma entrega de {x} **{objects}**s grandes e {y} **{objects}**s de tamanho pequeno. Qual o total de **{objects}**s que a loja recebeu?",
 
     ],
     subtractionWithProblems: [
         "{names} comprou {x} adesivos. Ela usou {y} adesivos em seu caderno. Quantos adesivos restaram?",
-        "No jardim havia {x} joaninhas. {y} delas voaram. Quantas joaninhas ficaram no jardim?",
-        "{names} tinha {x} reais. Ele gastou {y} reais em um brinquedo. Com quantos reais ele ficou?",
+        "No jardim havia {x} joaninhas. {y} delas voaram. Quantas joaninhas ficaram no jardim? 🐞",
+        "{names} tinha {x} reais. Ele gastou {y} reais em um brinquedo. Com quantos reais ele ficou? 💰",
+        "Havia {x} **{objects}**s na prateleira. {y} **{objects}**s foram vendidos. Qual a quantidade de **{objects}**s que tem na prateleira agora?",
+        "Um ônibus levava {x} passageiros. Na primeira parada, {y} passageiros desceram. Quantos passageiros continuam no ônibus? 🚌",
+        "O placar de um jogo estava {x} a {y}. Por quantos pontos um time está à frente do outro? ⚽",
+        "O time de {names} marcou {x} pontos no total. Se {y} pontos foram marcados no primeiro tempo, quantos pontos foram marcados no segundo tempo?",
+        "Havia {x} balões na festa. {y} balões estouraram. Quantos balões sobraram? 🎈",
+        "Um livro tem {x} páginas. {names} já leu {y} páginas. Quantas páginas faltam para {names} terminar o livro? 📚",
+        "Havia {x} **{objects}**s em uma caixa. {names} tirou {y} **{objects}**s para brincar. Qual a quantidade de **{objects}**s que resta na caixa?",
+        "Uma fábrica processou {x} **{objects}**s hoje. {y} **{objects}**s foram considerados defeituosos. Qual a quantidade de **{objects}**s que está apto para venda?",
 
     ],
     multiplicationWithProblems: [
         "{names} tem {x} caixas, e em cada caixa há {y} lápis. Quantos lápis {names} tem ao todo?",
-        "Uma semana tem {x} dias. {names} faz exercícios por {y} semanas. Por quantos dias ela fez exercícios?",
-        "Uma abelha tem {x} pernas. Quantas pernas {y} abelhas têm no total?",
+        "Uma semana tem {x} dias. {names} faz exercícios por {y} semanas. Por quantos dias ela fez exercícios? 🗓️",
+        "Uma abelha tem {x} pernas. Quantas pernas {y} abelhas têm no total? 🐝",
+        "{names} tem {x} bandejas de **{objects}**s, e cada bandeja contém {y} **{objects}**s. Qual o total de **{objects}**s?",
+        "Um prédio tem {x} andares. Se em cada andar há {y} apartamentos, quantos apartamentos tem o prédio? 🏢",
+        "Cada bilhete para o cinema custa {x} reais. Quanto {names} gastará para comprar {y} bilhetes? 🎟️",
+        "Uma caixa de lápis de cor tem {x} cores diferentes. Se {names} tem {y} caixas, quantas cores diferentes {names} possui? 🖍️",
+        "Em um teatro há {x} fileiras, e cada fileira tem {y} cadeiras. Quantas cadeiras há no teatro? 🎭",
+        "O salário de {names} é de {x} reais por dia. Quanto ele ganhará trabalhando por {y} dias?",
+        "Cada aluno precisa de {x} **{objects}**s para o projeto. Se há {y} alunos na turma, qual o total de **{objects}**s que o professor precisará?",
+        "Uma impressora consegue imprimir {x} páginas por minuto. Quantas páginas ela imprimirá em {y} minutos? 🖨️",
+        "Há {x} sacolas, e em cada sacola {names} colocou {y} **{objects}**s. Qual o total de **{objects}**s que ela colocou nas sacolas?",
 
     ],
     divisionWithProblems: [
-        "{names} tem {x} biscoitos para dividir igualmente entre {y} amigos. Quantos biscoitos cada amigo receberá?",
-        "Uma régua tem {x} centímetros. Queremos dividir a régua em {y} partes iguais. Quantos centímetros terá cada parte?",
-        "Há {x} bolas. Queremos guardar {y} bolas em cada cesto. De quantos cestos precisaremos?"
+        "{names} tem {x} **{objects}**s para dividir igualmente entre {y} amigos. Qual a quantia de **{objects}**s que cada amigo receberá?",
+        "Uma régua tem {x} centímetros. Queremos dividir a régua em {y} partes iguais. Quantos centímetros terá cada parte? 📏",
+        "Há {x} bolas. Queremos guardar {y} bolas em cada cesto. De quantos cestos precisaremos? ⚽",
+        "Um professor tem {x} alunos e {y} mesas grandes. Quantos alunos ficarão em cada mesa, se a divisão for igual?",
+        "Há {x} metros de fita. {names} precisa cortar pedaços de {y} metros cada. Quantos pedaços de fita ela conseguirá cortar? 🎗️",
+        "Para fazer um bolo são necessários {y} ovos. Quantos bolos {names} poderá fazer com {x} ovos? 🍰",
+        "Uma professora tem {x} figurinhas para distribuir igualmente para {y} alunos. Quantas figurinhas cada aluno receberá? 🖼️",
+        "Um pacote de balas tem {x} balas. Se cada criança pode receber {y} balas, para quantas crianças o pacote será suficiente? 🍬",
+        "Um muro tem {x} tijolos no total. Se há {y} tijolos em cada linha, quantas linhas de tijolos o muro tem? 🧱",
+        "Uma pilha de {x} **{objects}**s precisa ser dividida em {y} pilhas menores e iguais. Quantos **{objects}**s terá cada pilha?",
+        "{names} tem {x} **{objects}**s e quer colocá-los em caixas, cabendo {y} **{objects}**s em cada caixa. De quantas caixas ele precisará?",
+        "Se {x} **{objects}**s custaram {y} reais, qual é o preço de um(a) único(a) **{objects}**?",
     ]
 }
 
@@ -147,11 +181,11 @@ function formatarProblema(modelo: string, nome: string, numX: number, numY: numb
     const frutaPlural = fruta + "s";
     
     // ATENÇÃO: A ordem importa para o plural/singular!
-    // Substitui PLURAIS primeiro (ex: **{fruits}**s)
-    problemaFinal = problemaFinal.replace(/\*\*\{fruits\}\*\*s/g, frutaPlural);
+    // Substitui PLURAIS primeiro (ex: **{objects}**s)
+    problemaFinal = problemaFinal.replace(/\*\*\{objects\}\*\*s/g, frutaPlural);
     
-    // Substitui SINGULARES depois (ex: **{fruits}**)
-    problemaFinal = problemaFinal.replace(/\*\*\{fruits\}\*\*/g, fruta);
+    // Substitui SINGULARES depois (ex: **{objects}**)
+    problemaFinal = problemaFinal.replace(/\*\*\{objects\}\*\*/g, fruta);
 
     return problemaFinal;
 }
@@ -201,7 +235,7 @@ function createProblem() {
     
     // 3. Escolhe um prompt e as variáveis de contexto aleatoriamente
     const nomeAleatorio = names[Math.floor(Math.random() * names.length)]
-    const frutaAleatoria = fruits[Math.floor(Math.random() * fruits.length)]
+    const objetoAleatorio = objects[Math.floor(Math.random() * objects.length)]
     const randomIndex = Math.floor(Math.random() * problemTemplates.length)
     const tarefaAleatoria = problemTemplates[randomIndex]
     
@@ -210,7 +244,7 @@ function createProblem() {
         nomeAleatorio, 
         x, 
         y, 
-        frutaAleatoria 
+        objetoAleatorio 
     )
 
     return { problemaPronto, x, y }
