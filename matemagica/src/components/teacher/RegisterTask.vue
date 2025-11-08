@@ -13,6 +13,9 @@ const userStore = useUserStore()
 
 const teacherId = computed(() => userStore.data?.user.id)
 
+type ProblemKey = 'addition' | 'additionWithProblems' | 'subtraction' | 'subtractionWithProblems' | 'multiplication' | 'multiplicationWithProblems' | 'division' | 'divisionWithProblems'
+const classrooms = ref<IClassrooms[] | null>(null)
+
 const form = reactive({
     title: '',
     type: '',
@@ -44,8 +47,6 @@ const submitTask = async() => {
         showNotification('Não foi possível adicionar tarefa', 'bg-red-500')
     }
 }
-
-const classrooms = ref<IClassrooms[] | null>(null)
 
 onMounted(async () => {
     try {
@@ -102,17 +103,31 @@ const problems = {
     ]
 }
 
-function getRangeByLevel(difficulty: string) {
-    switch (difficulty) {
-        case 'easy':
-            return 20
-        case 'medium':
-            return 50
-        case 'hard':
-            return 100
-        default:
-            return 10 // Valor de segurança
+function getRangeByLevel(difficulty: string, type: string): number {
+    const types = [
+        'multiplication', 
+        'multiplicationWithProblems', 
+        'division', 
+        'divisionWithProblems'
+    ]
+
+    const shortRangeMap: { [key: string]: number } = {
+        'easy': 6,
+        'medium': 10,
+        'hard': 20
     }
+
+    const defaultRangeMap: { [key: string]: number } = {
+        'easy': 20,
+        'medium': 50,
+        'hard': 100
+    }
+
+    if (types.includes(type)) {
+        return shortRangeMap[difficulty] ?? 10
+    }
+
+    return defaultRangeMap[difficulty] ?? 10
 }
 
 function formatarProblema(modelo: string, nome: string, numX: number, numY: number, fruta: string) {
@@ -141,18 +156,41 @@ function formatarProblema(modelo: string, nome: string, numX: number, numY: numb
     return problemaFinal;
 }
 
-function createProblem() {
-    type ProblemKey = 'addition' | 'subtraction' | 'multiplication' | 'division'
-    
-    const type: ProblemKey = form.type as ProblemKey
-    const difficulty = form.difficulty
-
+function generateProblemValues(difficulty: string, type: ProblemKey, getRangeByLevel: (difficulty: string, type: string) => number) {
     // 1. Define o nível e o range
-    const maxRange = getRangeByLevel(difficulty)
+    const maxRange = getRangeByLevel(difficulty, type)
     
     // 2. Define a operação (ex: Soma) e os valores
-    const x = Math.floor(Math.random() * (maxRange + 1))
-    const y = Math.floor(Math.random() * (maxRange + 1))
+    let x = Math.floor(Math.random() * (maxRange + 1))
+    let y = Math.floor(Math.random() * (maxRange + 1))
+
+    if (type === 'subtraction' || type === 'subtractionWithProblems') {
+        if (x < y) {
+            [x, y] = [y, x]
+        }
+    }
+
+    if (type === 'division' || type === 'divisionWithProblems') {
+        if (x < 4) {
+            x = Math.floor(Math.random() * maxRange) + 1
+        }
+        if (y == 1) {
+            y = Math.floor(Math.random() * maxRange) + 1
+        }
+        while (x % y != 0) {
+            y = Math.floor(Math.random() * (maxRange + 1))
+        }
+    }
+
+    return { x, y }
+}
+
+function createProblem() {   
+    const type: ProblemKey = form.type as ProblemKey
+    const difficulty = form.difficulty
+    
+    // 2. Define a operação (ex: Soma) e os valores
+    const { x, y } = generateProblemValues(difficulty, type, getRangeByLevel)
 
     const problemTemplates = problems[type]
 
