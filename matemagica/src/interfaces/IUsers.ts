@@ -1,3 +1,8 @@
+export interface IUserdata {
+    token: string
+    user: IUsers
+}
+
 export interface IUsers {
     avatar_url: string
     classroom_id: number

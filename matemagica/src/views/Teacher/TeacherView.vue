@@ -23,6 +23,13 @@ onMounted(async () => {
         console.error('Error fetching job', error)
     }
 })
+
+const formatData = (dataString: string) => {
+    if (!dataString) return ''
+    const date = new Date(dataString)
+    
+    return date.toLocaleDateString('pt-BR')
+}
 </script>
 
 <template>
@@ -88,7 +95,7 @@ onMounted(async () => {
                         </div>
                         <div class="flex-1">
                             <p class="font-semibold">{{ progress.username }} completou "Adição Básica"</p>
-                            <p class="text-sm text-muted-foreground">Há 2 horas • Nota {{ progress.score }}</p>
+                            <p class="text-sm text-muted-foreground">{{ formatData(progress.completion_date) }} • Nota {{ progress.score }}</p>
                             <p class="text-sm text-muted-foreground">Submetido</p>
                         </div>
                         <div class="hidden sm:block text-right">

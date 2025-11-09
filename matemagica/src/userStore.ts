@@ -1,18 +1,13 @@
 import { defineStore } from 'pinia';
-import type { IUsers } from './interfaces/IUsers';
-
-interface userdata {
-    token: string
-    user: IUsers
-}
+import type { IUserdata } from './interfaces/IUsers';
 
 export const useUserStore = defineStore('user', {
     persist: true,
     state: () => ({
-        data: null as userdata | null,
+        data: null as IUserdata | null,
     }),
     actions: {
-        setUserData(userData: userdata) {
+        setUserData(userData: IUserdata) {
             this.data = userData
         },
         clearUserData() {

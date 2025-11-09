@@ -3,6 +3,8 @@ import { reactive } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '../userStore';
+import { showNotification } from '../stores/notificationStore';
+import type { IUserdata } from '../interfaces/IUsers';
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -17,6 +19,7 @@ type UserRole = 'professor' | 'aluno'
 interface UserState {
     userType: UserRole
 }
+
 const userType = reactive<UserState>({
     userType: 'professor'
 })
@@ -30,13 +33,14 @@ const handleLogin = async() => {
   try {
     const response = await axios.post('http://localhost:3000/users/login', login)
     if(response) {
-      const userData = response.data
+      const userData: IUserdata = response.data
       userStore.setUserData(userData)
-      if(userType.userType == 'aluno') router.push({ name: 'student' })
-      else router.push({ name: 'teacher' })
+      if (userData.user.type == 'student' && userType.userType == 'aluno') router.push({ name: 'student' })
+      else if (userData.user.type == 'teacher' && userType.userType == 'professor') router.push({ name: 'teacher' })
+      else showNotification('Você está tentando logar no campo errado!', 'bg-red-500')
     }
   } catch(error) {
-    console.log('Tentativa de login com falha', error)
+    showNotification('Login ou senha incorretos! Tente novamente.', 'bg-red-500')
   }
 }
 </script>
