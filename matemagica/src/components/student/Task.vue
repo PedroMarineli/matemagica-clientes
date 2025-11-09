@@ -16,6 +16,8 @@ const task = ref<ITasksProgress | null>(null)
 const problems = ref<IProblems[]>([])
 const showError = ref(false)
 
+let number_of_attempts = 0
+
 const i = ref(0)
 const x = ref(0)
 const y = ref(0)
@@ -24,7 +26,19 @@ const state = reactive({
     isLoading: true
 })
 
-let number_of_attempts = 0
+const form = reactive({
+    student_id: userStore.data?.user.id,
+    task_id: taskId,
+    status: 'Submitted',
+    score: 0,
+    answer: null
+})
+
+const help = ref(false)
+
+const askHekp = () => {
+    help.value = !help.value
+}
 
 const updateCurrentProblem = () => {
     const currentProblem = problems.value[i.value]
@@ -53,14 +67,6 @@ onMounted(async() => {
     }
 })
 
-const form = reactive({
-    student_id: userStore.data?.user.id,
-    task_id: taskId,
-    status: 'Submitted',
-    score: 0,
-    answer: null
-})
-
 const submitAnswer = () => {
     const currentProblem = problems.value[i.value]
     number_of_attempts++
@@ -85,12 +91,6 @@ const submitAnswer = () => {
         console.log('Resposta incorreta. Tentativas:', number_of_attempts)
     }
     form.answer = null
-}
-
-const help = ref(false)
-
-const askHekp = () => {
-    help.value = !help.value
 }
 
 const submitTask = async() => {

@@ -44,17 +44,6 @@ const verifyClass = (id: number): string => {
     return foundClassroom ? foundClassroom.name : ''
 }
 
-// const callRegister = () => {
-//     if (showMaintainForm.value) {
-//         showMaintainForm.value = false
-//         selectedTask.value = null
-//     }
-//     showRegisterForm.value = !showRegisterForm.value
-// }
-// const closeTaskRegister = () => {
-//   showRegisterForm.value = false
-// }
-
 const callMaintain = (student: ITasks) => {
     if (showRegisterForm.value) {
         showRegisterForm.value = false

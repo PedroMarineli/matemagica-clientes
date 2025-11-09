@@ -18,11 +18,9 @@ const userStore = useUserStore()
                         <p className="font-bold">Prof. {{ userStore.data?.user.username }}</p>
                         <p className="text-sm text-muted-foreground">{{ userStore.data?.user.email }}</p>
                     </div>
-                    <button variant="ghost" size="icon" asChild>
-                        <RouterLink @click="() => userStore.clearUserData()" to="/login">
-                            <img :src="logout" alt="Logout" class="w-8 h-8"/>
-                        </RouterLink>
-                    </button>
+                    <RouterLink @click="() => userStore.clearUserData()" to="/login">
+                        <img :src="logout" alt="Logout" class="w-8 h-8"/>
+                    </RouterLink>
                 </div>
             </div>
         </div>

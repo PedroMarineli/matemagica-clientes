@@ -18,7 +18,6 @@ onMounted(async () => {
         dashboard.value = teacherDashboard.data as ITeacherDashboard
         const listProgressInATask = await axios.get(`http://localhost:3000/progress/task/10`)
         progresses.value = listProgressInATask.data as IListProgressInATask[]
-        // listProgressInATask -> arrumar isso para aparecer de todas as atividades
     } catch(error) {
         console.error('Error fetching job', error)
     }
@@ -33,7 +32,6 @@ const formatData = (dataString: string) => {
 </script>
 
 <template>
-    <!-- Main content -->
     <main class="w-full px-20 py-10 lg:col-span-3 space-y-6 xl:px-56">
         <!-- Welcome section -->
         <div class="card">
