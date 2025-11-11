@@ -86,33 +86,28 @@ const formatData = (dataString: string) => {
 
 <template>
   <div class="container mx-auto px-4 py-8 max-w-6xl">
-    <div class="flex gap-10">
-      <div>
-        <!-- Welcome section with avatar -->
-        <div class="card p-8 mb-8 bg-gradient-warm shadow-glow">
-          <div class="flex flex-col md:flex-row items-center gap-6">
-            <div class="w-32 h-32 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
-              👦
+    <div class="flex justify-center gap-14 card p-10 mb-8 bg-gradient-warm shadow-glow">
+      <div class="w-96 h-96 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
+        <img class="w-full h-full rounded-full object-cover" :src="userStore.data?.user.cartoon_image_path" alt="Imagem do Avatar" crossorigin="anonymous">
+      </div>
+      <div class="flex gap-10 flex-col justify-center">
+        <div class="flex flex-col md:flex-row items-center gap-6">
+          <div class="text-center md:text-left flex-1">
+            <h1 class="text-4xl font-bold mb-2">Olá, {{ userStore.data?.user.username }}! 🎉</h1>
+            <p class="text-lg text-black/90">Você está indo muito bem!</p>
+          </div>
+          <div class="flex gap-4">
+            <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
+              <div class="text-3xl font-bold">⭐ 45</div>
+              <div class="text-sm">Estrelas</div>
             </div>
-            <div class="text-center md:text-left flex-1">
-              <h1 class="text-4xl font-bold mb-2">Olá, {{ userStore.data?.user.username }}! 🎉</h1>
-              <p class="text-xl text-black/90">Você está indo muito bem!</p>
-            </div>
-            <div class="flex gap-4">
-              <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
-                <div class="text-3xl font-bold">⭐ 45</div>
-                <div class="text-sm">Estrelas</div>
-              </div>
-              <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
-                <div class="text-3xl font-bold">🏆 5</div>
-                <div class="text-sm">Troféus</div>
-              </div>
+            <div class="text-center bg-white/20 px-6 py-3 rounded-2xl">
+              <div class="text-3xl font-bold">🏆 5</div>
+              <div class="text-sm">Troféus</div>
             </div>
           </div>
         </div>
-
-        <!-- Level progress -->
-        <div class="card p-6 mb-8">
+        <div class="bg-background p-8 rounded-2xl">
           <div class="flex items-center justify-between mb-3">
             <h2 class="text-2xl font-bold flex items-center gap-2">
               <!-- <Trophy class="w-6 h-6 text-accent" /> -->
@@ -124,13 +119,10 @@ const formatData = (dataString: string) => {
           <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
         </div>
       </div>
-      <div>
-        <img :src="userStore.data?.user.photo_path" alt="Imagem do Avatar">
-      </div>
     </div>
 
     <!-- Pending tasks -->
-    <div class="mb-8">
+    <div class="my-8">
       <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
         <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
         Suas Atividades
