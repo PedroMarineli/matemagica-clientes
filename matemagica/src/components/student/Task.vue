@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import axios from 'axios';
 import type { IProblems, ITasksProgress } from '../../interfaces/ITasks';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, toRaw } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../../userStore';
 
@@ -21,6 +21,9 @@ let number_of_attempts = 0
 const i = ref(0)
 const x = ref(0)
 const y = ref(0)
+const submitted_answers_list = ref<number[]>([])
+let countdown_score = ref(10)
+let answer = ref(0)
 
 const state = reactive({
     isLoading: true
@@ -31,7 +34,7 @@ const form = reactive({
     task_id: taskId,
     status: 'Submitted',
     score: 0,
-    answer: null
+    answer: 0
 })
 
 const help = ref(false)
@@ -69,12 +72,13 @@ onMounted(async() => {
 
 const submitAnswer = () => {
     const currentProblem = problems.value[i.value]
-    number_of_attempts++
+    // number_of_attempts++
 
     if(form.answer == currentProblem.answer) {
-        form.score = 10
-        console.log('Parabens vc acertou')
+        // form.score += countdown_score.value
+        // countdown_score.value = 10
         if (i.value < problems.value.length - 1) {
+            // submitTask()
             i.value++
             updateCurrentProblem()
         } else {
@@ -82,28 +86,31 @@ const submitAnswer = () => {
         }
     }
     else {
+        // countdown_score.value--  
         showError.value = true
-
         setTimeout(() => {
             showError.value = false
-        }, 2000)
-
-        console.log('Resposta incorreta. Tentativas:', number_of_attempts)
+        }, 3000)
     }
-    form.answer = null
+
+    submitted_answers_list.value.push(form.answer)
 }
 
 const submitTask = async() => {
+    const rawAnswers = toRaw(submitted_answers_list.value)
     const taskAltered = {
-        student_id: form.student_id,
+        // student_id: form.student_id,
+        // task_id: form.task_id,
+        // status: form.status,
+        // score: form.score / problems.value.length,
+        // number_of_attempts: number_of_attempts
         task_id: form.task_id,
-        status: form.status,
-        score: form.score,
-        number_of_attempts: number_of_attempts
+        answers: rawAnswers
     }
+    console.log(taskAltered)
 
     try {
-        const response = await axios.put('http://localhost:3000/progress/update', taskAltered)
+        const response = await axios.post('http://localhost:3000/progress/submit', taskAltered)
         if(response) {
             router.push('/alunos')
             console.log('Progresso de tarefa realizado')
@@ -138,7 +145,7 @@ const submitTask = async() => {
           
             <div v-if="task" class="flex items-center">
                 <!-- Task card 1 -->
-                <div class="grid sm:grid-cols-2 gap-6 items-center">
+                <div class="w-full grid sm:grid-cols-2 gap-6 items-center">
                     <div class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
@@ -179,26 +186,26 @@ const submitTask = async() => {
                             </form>
                         </div>
                     </div>
-                    <div class="flex gap-5 justify-center">
-                        <div v-if="help" class="flex flex-col items-end justify-center font-bold text-4xl w-min">
+                    <div class="relative flex gap-5 justify-center">
+                        <div v-if="help" class="ajuda text-end font-bold text-4xl w-min">
                             <span class="text-7xl">{{ x }}</span>
-                            <div class="flex items-center justify-between">
-                                <span class="text-7xl mr-2">
-                                    {{ task.type === 'addition' ? '+' : 
-                                       task.type === 'subtraction' ? '-' : 
-                                       task.type === 'multiplication' ? 'x' : 
-                                       task.type === 'division' ? '/' : '' }}
+                            <div class="flex items-center">
+                                <span class="text-7xl">
+                                    {{ task.type === 'addition' || 'additionWIthProblems' ? '+' : 
+                                       task.type === 'subtraction' || 'subtractionWIthProblems' ? '-' : 
+                                       task.type === 'multiplication' || 'multiplicationWIthProblems' ? 'x' : 
+                                       task.type === 'division' || 'divisionWIthProblems' ? '/' : '' }}
                                 </span> 
                                 <span class="text-7xl">{{ y }}</span>
                             </div>
                             <div class="w-full border-b-8 border-black mt-5"></div> 
                         </div>
-                        <div class="flex flex-col">
-                            <div>
-                                Aqui ficará a imagem da mascote
-                            </div>
-                            <div v-if="showError" class="transform bg-red-500 text-white px-6 py-3 rounded-lg shadow-xl transition-opacity duration-300">
+                        <div class="caixa-de-fala">
+                            <div v-if="showError" class="balao">
                                 ❌ Quase! Tente de novo
+                            </div>
+                            <div class="w-96 h-96 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
+                                <img class="w-full h-full rounded-full object-cover" :src="userStore.data?.user.cartoon_image_path" alt="Imagem do Avatar" crossorigin="anonymous">
                             </div>
                         </div>
                     </div>
@@ -207,3 +214,66 @@ const submitTask = async() => {
         </div>
     </div>
 </template>
+
+<style>
+.ajuda {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  position: absolute;
+  z-index: 10;
+  max-width: fit-content;
+  flex-grow: 1;
+  left: 0;
+}
+
+.ajuda::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 15px solid #fff;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  right: -13px;
+  bottom: 15px;
+}
+
+.caixa-de-fala {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.balao {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 10;
+  max-width: fit-content;
+  flex-grow: 1;
+}
+
+.balao p {
+  margin: 0;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+.balao::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 15px solid #fff;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  bottom: -13px;
+  left: 15px;
+}
+</style>
