@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import axios from 'axios';
+import trofeu from '../../../public/icons/trophy.png';
 import type { IProblems, ITasksProgress } from '../../interfaces/ITasks';
 import { onMounted, reactive, ref, toRaw } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -126,13 +127,12 @@ const submitTask = async() => {
         <!-- Level progress -->
         <div class="card p-6 mb-8 rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="flex items-center justify-between mb-3">
-                <h2 class="text-2xl font-bold flex items-center gap-2">
-                    <!-- <Trophy class="w-6 h-6 text-accent" /> -->
+                <h2 class="text-2xl font-bold flex items-center gap-3 bg-orange text-accent-foreground px-5 py-2 rounded-full">
+                    <img :src="trofeu" alt="Troféu" class="w-6 h-6"/>
                     Seu Progresso
                 </h2>
                 <span class="text-xl font-bold text-lilac">Nível 1</span>
             </div>
-            <!-- <Progress value={65} class="h-4 mb-2" /> -->
             <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
         </div>
 
@@ -146,7 +146,7 @@ const submitTask = async() => {
             <div v-if="task" class="flex items-center">
                 <!-- Task card 1 -->
                 <div class="w-full grid sm:grid-cols-2 gap-6 items-center">
-                    <div class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-primary">
+                    <div class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-purple-400">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <span class="text-4xl">➕</span>
@@ -158,11 +158,8 @@ const submitTask = async() => {
                             </div>
                             <h3 class="text-2xl font-bold">{{ task.title }}</h3>
                             <p class="text-muted-foreground text-lg">{{ problems[i].content }}</p>
-                            <div class="space-y-2">
-                                <div @click="askHekp" class="flex justify-between text-sm font-medium cursor-pointer">
-                                    <span>Ajuda?</span>
-                                </div>
-                                <!-- <Progress value={30} class="h-3" /> -->
+                            <div @click="askHekp" class="w-min flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-medium cursor-pointer">
+                                <span>Ajuda?</span>
                             </div>
                             <form @submit.prevent="submitAnswer">
                                 <div>
@@ -172,17 +169,14 @@ const submitTask = async() => {
                                         v-model="form.answer"
                                         id="answer"
                                         name="answer"
-                                        class="border rounded w-full py-2 px-3 mb-2"
+                                        class="border rounded w-full py-2 px-3 mb-4"
                                         placeholder="45"
                                         required
                                     />
                                 </div>
-                                <div class="w-full flex justify-center items-center">
-                                    <button class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-orange text-accent-foreground shadow-soft">
-                                        <!-- <Play class="w-5 h-5" /> -->
-                                        Entregar
-                                    </button>
-                                </div>
+                                <button class="w-full py-3 px-10 rounded-xl font-bold hover:shadow-glow transition-smooth hover:-translate-y-2 cursor-pointer bg-orange text-accent-foreground shadow-soft">
+                                    Entregar
+                                </button>
                             </form>
                         </div>
                     </div>

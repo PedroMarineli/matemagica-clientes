@@ -4,6 +4,8 @@ import { useUserStore } from '../../userStore';
 import axios from 'axios';
 import type { IProblems, ITaskProgress } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
+import trofeu from '../../../public/icons/trophy.png';
+import estrela from '../../../public/icons/christmas-stars.png';
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -109,13 +111,12 @@ const formatData = (dataString: string) => {
         </div>
         <div class="bg-background p-8 rounded-2xl">
           <div class="flex items-center justify-between mb-3">
-            <h2 class="text-2xl font-bold flex items-center gap-2">
-              <!-- <Trophy class="w-6 h-6 text-accent" /> -->
+            <h2 class="text-2xl font-bold flex items-center gap-3 bg-orange text-accent-foreground px-5 py-2 rounded-full">
+              <img :src="trofeu" alt="Troféu" class="w-6 h-6"/>
               Seu Progresso
             </h2>
             <span class="text-xl font-bold text-lilac">Nível 1</span>
           </div>
-          <!-- <Progress value={65} class="h-4 mb-2" /> -->
           <p class="text-muted-foreground">Faltam 35 estrelas para o próximo nível!</p>
         </div>
       </div>
@@ -124,16 +125,25 @@ const formatData = (dataString: string) => {
     <!-- Pending tasks -->
     <div class="my-8">
       <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-        <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
+        <img :src="estrela" alt="Estrela" class="w-8 h-8"/>
         Suas Atividades
       </h2>
       
       <div class="grid sm:grid-cols-2 gap-6">
         <template v-if="pendingTasks && pendingTasks.length >= 1">
-          <div v-for="task in pendingTasks" :key="task.task_id" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-lilac">
+          <div v-for="task in pendingTasks" :key="task.task_id" class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-purple-400">
             <div class="space-y-4">
               <div class="flex items-center justify-between">
-                <span class="text-4xl">➕➖🔢</span>
+                <span class="text-4xl">
+                  {{ task.type === 'addition' ? '➕' :
+                     task.type === 'subtraction' ? '➖' :
+                     task.type === 'multiplication' ? '✖️' :
+                     task.type === 'division' ? '➗' :
+                     task.type === 'additionWithProblems' ? '➕🔢' :
+                     task.type === 'subtractionWithProblems' ? '➖🔢' :
+                     task.type === 'multiplicationWithProblems' ? '✖️🔢' :
+                     task.type === 'divisionWithProblems' ? '➗🔢' : '🔢' }}
+                </span>
                 <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
                   {{ task.difficulty === 'easy' ? 'Fácil' : 
                       task.difficulty === 'medium' ? 'Médio' : 
@@ -149,7 +159,7 @@ const formatData = (dataString: string) => {
               <p class="text-muted-foreground text-lg">
                   {{ task.status === 'In Progress' ? 'Em Progresso' : 
                       task.status === 'Not Started' ? 'Não Iniciado' : 
-                      task.status === 'Graded' ? 'Corriido' : 
+                      task.status === 'Graded' ? 'Corrigido' : 
                       task.status === 'Submitted' ? 'Submetido' : 'Desconhecido' }}
               </p>
               <div class="space-y-2">
@@ -159,9 +169,9 @@ const formatData = (dataString: string) => {
                 </div>
                 <!-- <Progress value={30} class="h-3" /> -->
               </div>
-              <button @click="navigateToTask(task)" class="flex py-3 px-10 rounded-xl font-bold transition-smooth cursor-pointer bg-orange text-accent-foreground shadow-soft">
-                <!-- <Play class="w-5 h-5" /> -->
-                Continuar
+              <button @click="navigateToTask(task)" class="w-full py-3 px-10 rounded-xl font-bold hover:shadow-glow transition-smooth hover:-translate-y-2 cursor-pointer bg-orange text-accent-foreground shadow-soft">
+                {{ task.status === 'In Progress' ? 'Continuar' : 
+                      task.status === 'Not Started' ? 'Começar' : 'Continuar' }}
               </button>
             </div>
           </div>
@@ -179,7 +189,7 @@ const formatData = (dataString: string) => {
 
     <div v-if="completedTasks && completedTasks.length > 0">
       <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-        <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
+        <img :src="estrela" alt="Estrela" class="w-8 h-8"/>
         Atividades Concluídas ⭐
       </h2>
 
@@ -187,7 +197,16 @@ const formatData = (dataString: string) => {
         <div v-for="task in completedTasks" class="bg-background px-10 py-4 space-y-4 rounded-4xl shadow-sm">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-5">
-              <span class="text-4xl">➕</span>
+              <span class="text-4xl">
+                {{ task.type === 'addition' ? '➕' :
+                   task.type === 'subtraction' ? '➖' :
+                   task.type === 'multiplication' ? '✖️' :
+                   task.type === 'division' ? '➗' :
+                   task.type === 'additionWithProblems' ? '➕🔢' :
+                   task.type === 'subtractionWithProblems' ? '➖🔢' :
+                   task.type === 'multiplicationWithProblems' ? '✖️🔢' :
+                   task.type === 'divisionWithProblems' ? '➗🔢' : '🔢' }}
+              </span>
               <h3 class="text-2xl font-bold">{{ task.title }}</h3>
             </div>
             <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
@@ -224,7 +243,7 @@ const formatData = (dataString: string) => {
     <!-- Achievements -->
     <div class="card p-6">
       <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-        <!-- <Trophy class="w-6 h-6 text-accent" /> -->
+        <img :src="trofeu" alt="Troféu" class="w-6 h-6"/>
         Suas Conquistas
       </h2>
       <div class="flex">
