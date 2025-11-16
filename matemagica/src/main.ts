@@ -7,6 +7,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { useUserStore } from './userStore'
 import axios from 'axios'
 import { showNotification } from './stores/notificationStore'
+import { setAuthHeader } from './services/api'
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -16,6 +17,10 @@ app.use(pinia)
 app.use(router)
 
 const userStore = useUserStore()
+
+if (userStore.data && userStore.data.token) {
+    setAuthHeader(userStore.data.token)
+}
 
 if (userStore.data?.token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.data.token}`

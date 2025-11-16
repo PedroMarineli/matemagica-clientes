@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useUserStore } from '../../userStore';
-import axios from 'axios';
+// import axios from 'axios';
 import type { ITeacherDashboard } from '../../interfaces/ITeacherDashboard';
 import type { IListProgressInATask } from '../../interfaces/ITasks';
 import students from "../../../public/icons/students.png";
 import classes from "../../../public/icons/class.png";
 import tasks from "../../../public/icons/tasks.png";
+import api from '../../services/api';
 
 const userStore = useUserStore()
 const dashboard = ref<ITeacherDashboard | null>(null)
@@ -14,9 +15,9 @@ const progresses = ref<IListProgressInATask[] | null>([])
 
 onMounted(async () => {
     try {
-        const teacherDashboard = await axios.get('http://localhost:3000/progress/teacher/dashboard')
+        const teacherDashboard = await api.get('http://localhost:3000/progress/teacher/dashboard')
         dashboard.value = teacherDashboard.data as ITeacherDashboard
-        const listProgressInATask = await axios.get(`http://localhost:3000/progress/task/10`)
+        const listProgressInATask = await api.get(`http://localhost:3000/progress/task/10`)
         progresses.value = listProgressInATask.data as IListProgressInATask[]
     } catch(error) {
         console.error('Error fetching job', error)

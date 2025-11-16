@@ -6,6 +6,7 @@ import type { IProblems, ITaskProgress } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
 import trofeu from '../../../public/icons/trophy.png';
 import estrela from '../../../public/icons/christmas-stars.png';
+import api from '../../services/api';
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -69,9 +70,9 @@ const navigateToTask = (task: ITaskProgress) => {
 
 onMounted(async () => {
   try {
-    const notCompletedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.user.id}?status=pending`)
+    const notCompletedTasks = await api.get(`http://localhost:3000/progress/student/${userStore.data?.user.id}?status=pending`)
     pendingTasks.value = notCompletedTasks.data as ITaskProgress[]
-    const finishedTasks = await axios.get(`http://localhost:3000/progress/student/${userStore.data?.user.id}?status=completed`)
+    const finishedTasks = await api.get(`http://localhost:3000/progress/student/${userStore.data?.user.id}?status=completed`)
     completedTasks.value = finishedTasks.data as ITaskProgress[]
   } catch(error) {
     console.error('Error fetching job', error)

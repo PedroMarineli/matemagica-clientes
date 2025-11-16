@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '../userStore';
 import { showNotification } from '../stores/notificationStore';
 import type { IUserdata } from '../interfaces/IUsers';
+import api from '../services/api';
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -31,7 +31,7 @@ const handleLogin = async() => {
   }
 
   try {
-    const response = await axios.post('http://localhost:3000/users/login', login)
+    const response = await api.post('http://localhost:3000/users/login', login)
     if(response) {
       const userData: IUserdata = response.data
       userStore.setUserData(userData)
@@ -100,7 +100,6 @@ const handleLogin = async() => {
                   {{ userType.userType === "professor" ? "E-mail" : "Usuário" }}
                 </label>
                 <div class="relative">
-                  <!-- <Mail class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                   <input
                     id="email"
                     name="email"
@@ -117,7 +116,6 @@ const handleLogin = async() => {
               <div class="space-y-2">
                 <label htmlFor="password" class="text-base">Senha</label>
                 <div class="relative">
-                  <!-- <Lock class="absolute left-3 top-3 w-5 h-5 text-muted-foreground" /> -->
                   <input
                     id="password"
                     name="password"
@@ -130,12 +128,6 @@ const handleLogin = async() => {
                   />
                 </div>
               </div>
-
-              <!-- <div class="flex items-center justify-between text-sm">
-                <label @click="() => router.push('/recuperar-senha')" class="text-lilac hover:underline font-medium">
-                  Esqueceu a senha?
-                </label>
-              </div> -->
 
               <button 
                 type="submit"
