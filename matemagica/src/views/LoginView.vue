@@ -35,8 +35,8 @@ const handleLogin = async() => {
     if(response) {
       const userData: IUserdata = response.data
       userStore.setUserData(userData)
-      if (userData.user.type == 'student' && userType.userType == 'aluno') router.push({ name: 'student' })
-      else if (userData.user.type == 'teacher' && userType.userType == 'professor') router.push({ name: 'teacher' })
+      if (userData.user.type == 'student' && userType.userType == 'aluno') router.push({ name: 'studentDashboard' })
+      else if (userData.user.type == 'teacher' && userType.userType == 'professor') router.push({ name: 'teacherDashboard' })
       else showNotification('Você está tentando logar no campo errado!', 'bg-red-500')
     }
   } catch(error) {
@@ -107,7 +107,7 @@ const handleLogin = async() => {
                     autoComplete="email"
                     required
                     v-model="form.email"
-                    :placeholder="userType.userType === 'professor' ? 'seu@email.com' : 'seu_usuario'"
+                    placeholder="seu@email.com"
                     class="input-register-login bg-background"
                   />
                 </div>

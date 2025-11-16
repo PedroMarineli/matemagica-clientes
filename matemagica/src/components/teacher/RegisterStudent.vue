@@ -9,8 +9,9 @@ import { showNotification } from '../../stores/notificationStore';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
-
 const teacherId = computed(() => userStore.data?.user.id)
+
+const classrooms = ref<IClassrooms[] | null>(null)
 
 const closeComponent = () => {
   emit('close');
@@ -41,8 +42,6 @@ const submitStudent = async() => {
         showNotification('Não foi possível adicionar aluno', 'bg-red-500')
     }
 }
-
-const classrooms = ref<IClassrooms[] | null>(null)
 
 onMounted(async () => {
     try {

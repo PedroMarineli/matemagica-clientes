@@ -13,8 +13,6 @@ const router = useRouter()
 const pendingTasks = ref<ITaskProgress[] | null>([])
 const completedTasks = ref<ITaskProgress[] | null>([])
 
-console.log(completedTasks)
-
 const parseContentToJson = (jsonString: string): IProblems[] => {
   if (!jsonString || typeof jsonString !== 'string' || !jsonString.startsWith('[')) {
     return []
@@ -38,10 +36,6 @@ const form = reactive({
   status: 'In Progress'
 })
 
-// const avatar = userStore.data?.user.cartoon_image_path
-
-console.log(userStore.data?.user)
-
 const changeStatus = async(id: any, score: any) => {
   const statusAltered = {
     student_id: form.student_id,
@@ -50,7 +44,6 @@ const changeStatus = async(id: any, score: any) => {
     score: score
   }
 
-  console.log(statusAltered)
   try {
     const response = await axios.put('http://localhost:3000/progress/update', statusAltered)
     pendingTasks.value = response.data as ITaskProgress[]
@@ -168,7 +161,6 @@ const formatData = (dataString: string) => {
                   <span>Progresso</span>
                   <span>{{ parseContentToJson(task.content).length }} questões</span>
                 </div>
-                <!-- <Progress value={30} class="h-3" /> -->
               </div>
               <button @click="navigateToTask(task)" class="w-full py-3 px-10 rounded-xl font-bold hover:shadow-glow transition-smooth hover:-translate-y-2 cursor-pointer bg-orange text-accent-foreground shadow-soft">
                 {{ task.status === 'In Progress' ? 'Continuar' : 

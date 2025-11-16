@@ -39,7 +39,7 @@ const router = createRouter({
             component: StudentLayout,
             children: [
                 {
-                    path: '/alunos',
+                    path: '',
                     name: 'studentDashboard',
                     component: StudentView,
                 },
@@ -56,7 +56,7 @@ const router = createRouter({
             component: TeacherLayout,
             children: [
                 {
-                    path: '/professores',
+                    path: '',
                     name: 'teacherDashboard',
                     component: TeacherView,
                 },
