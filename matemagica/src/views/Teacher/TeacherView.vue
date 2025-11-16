@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useUserStore } from '../../userStore';
-// import axios from 'axios';
 import type { ITeacherDashboard } from '../../interfaces/ITeacherDashboard';
 import type { IListProgressInATask } from '../../interfaces/ITasks';
 import students from "../../../public/icons/students.png";
@@ -12,6 +11,8 @@ import api from '../../services/api';
 const userStore = useUserStore()
 const dashboard = ref<ITeacherDashboard | null>(null)
 const progresses = ref<IListProgressInATask[] | null>([])
+
+console.log(userStore.data?.token)
 
 onMounted(async () => {
     try {

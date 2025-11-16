@@ -6,7 +6,6 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { useUserStore } from './userStore'
 import axios from 'axios'
-import { showNotification } from './stores/notificationStore'
 import { setAuthHeader } from './services/api'
 
 const app = createApp(App)
@@ -25,30 +24,5 @@ if (userStore.data && userStore.data.token) {
 if (userStore.data?.token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.data.token}`
 }
-
-const api = axios.create({
-    baseURL: 'http://localhost:3000',
-})
-
-api.interceptors.response.use(
-    (response) => {
-        return response
-    },
-    (error) => {
-        const userStore = useUserStore()
-        
-        const status = error.response ? error.response.status : null
-
-        if (status === 401) {
-            showNotification('Token expirado ou não autorizado. Redirecionando para login.', 'bg-red-500')
-
-            userStore.clearUserData()
-
-            router.push('/login')
-        }
-
-        return Promise.reject(error);
-    }
-);
 
 app.mount('#app')
