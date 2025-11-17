@@ -7,6 +7,7 @@ import type { IClassrooms } from '../../interfaces/IClassrooms';
 import type { IProblems } from '../../interfaces/ITasks';
 import { showNotification } from '../../stores/notificationStore';
 import router from '../../router';
+import api from '../../services/api';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -26,18 +27,22 @@ const form = reactive({
 })
 
 const submitTask = async() => {
+    const correctAnswers = listOfProblems.value 
+        ? listOfProblems.value.map(problem => problem.answer) 
+        : []
+    
     const newTask = {
         title: form.title,
         type: form.type,
         teacher_id: teacherId.value,
         content: listOfProblems.value,
-        answer: form.answer,
+        answer: correctAnswers,
         difficulty: form.difficulty,
         classroom_id: form.classroom_id,
     }
     
     try {
-        const response = await axios.post('http://localhost:3000/tasks', newTask)
+        const response = await api.post('http://localhost:3000/tasks', newTask)
 
         if(response) {
             router.push('/professores/tarefas')

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import type { ITasks } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
 import MaintainTask from './MaintainTask.vue';
 import points from "../../../public/icons/points.png";
 import type { IClassrooms } from '../../interfaces/IClassrooms';
+import api from '../../services/api';
 
 const router = useRouter()
 const tasks = ref<ITasks[] | null>(null)
@@ -13,9 +13,9 @@ const classrooms = ref<IClassrooms[] | null>(null)
 
 onMounted(async () => {
     try {
-        const response = await axios.get('http://localhost:3000/tasks')
+        const response = await api.get('http://localhost:3000/tasks')
         tasks.value = response.data as ITasks[]
-        const classes = await axios.get('http://localhost:3000/classrooms')
+        const classes = await api.get('http://localhost:3000/classrooms')
         classrooms.value = classes.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)

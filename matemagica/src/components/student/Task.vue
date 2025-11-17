@@ -5,6 +5,7 @@ import type { IProblems, ITasksProgress } from '../../interfaces/ITasks';
 import { onMounted, reactive, ref, toRaw } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../../userStore';
+import api from '../../services/api';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -59,7 +60,7 @@ const updateCurrentProblem = () => {
 
 onMounted(async() => {
     try {
-        const response = await axios.get(`http://localhost:3000/tasks/${taskId}`)
+        const response = await api.get(`http://localhost:3000/tasks/${taskId}`)
         task.value = response.data as ITasksProgress
         problems.value = task.value.problems || []
 
@@ -78,6 +79,8 @@ const submitAnswer = () => {
     if(form.answer == currentProblem.answer) {
         // form.score += countdown_score.value
         // countdown_score.value = 10
+        submitted_answers_list.value.push(form.answer)
+        form.answer = 0
         if (i.value < problems.value.length - 1) {
             // submitTask()
             i.value++
@@ -93,8 +96,6 @@ const submitAnswer = () => {
             showError.value = false
         }, 3000)
     }
-
-    submitted_answers_list.value.push(form.answer)
 }
 
 const submitTask = async() => {
