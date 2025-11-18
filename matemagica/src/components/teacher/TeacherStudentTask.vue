@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import type { IUsers } from '../../interfaces/IUsers';
-import axios from 'axios';
 import type { ITaskProgress } from '../../interfaces/ITasks';
 import { useRoute } from 'vue-router';
 import type { ITeacherDashboard } from '../../interfaces/ITeacherDashboard';
 import task from '../../../public/icons/tasks.png';
 import grade from '../../../public/icons/grade.png';
+import api from '../../services/api';
 
 interface StudentPerformance {
     average_score: string
@@ -26,11 +26,11 @@ const studentIdNum = routeId ? parseInt(routeId as string) : null
 
 onMounted(async () => {
     try {
-        const allTasks = await axios.get(`http://localhost:3000/progress/student/${studentIdNum}`)
+        const allTasks = await api.get(`http://localhost:3000/progress/student/${studentIdNum}`)
         studentTasks.value = allTasks.data as ITaskProgress[]
-        const teacherDashboard = await axios.get('http://localhost:3000/progress/teacher/dashboard')
+        const teacherDashboard = await api.get('http://localhost:3000/progress/teacher/dashboard')
         dashboard.value = teacherDashboard.data as ITeacherDashboard
-        const user = await axios.get(`http://localhost:3000/users/${studentIdNum}`)
+        const user = await api.get(`http://localhost:3000/users/${studentIdNum}`)
         student.value = user.data as IUsers
 
         if (!dashboard.value?.studentPerformance) return

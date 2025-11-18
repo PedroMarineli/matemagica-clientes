@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { computed, onMounted, reactive, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import close from "../../../public/icons/close.png";
 import { showNotification } from '../../stores/notificationStore';
+import api from '../../services/api';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -33,7 +33,7 @@ const submitStudent = async() => {
         photo_url: form.photo_url
     }
     try {
-        const response = await axios.post('http://localhost:3000/users/register/student', newStudent)
+        const response = await api.post('http://localhost:3000/users/register/student', newStudent)
         if(response) {
             showNotification('Aluno adicionado com sucesso!', 'bg-green-500')
             location.reload()
@@ -45,7 +45,7 @@ const submitStudent = async() => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get('http://localhost:3000/classrooms')
+        const response = await api.get('http://localhost:3000/classrooms')
         classrooms.value = response.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)

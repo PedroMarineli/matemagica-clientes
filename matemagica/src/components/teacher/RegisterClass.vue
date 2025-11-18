@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { computed, reactive } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
 import close from "../../../public/icons/close.png";
 import { showNotification } from '../../stores/notificationStore';
+import api from '../../services/api';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -27,7 +27,7 @@ const submitClass = async() => {
     }
 
     try {
-        const response = await axios.post('http://localhost:3000/classrooms', newClass)
+        const response = await api.post('http://localhost:3000/classrooms', newClass)
         if(response) {
             showNotification('Sala adicionada com sucesso!', 'bg-green-500')
             location.reload()

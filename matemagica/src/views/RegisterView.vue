@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 import { showNotification } from '../stores/notificationStore';
+import api from '../services/api';
 
 const router = useRouter();
 
@@ -29,7 +29,7 @@ const handleRegister = async() => {
   }
 
   try {
-    const response = await axios.post('http://localhost:3000/users/register/teacher', login)
+    const response = await api.post('http://localhost:3000/users/register/teacher', login)
     if(response) {
       router.push({ name: 'login' })
     }

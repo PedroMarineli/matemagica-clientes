@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { computed, onMounted, reactive, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { useUserStore } from '../../userStore';
@@ -55,7 +54,7 @@ const submitTask = async() => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get('http://localhost:3000/classrooms')
+        const response = await api.get('http://localhost:3000/classrooms')
         classrooms.value = response.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)

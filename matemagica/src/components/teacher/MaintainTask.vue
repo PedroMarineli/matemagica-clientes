@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { reactive, ref, type PropType } from 'vue';
 import { defineEmits } from 'vue';
 import type { IProblems, ITasks } from '../../interfaces/ITasks';
 import close from "../../../public/icons/close.png";
 import { showNotification } from '../../stores/notificationStore';
+import api from '../../services/api';
 
 const emit = defineEmits(['close'])
 
@@ -46,7 +46,7 @@ const submitTask = async() => {
     }
 
     try {
-        const response = await axios.put(`http://localhost:3000/tasks/${props.taskData.id}`, taskAltered)
+        const response = await api.put(`http://localhost:3000/tasks/${props.taskData.id}`, taskAltered)
         if(response) {
             showNotification('Tarefa alterada com sucesso!', 'bg-green-500')
             location.reload()
@@ -58,7 +58,7 @@ const submitTask = async() => {
 
 const deleteTask = async() => {
     try {
-        const response = await axios.delete(`http://localhost:3000/tasks/${props.taskData.id}`)
+        const response = await api.delete(`http://localhost:3000/tasks/${props.taskData.id}`)
         if(response) {
             showNotification('Tarefa deletada com sucesso!', 'bg-green-500')
             location.reload()

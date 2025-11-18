@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
 import { useUserStore } from '../../userStore';
-import axios from 'axios';
 import type { IProblems, ITaskProgress } from '../../interfaces/ITasks';
 import { useRouter } from 'vue-router';
 import trofeu from '../../../public/icons/trophy.png';
@@ -45,7 +44,7 @@ const changeStatus = async(id: any, score: any) => {
   }
 
   try {
-    const response = await axios.put('http://localhost:3000/progress/update', statusAltered)
+    const response = await api.put('http://localhost:3000/progress/update', statusAltered)
     pendingTasks.value = response.data as ITaskProgress[]
   } catch(error) {
     console.error('Error fetching job', error)
@@ -226,7 +225,7 @@ const formatData = (dataString: string) => {
             </div>
             <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
               <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Nota:</span>
-              <span>{{ task.score }}</span>
+              <span>{{ parseFloat(task.score)?.toFixed(2) }}</span>
             </div>
           </div>
         </div>

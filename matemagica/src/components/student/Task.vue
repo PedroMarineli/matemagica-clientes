@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios';
 import trofeu from '../../../public/icons/trophy.png';
 import type { IProblems, ITasksProgress } from '../../interfaces/ITasks';
 import { onMounted, reactive, ref, toRaw } from 'vue';
@@ -25,7 +24,6 @@ const x = ref(0)
 const y = ref(0)
 const submitted_answers_list = ref<number[]>([])
 let countdown_score = ref(10)
-let answer = ref(0)
 
 const state = reactive({
     isLoading: true
@@ -74,15 +72,15 @@ onMounted(async() => {
 
 const submitAnswer = () => {
     const currentProblem = problems.value[i.value]
-    // number_of_attempts++
+    number_of_attempts++
 
     if(form.answer == currentProblem.answer) {
-        // form.score += countdown_score.value
-        // countdown_score.value = 10
+        form.score += countdown_score.value
+        countdown_score.value = 10
+
         submitted_answers_list.value.push(form.answer)
         form.answer = 0
         if (i.value < problems.value.length - 1) {
-            // submitTask()
             i.value++
             updateCurrentProblem()
         } else {
@@ -90,7 +88,10 @@ const submitAnswer = () => {
         }
     }
     else {
-        // countdown_score.value--  
+        if (countdown_score.value > 0) {
+            countdown_score.value--
+        }
+        
         showError.value = true
         setTimeout(() => {
             showError.value = false
@@ -100,19 +101,17 @@ const submitAnswer = () => {
 
 const submitTask = async() => {
     const rawAnswers = toRaw(submitted_answers_list.value)
+
     const taskAltered = {
-        // student_id: form.student_id,
-        // task_id: form.task_id,
-        // status: form.status,
-        // score: form.score / problems.value.length,
-        // number_of_attempts: number_of_attempts
         task_id: form.task_id,
-        answers: rawAnswers
-    }
+        answers: rawAnswers,
+        number_of_attempts: number_of_attempts,
+        score: (form.score / (problems.value.length * 10)) * 100
+    }    
     console.log(taskAltered)
 
     try {
-        const response = await axios.post('http://localhost:3000/progress/submit', taskAltered)
+        const response = await api.post('http://localhost:3000/progress/submit', taskAltered)
         if(response) {
             router.push('/alunos')
             console.log('Progresso de tarefa realizado')

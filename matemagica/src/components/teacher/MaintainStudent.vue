@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { onMounted, reactive, ref, type PropType } from 'vue';
 import { defineEmits } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import type { IUsers } from '../../interfaces/IUsers';
 import close from "../../../public/icons/close.png";
 import { showNotification } from '../../stores/notificationStore';
+import api from '../../services/api';
 
 const emit = defineEmits(['close'])
 
@@ -46,7 +46,7 @@ const submitStudent = async () => {
         formData.append('photo', selectedFile.value)
 
         try {
-            const response = await axios.put(
+            const response = await api.put(
                 `http://localhost:3000/users/${props.studentData.id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data' 
@@ -70,7 +70,7 @@ const submitStudent = async () => {
     }
 
     try {
-        const response = await axios.put(`http://localhost:3000/users/${props.studentData.id}`, studentAltered)
+        const response = await api.put(`http://localhost:3000/users/${props.studentData.id}`, studentAltered)
         
         if (response) {
             showNotification('Dados do aluno altados com sucesso!', 'bg-green-500')
@@ -83,7 +83,7 @@ const submitStudent = async () => {
 
 const deleteStudent = async() => {
     try {
-        const response = await axios.delete(`http://localhost:3000/users/${props.studentData.id}`)
+        const response = await api.delete(`http://localhost:3000/users/${props.studentData.id}`)
         if(response) {
             showNotification('Aluno deletado com sucesso!', 'bg-green-500')
             location.reload()
@@ -95,7 +95,7 @@ const deleteStudent = async() => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get('http://localhost:3000/classrooms')
+        const response = await api.get('http://localhost:3000/classrooms')
         classrooms.value = response.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)

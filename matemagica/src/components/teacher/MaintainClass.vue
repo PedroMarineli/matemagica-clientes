@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { reactive, type PropType } from 'vue';
 import { defineEmits } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import close from "../../../public/icons/close.png";
 import { showNotification } from '../../stores/notificationStore';
+import api from '../../services/api';
 
 const emit = defineEmits(['close'])
 
@@ -31,7 +31,7 @@ const submitClass = async() => {
     }
 
     try {
-        const response = await axios.put(`http://localhost:3000/classrooms/${props.classData.id}`, classAltered)
+        const response = await api.put(`http://localhost:3000/classrooms/${props.classData.id}`, classAltered)
         if(response) {
             showNotification('Sala alterada com sucesso!', 'bg-green-500')
             location.reload()
@@ -43,7 +43,7 @@ const submitClass = async() => {
 
 const deleteClass = async() => {
     try {
-        const response = await axios.delete(`http://localhost:3000/classrooms/${props.classData.id}`)
+        const response = await api.delete(`http://localhost:3000/classrooms/${props.classData.id}`)
         if(response) {
             showNotification('Sala deletada com sucesso!', 'bg-green-500')
             location.reload()

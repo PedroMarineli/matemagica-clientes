@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import axios from 'axios';
 import RegisterClass from './RegisterClass.vue';
 import { onMounted, ref } from 'vue';
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import MaintainClass from './MaintainClass.vue';
 import points from "../../../public/icons/points.png";
 import router from '../../router';
+import api from '../../services/api';
 
 const classrooms = ref<IClassrooms[] | null>(null)
 const selectedClass = ref<IClassrooms | null>(null)
@@ -15,7 +15,7 @@ const showMaintainForm = ref(false)
 
 onMounted(async () => {
     try {
-        const response = await axios.get('http://localhost:3000/classrooms')
+        const response = await api.get('http://localhost:3000/classrooms')
         classrooms.value = response.data as IClassrooms[]
     } catch(error) {
         console.error('Error fetching job', error)

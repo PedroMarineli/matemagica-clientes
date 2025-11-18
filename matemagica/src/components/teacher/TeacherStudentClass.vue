@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from 'axios';
 import RegisterStudent from './RegisterStudent.vue';
 import { onMounted, ref } from 'vue';
 import type { IUsers } from '../../interfaces/IUsers';
@@ -8,6 +7,7 @@ import router from '../../router';
 import points from "../../../public/icons/points.png";
 import type { IClassrooms } from '../../interfaces/IClassrooms';
 import { useRoute } from 'vue-router';
+import api from '../../services/api';
 
 const students = ref<IUsers[] | null>(null)
 const studentsClass = ref<IUsers[] | null>(null)
@@ -23,9 +23,9 @@ const classId = routeId ? parseInt(routeId as string) : null
 
 onMounted(async () => {
     try {
-        const users = await axios.get('http://localhost:3000/users')
+        const users = await api.get('http://localhost:3000/users')
         students.value = users.data as IUsers[]
-        const classes = await axios.get('http://localhost:3000/classrooms')
+        const classes = await api.get('http://localhost:3000/classrooms')
         classrooms.value = classes.data as IClassrooms[]
 
         if (classId !== null) {
