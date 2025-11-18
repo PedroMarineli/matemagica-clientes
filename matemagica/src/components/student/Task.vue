@@ -199,7 +199,12 @@ const submitTask = async() => {
                                 ❌ Quase! Tente de novo
                             </div>
                             <div class="w-96 h-96 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
-                                <img class="w-full h-full rounded-full object-cover" :src="userStore.data?.user.cartoon_image_path" alt="Imagem do Avatar" crossorigin="anonymous">
+                                <div v-if="userStore.data?.user.cartoon_image_path" class="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+                                    <img class="w-full h-full object-cover" :src="userStore.data?.user.cartoon_image_path" alt="Imagem do Avatar" crossorigin="anonymous">
+                                </div>
+                                <div v-else class="text-9xl">
+                                    🧒
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -83,7 +83,12 @@ const formatData = (dataString: string) => {
   <div class="container mx-auto px-4 py-8 max-w-6xl">
     <div class="flex justify-center gap-14 card p-10 mb-8 bg-gradient-warm shadow-glow">
       <div class="w-96 h-96 rounded-full bg-background flex items-center justify-center text-6xl border-4 border-white shadow-medium">
-        <img class="w-full h-full rounded-full object-cover" :src="userStore.data?.user.cartoon_image_path" alt="Imagem do Avatar" crossorigin="anonymous">
+        <div v-if="userStore.data?.user.cartoon_image_path" class="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+          <img class="w-full h-full object-cover" :src="userStore.data?.user.cartoon_image_path" alt="Imagem do Avatar" crossorigin="anonymous">
+        </div>
+        <div v-else class="text-9xl">
+          🧒
+        </div>
       </div>
       <div class="flex gap-10 flex-col justify-center">
         <div class="flex flex-col md:flex-row items-center gap-6">
