@@ -149,7 +149,16 @@ const submitTask = async() => {
                     <div class="card p-6 hover:shadow-glow transition-smooth hover:-translate-y-2 border-4 border-purple-400">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <span class="text-4xl">➕</span>
+                                <span class="text-4xl">
+                                    {{ task.type === 'addition' ? '➕' :
+                                       task.type === 'subtraction' ? '➖' :
+                                       task.type === 'multiplication' ? '✖️' :
+                                       task.type === 'division' ? '➗' :
+                                       task.type === 'additionWithProblems' ? '➕🔢' :
+                                       task.type === 'subtractionWithProblems' ? '➖🔢' :
+                                       task.type === 'multiplicationWithProblems' ? '✖️🔢' :
+                                       task.type === 'divisionWithProblems' ? '➗🔢' : '🔢' }}
+                                </span>
                                 <span class="bg-orange text-accent-foreground px-3 py-1 rounded-full text-sm font-bold">
                                     {{ task.difficulty === 'easy' ? 'Fácil' : 
                                        task.difficulty === 'medium' ? 'Médio' : 
@@ -185,11 +194,14 @@ const submitTask = async() => {
                             <span class="text-7xl">{{ x }}</span>
                             <div class="flex items-center">
                                 <span class="text-7xl">
-                                    {{ task.type === 'addition' || 'additionWIthProblems' ? '+' : 
-                                       task.type === 'subtraction' || 'subtractionWIthProblems' ? '-' : 
-                                       task.type === 'multiplication' || 'multiplicationWIthProblems' ? 'x' : 
-                                       task.type === 'division' || 'divisionWIthProblems' ? '/' : '' }}
-                                </span> 
+                                    {{ 
+                                        task.type === 'addition' || task.type === 'additionWithProblems' ? '+' : 
+                                        task.type === 'subtraction' || task.type === 'subtractionWithProblems' ? '-' : 
+                                        task.type === 'multiplication' || task.type === 'multiplicationWithProblems' ? 'x' : 
+                                        task.type === 'division' || task.type === 'divisionWithProblems' ? '/' : 
+                                        '' 
+                                    }}
+                                </span>
                                 <span class="text-7xl">{{ y }}</span>
                             </div>
                             <div class="w-full border-b-8 border-black mt-5"></div> 
