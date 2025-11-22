@@ -230,7 +230,7 @@ const formatData = (dataString: string) => {
             </div>
             <div class="flex gap-2 items-center bg-lilac text-white px-3 py-1 rounded-full text-sm font-bold">
               <span class="bg-orange text-black px-3 py-1 rounded-full text-sm font-bold">Nota:</span>
-              <span>{{ parseFloat(task.score)?.toFixed(2) }}</span>
+              <span>{{ (Number(task.score) || 0).toFixed(2) }}</span>
             </div>
           </div>
         </div>

@@ -15,7 +15,11 @@ const form = reactive({
 })
 
 const confirmPassword = () => {
-  if (form.password != form.confirmPassword) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!regex.test(form.email)) {
+    showNotification('Email não foi bem cadastrado. Tente novamente!', 'bg-red-500')
+  }
+  else if (form.password != form.confirmPassword) {
     showNotification('Campos de "Senha" e "Confirmar senha" possuem dados incongruentes!', 'bg-red-500')
   }
   else handleRegister()

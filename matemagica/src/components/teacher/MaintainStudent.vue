@@ -33,7 +33,14 @@ function onFileChanged(event: Event) {
     if (target.files && target.files.length > 0) {
         selectedFile.value = target.files[0];
     }
-    console.log(selectedFile.value)
+}
+
+const confirmEmail = () => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!regex.test(form.email)) {
+    showNotification('Email não foi bem cadastrado. Tente novamente!', 'bg-red-500')
+  }
+  else submitStudent()
 }
 
 const submitStudent = async () => {
@@ -46,7 +53,7 @@ const submitStudent = async () => {
         formData.append('photo', selectedFile.value)
 
         try {
-            const response = await api.put(
+            await api.put(
                 `http://localhost:3000/users/${props.studentData.id}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data' 
@@ -56,14 +63,6 @@ const submitStudent = async () => {
                     }
                 }
             )
-
-            if (response) {
-                console.log('Imagem foi', response.data)
-            }
-            else {
-                console.log('Nao foi')
-            }
-
         } catch (error) {
              console.error('Falha ao fazer upload da imagem', error)
         }
@@ -105,7 +104,7 @@ onMounted(async () => {
 
 <template>
     <div class="grid gap-3">
-        <form @submit.prevent="submitStudent" class="grid gap-3">
+        <form @submit.prevent="confirmEmail" class="grid gap-3">
             <div class="flex justify-between items-center">
                 <h1 class="font-bold text-lg">Registrar Aluno:</h1>
                 <button @click="closeComponent">

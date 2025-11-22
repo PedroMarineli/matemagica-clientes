@@ -5,6 +5,7 @@ import { onMounted, reactive, ref, toRaw } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../../userStore';
 import api from '../../services/api';
+import { showNotification } from '../../stores/notificationStore';
 
 const emit = defineEmits(['close'])
 const userStore = useUserStore()
@@ -101,23 +102,21 @@ const submitAnswer = () => {
 
 const submitTask = async() => {
     const rawAnswers = toRaw(submitted_answers_list.value)
-
     const taskAltered = {
         task_id: form.task_id,
         answers: rawAnswers,
         number_of_attempts: number_of_attempts,
         score: (form.score / (problems.value.length * 10)) * 100
-    }    
-    console.log(taskAltered)
+    }
 
     try {
         const response = await api.post('http://localhost:3000/progress/submit', taskAltered)
         if(response) {
             router.push('/alunos')
-            console.log('Progresso de tarefa realizado')
+            showNotification('Tarefa feita com sucesso!', 'bg-green-500')
         }
     } catch(error) {
-        console.log('Progresso de tarefa não realizado')
+        showNotification('Progresso de tarefa não realizado', 'bg-red-500')
     }
 }
 </script>
@@ -139,7 +138,6 @@ const submitTask = async() => {
         <!-- Pending tasks -->
         <div>
             <h2 class="text-3xl font-bold mb-4 flex items-center gap-2">
-                <!-- <Sparkles class="w-8 h-8 text-lilac" /> -->
                 Suas Atividades
             </h2>
           

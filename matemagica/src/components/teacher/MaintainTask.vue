@@ -91,7 +91,16 @@ const deleteTask = async() => {
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2">Tipo:</label>
-                <label class="block text-gray-700 mb-2">{{ props.taskData.type }}</label>
+                <label class="block text-gray-700 mb-2">
+                    {{ props.taskData.type === 'addition' ? 'Adição' :
+                       props.taskData.type === 'subtraction' ? 'Subtração' :
+                       props.taskData.type === 'multiplication' ? 'Multiplicação' :
+                       props.taskData.type === 'division' ? 'Divisão' :
+                       props.taskData.type === 'additionWithProblems' ? 'Adição com Problemas' :
+                       props.taskData.type === 'subtractionWithProblems' ? 'Subtração com Problemas' :
+                       props.taskData.type === 'multiplicationWithProblems' ? 'Multiplicação com Problemas' :
+                       props.taskData.type === 'divisionWithProblems' ? 'Divisão com Problemas' : 'Desconhecido' }}
+                </label>
             </div>
             <div>
                 <label class="block text-gray-700 font-bold mb-2">Conteúdo:</label>

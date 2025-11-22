@@ -120,8 +120,8 @@ const formatData = (dataString: string) => {
                                task.status === 'Not Started' ? 'Não Iniciado' : 
                                task.status === 'Graded' ? 'Corriido' : 
                                task.status === 'Submitted' ? 'Submetido' : 'Desconhecido' }}</td>
-                        <td>{{ task.score }}</td>
-                        <td>{{ formatData(task.completion_date) }}</td>
+                        <td>{{ (Number(task.score) || 0).toFixed(2) }}</td>
+                        <td>{{ formatData(task.completion_date) || 'Não entregue' }}</td>
                     </tr>
                 </tbody>
             </table>
