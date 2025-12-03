@@ -126,7 +126,7 @@ const formatData = (dataString: string) => {
                         </div>
                     </div>
                     <div v-else>
-                        <p class="font-semibold">Nenhum aluno concluiu essa atividade.</p>
+                        <p class="font-semibold">{{ progress.username }} não concluiu essa atividade</p>
                     </div>
                 </div>
             </div>
